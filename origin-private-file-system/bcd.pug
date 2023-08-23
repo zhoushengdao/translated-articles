@@ -7,6 +7,12 @@ mixin bc-platform(type, colspan)
   )
     span.icon(class=`icon-${type}`)
 
+mixin bc-browser(browser)
+  - self.check("browsers", browser);
+  th.bc-browser(class=`bc-browser-${browser}`)
+    .bc-head-txt-label(class=`bc-head-icon-${browser}`)= self.browsers[browser].text
+    .bc-head-icon-symbol.icon(class=`icon-${self.browsers[browser].icon}`)
+
 mixin bc-legend-item(status)
   - self.check("supportStatus", status);
   .bc-legend-item
@@ -41,6 +47,7 @@ html(lang="en")
               +bc-platform("mobile", 6)
             tr.bc-browsers
               td
+              //- +bc-browser("chrome")
               th.bc-browser.bc-browser-chrome
                 .bc-head-txt-label.bc-head-icon-chrome Chrome
                 .bc-head-icon-symbol.icon.icon-chrome
@@ -643,16 +650,5 @@ html(lang="en")
     section.bc-legend
       p.bc-legend-tip 提示：你可以点击单元格以获取更多信息。
       dl.bc-legend-items-container
-        .bc-legend-item
-          dt.bc-legend-item-dt
-            span.bc-supports-yes.bc-supports
-              abbr.bc-level.bc-level-yes.icon.icon-yes(title="完全支持")
-          dd.bc-legend-item-dd 完全支持
-        .bc-legend-item
-          dt.bc-legend-item-dt
-            span.bc-supports-no.bc-supports
-              abbr.bc-level.bc-level-no.icon.icon-no(title="不支持")
-          dd.bc-legend-item-dd 不支持
-
         +bc-legend-item("yes")
         +bc-legend-item("no")
