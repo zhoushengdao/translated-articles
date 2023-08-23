@@ -15,6 +15,29 @@ mixin bc-browser(browser)
     .bc-head-txt-label(class=`bc-head-icon-${browser}`)= self.browsers[browser].text
     .bc-head-icon-symbol.icon(class=`icon-${self.browsers[browser].icon}`)
 
+//- 历史记录
+mixin bc-notes-wrapper(browser, status, version, releaseDate)
+  - self.check("browsers", browser);
+  - self.check("supportStatus", status);
+  .bc-notes-wrapper
+    dt.bc-supports(class=`bc-supports-${status}`)
+      .bcd-timeline-cell-text-wrapper
+        .bcd-cell-icons
+          span.icon-wrap
+            abbr.icon(
+              class=`bc-level-${status} icon-${status}`,
+              title=self.supportStatus[status]
+            )
+              span.bc-support-level= self.supportStatus[status]
+        .bcd-cell-text-copy
+          span.bc-browser-name= self.browsers[browser].text
+          span.bc-version-label= `${version}（发布于 ${releaseDate}）`
+    dd.bc-supports-dd
+      abbr.only-icon(title=self.supportStatus.footnote)
+        span 脚注
+        i.icon.icon-footnote
+      span= self.supportStatus[status]
+
 //- 数据（dl.bc-notes-list.bc-history.bc-history-mobile 为小屏幕上的历史记录）
 mixin bc-support(browser, status, version, releaseDate)
   - self.check("browsers", browser);
@@ -36,24 +59,7 @@ mixin bc-support(browser, status, version, releaseDate)
           span.bc-browser-name= self.browsers[browser].text
           span.bc-version-label(title=`发布于 ${releaseDate}`)= version
       dl.bc-notes-list.bc-history.bc-history-mobile
-        .bc-notes-wrapper
-          dt.bc-supports(class=`bc-supports-${status}`)
-            .bcd-timeline-cell-text-wrapper
-              .bcd-cell-icons
-                span.icon-wrap
-                  abbr.icon(
-                    class=`bc-level-${status} icon-${status}`,
-                    title=self.supportStatus[status]
-                  )
-                    span.bc-support-level= self.supportStatus[status]
-              .bcd-cell-text-copy
-                span.bc-browser-name= self.browsers[browser].text
-                span.bc-version-label= `${version}（发布于 ${releaseDate}）`
-          dd.bc-supports-dd
-            abbr.only-icon(title=self.supportStatus.footnote)
-              span 脚注
-              i.icon.icon-footnote
-            span= self.supportStatus[status]
+        +bc-notes-wrapper(browser, status, version, releaseDate)
       span.offscreen 展开/收起历史记录
 
 //- 历史记录（大屏幕）
@@ -63,24 +69,7 @@ mixin bc-history(browser, status, version, releaseDate)
   tr.bc-history.bc-history-desktop
     td(colspan="12")
       dl.bc-notes-list
-        .bc-notes-wrapper
-          dt.bc-supports(class=`bc-supports-${status}`)
-            .bcd-timeline-cell-text-wrapper
-              .bcd-cell-icons
-                span.icon-wrap
-                  abbr.icon(
-                    class=`bc-level-${status} icon-${status}`,
-                    title=self.supportStatus[status]
-                  )
-                    span.bc-support-level= self.supportStatus[status]
-              .bcd-cell-text-copy
-                span.bc-browser-name= self.browsers[browser].text
-                span.bc-version-label= `${version}（发布于 ${releaseDate}）`
-          dd.bc-supports-dd
-            abbr.only-icon(title=self.supportStatus.footnote)
-              span 脚注
-              i.icon.icon-footnote
-            span= self.supportStatus[status]
+        +bc-notes-wrapper(browser, status, version, releaseDate)
 
 //- 图例
 mixin bc-legend-item(status)
