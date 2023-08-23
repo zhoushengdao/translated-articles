@@ -1,0 +1,4 @@
+endOfLine = "crlf"
+htmlWhitespaceSensitivity = "strict"
+pluginSearchDirs = ["./node_modules/"]
+plugins =  ["@prettier/plugin-pug"]
