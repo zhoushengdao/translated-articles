@@ -35,7 +35,7 @@ const locals = {
       icon: "samsunginternet",
       text: "Samsung Internet",
     },
-    webview_android: { icon: "webview_android", text: "WebView Android" },
+    webview_android: { icon: "webview", text: "WebView Android" },
     deno: { icon: "deno", text: "Deno" },
     nodejs: { icon: "nodejs", text: "Node.js" },
   },

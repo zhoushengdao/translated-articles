@@ -47,40 +47,17 @@ html(lang="en")
               +bc-platform("mobile", 6)
             tr.bc-browsers
               td
-              //- +bc-browser("chrome")
-              th.bc-browser.bc-browser-chrome
-                .bc-head-txt-label.bc-head-icon-chrome Chrome
-                .bc-head-icon-symbol.icon.icon-chrome
-              th.bc-browser.bc-browser-edge
-                .bc-head-txt-label.bc-head-icon-edge Edge
-                .bc-head-icon-symbol.icon.icon-edge
-              th.bc-browser.bc-browser-firefox
-                .bc-head-txt-label.bc-head-icon-firefox Firefox
-                .bc-head-icon-symbol.icon.icon-simple-firefox
-              th.bc-browser.bc-browser-opera
-                .bc-head-txt-label.bc-head-icon-opera Opera
-                .bc-head-icon-symbol.icon.icon-opera
-              th.bc-browser.bc-browser-safari
-                .bc-head-txt-label.bc-head-icon-safari Safari
-                .bc-head-icon-symbol.icon.icon-safari
-              th.bc-browser.bc-browser-chrome_android
-                .bc-head-txt-label.bc-head-icon-chrome_android Chrome Android
-                .bc-head-icon-symbol.icon.icon-chrome
-              th.bc-browser.bc-browser-firefox_android
-                .bc-head-txt-label.bc-head-icon-firefox_android Firefox for Android
-                .bc-head-icon-symbol.icon.icon-simple-firefox
-              th.bc-browser.bc-browser-opera_android
-                .bc-head-txt-label.bc-head-icon-opera_android Opera Android
-                .bc-head-icon-symbol.icon.icon-opera
-              th.bc-browser.bc-browser-safari_ios
-                .bc-head-txt-label.bc-head-icon-safari_ios Safari on iOS
-                .bc-head-icon-symbol.icon.icon-safari
-              th.bc-browser.bc-browser-samsunginternet_android
-                .bc-head-txt-label.bc-head-icon-samsunginternet_android Samsung Internet
-                .bc-head-icon-symbol.icon.icon-samsunginternet
-              th.bc-browser.bc-browser-webview_android
-                .bc-head-txt-label.bc-head-icon-webview_android WebView Android
-                .bc-head-icon-symbol.icon.icon-webview
+              +bc-browser("chrome")
+              +bc-browser("edge")
+              +bc-browser("firefox")
+              +bc-browser("opera")
+              +bc-browser("safari")
+              +bc-browser("chrome_android")
+              +bc-browser("firefox_android")
+              +bc-browser("opera_android")
+              +bc-browser("safari_ios")
+              +bc-browser("samsunginternet_android")
+              +bc-browser("webview_android")
           tbody
             tr
               th.bc-feature.bc-feature-depth-0(scope="row")
