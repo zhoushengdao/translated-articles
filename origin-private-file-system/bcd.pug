@@ -15,7 +15,7 @@ mixin bc-browser(browser)
     .bc-head-txt-label(class=`bc-head-icon-${browser}`)= self.browsers[browser].text
     .bc-head-icon-symbol.icon(class=`icon-${self.browsers[browser].icon}`)
 
-//- 数据
+//- 数据（dl.bc-notes-list.bc-history.bc-history-mobile 为小屏幕上的历史记录）
 mixin bc-support(browser, status, version, releaseDate)
   - self.check("browsers", browser);
   - self.check("supportStatus", status);
@@ -55,6 +55,32 @@ mixin bc-support(browser, status, version, releaseDate)
               i.icon.icon-footnote
             span= self.supportStatus[status]
       span.offscreen 展开/收起历史记录
+
+//- 历史记录（大屏幕）
+mixin bc-history(browser, status, version, releaseDate)
+  - self.check("browsers", browser);
+  - self.check("supportStatus", status);
+  tr.bc-history.bc-history-desktop
+    td(colspan="12")
+      dl.bc-notes-list
+        .bc-notes-wrapper
+          dt.bc-supports(class=`bc-supports-${status}`)
+            .bcd-timeline-cell-text-wrapper
+              .bcd-cell-icons
+                span.icon-wrap
+                  abbr.icon(
+                    class=`bc-level-${status} icon-${status}`,
+                    title=self.supportStatus[status]
+                  )
+                    span.bc-support-level= self.supportStatus[status]
+              .bcd-cell-text-copy
+                span.bc-browser-name= self.browsers[browser].text
+                span.bc-version-label= `${version}（发布于 ${releaseDate}）`
+          dd.bc-supports-dd
+            abbr.only-icon(title=self.supportStatus.footnote)
+              span 脚注
+              i.icon.icon-footnote
+            span= self.supportStatus[status]
 
 //- 图例
 mixin bc-legend-item(status)
@@ -121,226 +147,18 @@ html(lang="en")
               +bc-support("samsunginternet_android", "yes", "21.0", "2023-05-19")
               +bc-support("webview_android", "yes", "109", "2023-01-10")
 
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Chrome
-                          span.bc-version-label 86 (Released 2020-10-20)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Edge
-                          span.bc-version-label 86 (Released 2020-10-09)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Firefox
-                          span.bc-version-label 111 (Released 2023-03-14)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Opera
-                          span.bc-version-label 72 (Released 2020-10-21)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Safari
-                          span.bc-version-label 15.2 (Released 2021-12-13)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Chrome Android
-                          span.bc-version-label 109 (Released 2023-01-10)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Firefox for Android
-                          span.bc-version-label 111 (Released 2023-03-14)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Opera Android
-                          span.bc-version-label 74 (Released 2023-03-13)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Safari on iOS
-                          span.bc-version-label 15.2 (Released 2021-12-13)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name Samsung Internet
-                          span.bc-version-label 21.0 (Released 2023-05-19)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
-            tr.bc-history.bc-history-desktop
-              td(colspan="12")
-                dl.bc-notes-list
-                  .bc-notes-wrapper
-                    dt.bc-supports-yes.bc-supports
-                      .bcd-timeline-cell-text-wrapper
-                        .bcd-cell-icons
-                          span.icon-wrap
-                            abbr.bc-level-yes.icon.icon-yes(
-                              title="Full support"
-                            )
-                              span.bc-support-level Full support
-                        .bcd-cell-text-copy
-                          span.bc-browser-name WebView Android
-                          span.bc-version-label 109 (Released 2023-01-10)
-                    dd.bc-supports-dd
-                      abbr.only-icon(title="See implementation notes.")
-                        span footnote
-                        i.icon.icon-footnote
-                      span Full support
+            +bc-history("chrome", "yes", "86", "2020-10-20")
+            +bc-history("edge", "yes", "86", "2020-10-09")
+            +bc-history("firefox", "yes", "111", "2023-03-14")
+            +bc-history("opera", "yes", "72", "2020-10-21")
+            +bc-history("safari", "yes", "15.2", "2021-12-13")
+            +bc-history("chrome_android", "yes", "109", "2023-01-10")
+            +bc-history("firefox_android", "yes", "111", "2023-03-14")
+            +bc-history("opera_android", "yes", "74", "2023-03-13")
+            +bc-history("safari_ios", "yes", "15.2", "2021-12-13")
+            +bc-history("samsunginternet_android", "yes", "21.0", "2023-05-19")
+            +bc-history("webview_android", "yes", "109", "2023-01-10")
+
     section.bc-legend
       p.bc-legend-tip 提示：你可以点击单元格以获取更多信息。
       dl.bc-legend-items-container
