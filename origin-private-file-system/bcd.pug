@@ -38,15 +38,19 @@ mixin bc-notes-wrapper(browser, status, version, releaseDate)
         i.icon.icon-footnote
       span= self.supportStatus[status]
 
-//- 数据（dl.bc-notes-list.bc-history.bc-history-mobile 为小屏幕上的历史记录）
+//- 数据
 mixin bc-support(browser, status, version, releaseDate)
   - self.check("browsers", browser);
   - self.check("supportStatus", status);
-  td.bc-support.bc-has-history(
-    class=`bc-browser-${browser} bc-supports-${status}`,
-    aria-expanded="true"
-  )
-    button(type="button", title="展开/收起历史记录")
+  td.bc-support.bc-has-history(class=`bc-browser-${browser} bc-supports-${status}`)
+    input(
+      id=browser,
+      type="checkbox",
+      name="bc-support",
+      title=self.browsers[browser].text,
+      hidden
+    )
+    label(for=browser, title="展开/收起历史记录")
       .bcd-cell-text-wrapper
         .bcd-cell-icons
           span.icon-wrap
@@ -58,15 +62,15 @@ mixin bc-support(browser, status, version, releaseDate)
         .bcd-cell-text-copy
           span.bc-browser-name= self.browsers[browser].text
           span.bc-version-label(title=`发布于 ${releaseDate}`)= version
-      dl.bc-notes-list.bc-history.bc-history-mobile
+      dl.bc-notes-list.bc-history.bc-history-mobile(class=`bc-history-${browser}`)
         +bc-notes-wrapper(browser, status, version, releaseDate)
       span.offscreen 展开/收起历史记录
 
-//- 历史记录（大屏幕）
+//- 历史记录
 mixin bc-history(browser, status, version, releaseDate)
   - self.check("browsers", browser);
   - self.check("supportStatus", status);
-  tr.bc-history.bc-history-desktop
+  tr.bc-history.bc-history-desktop(class=`bc-history-${browser}`)
     td(colspan="12")
       dl.bc-notes-list
         +bc-notes-wrapper(browser, status, version, releaseDate)
@@ -83,73 +87,75 @@ mixin bc-legend-item(status)
         )
     dd.bc-legend-item-dd= self.supportStatus[status]
 
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title 兼容性表格
-    link(rel="stylesheet", href="main.css")
-  body
-    a.bc-github-link.external.external-icon(
-      href="https://github.com/mdn/browser-compat-data/issues/new?mdn-url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FStorageManager%2FgetDirectory&metadata=%3C%21--+Do+not+make+changes+below+this+line+--%3E%0A%3Cdetails%3E%0A%3Csummary%3EMDN+page+report+details%3C%2Fsummary%3E%0A%0A*+Query%3A+%60api.StorageManager.getDirectory%60%0A*+Report+started%3A+2023-08-23T05%3A23%3A22.705Z%0A%0A%3C%2Fdetails%3E&title=api.StorageManager.getDirectory+-+%3CSUMMARIZE+THE+PROBLEM%3E&template=data-problem.yml",
-      target="_blank",
-      rel="noopener noreferrer",
-      title="报告此兼容性数据的问题"
-    ) 在 GitHub 上报告此兼容性数据的问题
-    figure.table-container
-      figure.table-container-inner
-        table.bc-table.bc-table-web
-          thead
-            tr.bc-platforms
-              td
-              +bc-platform("desktop", 5)
-              +bc-platform("mobile", 6)
-            tr.bc-browsers
-              td
-              +bc-browser("chrome")
-              +bc-browser("edge")
-              +bc-browser("firefox")
-              +bc-browser("opera")
-              +bc-browser("safari")
-              +bc-browser("chrome_android")
-              +bc-browser("firefox_android")
-              +bc-browser("opera_android")
-              +bc-browser("safari_ios")
-              +bc-browser("samsunginternet_android")
-              +bc-browser("webview_android")
-          tbody
-            tr
-              th.bc-feature.bc-feature-depth-0(scope="row")
-                a.bc-table-row-header(
-                  href="https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/getDirectory"
-                )
-                  code getDirectory
-              +bc-support("chrome", "yes", "86", "2020-10-20")
-              +bc-support("edge", "yes", "86", "2020-10-09")
-              +bc-support("firefox", "yes", "111", "2023-03-14")
-              +bc-support("opera", "yes", "72", "2020-10-21")
-              +bc-support("safari", "yes", "15.2", "2021-12-13")
-              +bc-support("chrome_android", "yes", "109", "2023-01-10")
-              +bc-support("firefox_android", "yes", "111", "2023-03-14")
-              +bc-support("opera_android", "yes", "74", "2023-03-13")
-              +bc-support("safari_ios", "yes", "15.2", "2021-12-13")
-              +bc-support("samsunginternet_android", "yes", "21.0", "2023-05-19")
-              +bc-support("webview_android", "yes", "109", "2023-01-10")
+doctype xml
+svg(
+  xmlns="http://www.w3.org/2000/svg",
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+)
+  style
+    include main.min.css
+  foreignObject(x="0", y="0", width="100%", height="100%")
+    body(xmlns="http://www.w3.org/1999/xhtml")
+      a.bc-github-link.external.external-icon(
+        href="https://github.com/mdn/browser-compat-data/issues/new?mdn-url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FStorageManager%2FgetDirectory&metadata=%3C%21--+Do+not+make+changes+below+this+line+--%3E%0A%3Cdetails%3E%0A%3Csummary%3EMDN+page+report+details%3C%2Fsummary%3E%0A%0A*+Query%3A+%60api.StorageManager.getDirectory%60%0A*+Report+started%3A+2023-08-23T05%3A23%3A22.705Z%0A%0A%3C%2Fdetails%3E&title=api.StorageManager.getDirectory+-+%3CSUMMARIZE+THE+PROBLEM%3E&template=data-problem.yml",
+        target="_blank",
+        rel="noopener noreferrer",
+        title="报告此兼容性数据的问题"
+      ) 在 GitHub 上报告此兼容性数据的问题
+      figure.table-container
+        figure.table-container-inner
+          table.bc-table.bc-table-web
+            thead
+              tr.bc-platforms
+                td
+                +bc-platform("desktop", 5)
+                +bc-platform("mobile", 6)
+              tr.bc-browsers
+                td
+                +bc-browser("chrome")
+                +bc-browser("edge")
+                +bc-browser("firefox")
+                +bc-browser("opera")
+                +bc-browser("safari")
+                +bc-browser("chrome_android")
+                +bc-browser("firefox_android")
+                +bc-browser("opera_android")
+                +bc-browser("safari_ios")
+                +bc-browser("samsunginternet_android")
+                +bc-browser("webview_android")
+            tbody
+              tr
+                th.bc-feature.bc-feature-depth-0(scope="row")
+                  a.bc-table-row-header(
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/getDirectory"
+                  )
+                    code getDirectory
+                +bc-support("chrome", "yes", "86", "2020-10-20")
+                +bc-support("edge", "yes", "86", "2020-10-09")
+                +bc-support("firefox", "yes", "111", "2023-03-14")
+                +bc-support("opera", "yes", "72", "2020-10-21")
+                +bc-support("safari", "yes", "15.2", "2021-12-13")
+                +bc-support("chrome_android", "yes", "109", "2023-01-10")
+                +bc-support("firefox_android", "yes", "111", "2023-03-14")
+                +bc-support("opera_android", "yes", "74", "2023-03-13")
+                +bc-support("safari_ios", "yes", "15.2", "2021-12-13")
+                +bc-support("samsunginternet_android", "yes", "21.0", "2023-05-19")
+                +bc-support("webview_android", "yes", "109", "2023-01-10")
 
-            +bc-history("chrome", "yes", "86", "2020-10-20")
-            +bc-history("edge", "yes", "86", "2020-10-09")
-            +bc-history("firefox", "yes", "111", "2023-03-14")
-            +bc-history("opera", "yes", "72", "2020-10-21")
-            +bc-history("safari", "yes", "15.2", "2021-12-13")
-            +bc-history("chrome_android", "yes", "109", "2023-01-10")
-            +bc-history("firefox_android", "yes", "111", "2023-03-14")
-            +bc-history("opera_android", "yes", "74", "2023-03-13")
-            +bc-history("safari_ios", "yes", "15.2", "2021-12-13")
-            +bc-history("samsunginternet_android", "yes", "21.0", "2023-05-19")
-            +bc-history("webview_android", "yes", "109", "2023-01-10")
+              +bc-history("chrome", "yes", "86", "2020-10-20")
+              +bc-history("edge", "yes", "86", "2020-10-09")
+              +bc-history("firefox", "yes", "111", "2023-03-14")
+              +bc-history("opera", "yes", "72", "2020-10-21")
+              +bc-history("safari", "yes", "15.2", "2021-12-13")
+              +bc-history("chrome_android", "yes", "109", "2023-01-10")
+              +bc-history("firefox_android", "yes", "111", "2023-03-14")
+              +bc-history("opera_android", "yes", "74", "2023-03-13")
+              +bc-history("safari_ios", "yes", "15.2", "2021-12-13")
+              +bc-history("samsunginternet_android", "yes", "21.0", "2023-05-19")
+              +bc-history("webview_android", "yes", "109", "2023-01-10")
 
-    section.bc-legend
-      p.bc-legend-tip 提示：你可以点击单元格以获取更多信息。
-      dl.bc-legend-items-container
-        +bc-legend-item("yes")
-        +bc-legend-item("no")
+      section.bc-legend
+        p.bc-legend-tip 提示：你可以点击单元格以获取更多信息。
+        dl.bc-legend-items-container
+          +bc-legend-item("yes")
+          +bc-legend-item("no")
