@@ -9,7 +9,7 @@ The File System Standard introduces an origin private file system (OPFS) as a st
 
 The origin private file system is supported by modern browsers and is standardized by the Web Hypertext Application Technology Working Group ([WHATWG](https://whatwg.org/)) in the [File System Living Standard](https://fs.spec.whatwg.org/).
 
-![Browser compatibility](https://jihulab.com/gitlab-cn/gitlab/uploads/dc7aae48e0229c32f47ebe96c6ecb6e5/image.svg)
+![Browser compatibility](https://jihulab.com/zhoushengdao/zhoushengdao-articles/-/raw/main/origin-private-file-system/bcd.svg?ref_type=heads)
 
 ## Motivation
 
