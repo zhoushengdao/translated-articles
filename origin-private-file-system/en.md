@@ -2,7 +2,7 @@
 
 The File System Standard introduces an origin private file system (OPFS) as a storage endpoint private to the origin of the page and not visible to the user that provides optional access to a special kind of file that is highly optimized for performance.
 
-> **Celebration**
+> **Celebration**  
 > The origin private file system allows web apps to store and manipulate files in their very own origin-specific virtual filesystem, including low-level file manipulation, byte-by-byte access, and file streaming. The origin private file system is supported across all major browsers.
 
 ## Browser support
