@@ -57,7 +57,7 @@ const locals = {
 };
 
 const compileFile = async () => {
-  const output = { html: "index.svg", css: "main.css" };
+  const output = { html: "image.svg", css: "main.css" };
 
   writeFileSync(output.html, pug.compileFile(path, { self: true })(locals));
   console.log(`\x1B[36m${output.html}\x1B[0m \x1B[2mhas updated\x1B[0m`);
