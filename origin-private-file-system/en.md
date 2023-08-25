@@ -13,7 +13,7 @@ The origin private file system is supported by modern browsers and is standardiz
 
 ## Motivation
 
-When you think of files on your computer, you probably think about a file hierarchy: files organized in folders that you can explore with your operating system's file explorer. For example, on Windows, for a user called Tom, their To Do list might live in `C:\Users\Tom\Documents\ToDo.txt`. In this example, `ToDo.txt` is the file name, and `Users`, `Tom`, and `Documents` are folder names. `C:\` on Windows represents the root directory of the drive.
+When you think of files on your computer, you probably think about a file hierarchy: files organized in folders that you can explore with your operating system's file explorer. For example, on Windows, for a user called Tom, their To Do list might live in `C:\\Users\\Tom\\Documents\\ToDo.txt`. In this example, `ToDo.txt` is the file name, and `Users`, `Tom`, and `Documents` are folder names. `C:\\` on Windows represents the root directory of the drive.
 
 > In this article, I use the terms _folder_ and _directory_ interchangeably, disregarding the difference between the file system concept (directory) and the graphical user interface [metaphor](https://en.wikipedia.org/wiki/Directory_%28computing%29#Folder_metaphor) (folder).
 
@@ -61,8 +61,7 @@ To get access to the root directory, run the command below. You end up with an e
 
 ```js
 const opfsRoot = await navigator.storage.getDirectory();
-// A FileSystemDirectoryHandle whose type is "directory"
-// and whose name is "".
+// A FileSystemDirectoryHandle whose type is "directory" and whose name is "".
 console.log(opfsRoot);
 ```
 
@@ -84,7 +83,7 @@ If you need the fastest possible file operations and/or you deal with [WebAssemb
 
 ### Creating new files and folders
 
-Once you have a root folder, create files and folders using the [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) and the [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) methods respectively. By passing [`{create: true}`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create), the file or folder will be created if it doesn't exist. Build up a hierarchy of files by calling these functions using a newly created directory as the starting point.
+Once you have a root folder, create files and folders using the [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) and the [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) methods respectively. By passing [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create), the file or folder will be created if it doesn't exist. Build up a hierarchy of files by calling these functions using a newly created directory as the starting point.
 
 ```js
 const fileHandle = await opfsRoot.getFileHandle("my first file", {
@@ -112,9 +111,9 @@ const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
 If you know their name, access previously created files and folders by calling the `getFileHandle()` or the `getDirectoryHandle()` methods, passing in the name of the file or folder.
 
 ```js
-const existingFileHandle = await opfsRoot.getFileHandle('my first file');
-const existingDirectoryHandle = await opfsRoot
-    .getDirectoryHandle('my first folder);
+const existingFileHandle = await opfsRoot.getFileHandle("my first file");
+const existingDirectoryHandle =
+  await opfsRoot.getDirectoryHandle("my first folder");
 ```
 
 ### Getting the file associated with a file handle for reading
@@ -157,7 +156,7 @@ As an alternative, if you know the name of the to-be-deleted file or folder in a
 directoryHandle.removeEntry("my first nested file");
 ```
 
-> As a quick tip, `await (await navigator.storage.getDirectory()).remove({recursive: true})` is the fastest way to clear the entire origin private file system.
+> As a quick tip, `await (await navigator.storage.getDirectory()).remove({ recursive: true })` is the fastest way to clear the entire origin private file system.
 
 ### Moving and renaming files and folders
 
@@ -320,8 +319,7 @@ const moreContent = textEncoder.encode("More content");
 accessHandle.write(moreContent, { at: size });
 // Flush the changes.
 accessHandle.flush();
-// The current size of the file, now `21` (the length of
-// "Some textMore content").
+// The current size of the file, now `21` (the length of "Some textMore content").
 size = accessHandle.getSize();
 
 // Prepare a data view of the length of the file.
