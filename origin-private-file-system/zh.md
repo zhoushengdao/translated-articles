@@ -31,7 +31,7 @@
 
 1. 使用 `showOpenFilePicker()` 打开 `ToDo.txt`，得到一个 [`FileSystemFileHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle) 对象。
 1. 通过调用文件句柄 `FileSystemFileHandle` 对象的 [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) 方法获取 [`File`](https://developer.mozilla.org/docs/Web/API/File)。
-1. 编辑文件，然后在句柄上调用 [`requestPermission({mode: 'readwrite'})`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/requestPermission)。
+1. 编辑文件，然后在句柄上调用 [`requestPermission({ mode: 'readwrite' })`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/requestPermission)。
 1. 如果用户接受权限请求，则将更改保存回原始文件。
 1. 或者，调用 `showSaveFilePicker()` 让用户选择一个新文件。 （如果用户选择的是之前打开的文件，其内容将被覆盖。） 对于重复保存，可以保留文件句柄，这样就不必再次显示文件保存对话框。
 
@@ -43,9 +43,9 @@
 
 同时，文件也是记录数据的绝佳方式。 例如，[SQLite](https://www.sqlite.org/) 将整个数据库存储在一个文件中。 另一个例子是用于图像处理的 [mipmaps](https://en.wikipedia.org/wiki/Mipmap)。 Mipmaps 是经过预先计算和优化的图像序列，每一幅图像都是前一幅图像的分辨率逐渐降低的表示，这使得许多操作（如缩放）变得更快。 那么，网络应用程序如何既能获得文件的优势，又能避免传统网络文件处理的性能成本呢？ 答案是_源私有文件系统_。
 
-## 用户可见性与源私有文件系统
+## 用户可见文件系统与源私有文件系统的对比
 
-不同于通过操作系统文件浏览器浏览的用户可见的文件系统，您可以读取文件和文件夹， 撰写、移动和重命名原始私有文件系统并不意味着用户会看到。 原始私有文件系统中的文件和文件夹，正如名称所建议的那样是私密的 更具体而言，私下访问站点的 [原点](https://developer.mozilla.org/docs/Glossary/Origin)。 在 DevTools 控制台中输入 [`位置。来源`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来发现页面的原始位置。 For example, the origin of the page `https://developer.chrome.com/articles/` is `https://developer.chrome.com` (that is, the part `/articles` is _not_ part of the origin). 您可以阅读更多关于原产地理论的信息，见 [Understanding "some-site" and "some-origin"](https://web.dev/same-site-same-origin/#origin)。 所有共享相同来源的页面都可以看到相同来源的私有文件系统数据，所以 `https://developer。 hrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与前一个例子相同的细节。 每个原产地都有自己独立的原产地私有文件系统，这意味着 `https://developer的原始私有文件系统。 hrome.com` 完全不同于如 [`https://web.dev`](https://web.dev/) 在 Windows 上，用户可见文件系统的根目录是 ``C:\`。 原始私有文件系统的对应方式是调用异步方法 [``navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 访问的初始空根目录。 关于用户可见文件系统与原始私有文件系统的比较，请见下图表。 图表显示，除根目录外，其他所有东西在概念上都是一样的， 具有文件和文件夹的层次结构，以根据您的数据和存储需要组织和安排。
+不同于通过操作系统的文件资源管理器浏览的、你可以读取、写入、移动和重命名文件和文件夹的用户可见文件系统，源私有文件系统不会被用户看到。 顾名思义，源私有文件系统中的文件和文件夹是私有的，更具体地说，是网站的[源](https://developer.mozilla.org/docs/Glossary/Origin)的私有文件系统。 在 DevTools 控制台中输入 [`location.origin`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来查找页面的源。 例如，页面 `https://developer.chrome.com/articles/` 的源是 `https://developer.chrome.com`（即 `/articles` _不_是源的一部分）。 你可以在[理解“同站”和“同源”](https://web.dev/same-site-same-origin/#origin)一文中阅读更多关于源理论的内容。 共享相同源的所有页面都可以在源私有文件系统中看到相同的数据，因此 `https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与上例相同的信息。 每个源都有自己独立的源私有文件系统，这意味着 `https://developer.chrome.com` 的源私有文件系统与 [`https://web.dev`](https://web.dev/) 的源私有文件系统完全不同。 在 Windows 系统中，用户可见文件系统的根目录是 ``C:\`。 而源私有文件系统的相似项是通过调用异步方法 [``navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 得到的每个源的初始的空的根目录。 关于用户可见文件系统与源私有文件系统的比较，请见下图。 图表显示，除根目录外，其他所有东西在概念上都是一样的， 具有文件和文件夹的层次结构，以根据您的数据和存储需要组织和安排。
 
 <!-- https://web-dev.imgix.net/image/8WbTDNrhLsU0El80frMBGE4eMCD3/xej6CL5VFJuGJgXPkeKJ.png?auto=format&w=1600 -->
 
@@ -60,9 +60,8 @@ Just like other storage mechanisms in the browser (for example, [localStorage](h
 要访问根目录，请运行下面的命令。 你最后有一个空的目录句柄，更具体而言，一个 [`FileSystemDirectoryHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle)。
 
 ```js
-const opfsRoot = 等待navigator.storage.getDirectory();
-// A FileSystemDirectoryHandle 的类型是“directory”
-// 其名称为""。
+const opfsRoot = await navigator.storage.getDirectory();
+// A FileSystemDirectoryHandle whose type is "directory" and whose name is "".
 log(opfsRoot)；
 ```
 
@@ -84,7 +83,7 @@ If you need the fastest possible file operations and/or you deal with [WebAssemb
 
 ### 创建新文件和文件夹
 
-一旦你有一个根目录， 使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。 通过 [`{create: true}`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create)如果文件或文件夹不存在，它将被创建。 使用新创建的目录作为起点，调用这些函数来建立一个文件的层次结构。
+一旦你有一个根目录， 使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。 By passing [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create), the file or folder will be created if it doesn't exist. 使用新创建的目录作为起点，调用这些函数来建立一个文件的层次结构。
 
 ```js
 const fileHandle = await opfsRoot.getFileHandle("my first file", {
@@ -112,9 +111,9 @@ const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
 如果您知道他们的名字， 通过调用 `getFileHandle()` 或 `getDirectoryHandle()` 方法访问先前创建的文件和文件夹 在文件或文件夹中传递。
 
 ```js
-const existingFileHandle = 等待opfsRoot.getFileHandle('我的第一个文件');
-const existingDirectoryHandle = 等待opfsRoot
-    .getDirectoryHandle('我的第一个文件夹);
+const existingFileHandle = await opfsRoot.getFileHandle("my first file");
+const existingDirectoryHandle =
+  await opfsRoot.getDirectoryHandle("my first folder");
 ```
 
 ### 正在获取与文件句柄相关联的文件进行读取
@@ -157,7 +156,7 @@ const writable = 等待 fileHandle.createWritable();
 directoryHandle.removeEntry("我的第一个嵌套文件");
 ```
 
-> 作为一个快速提示, `正在等待 (等待 navigator.storage.getDirectory().remove({recursive: true})` 是清除整个原始私有文件系统的最快方式。
+> As a quick tip, `await (await navigator.storage.getDirectory()).remove({ recursive: true })` is the fastest way to clear the entire origin private file system.
 
 ### 移动和重命名文件和文件夹
 
@@ -320,8 +319,7 @@ const more content = textEncoder.encode("more content");
 accessHandle.write(更多内容, { at: size });
 // 刷新更改。
 accessHandle.flush();
-// 文件当前大小, 现在`21` (长度为
-// "一些文本更多内容").
+// The current size of the file, now `21` (the length of "Some textMore content").
 大小 = accessHandle.getSize();
 
 // 准备文件长度的数据视图。
