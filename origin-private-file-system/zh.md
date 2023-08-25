@@ -1,9 +1,9 @@
 # 源私有文件系统
 
-File System 标准引入了源私有文件系统（OPFS），作为页面的源的私有且用户不可见的存储后端，它提供了对一种特殊文件的可选访问，并对性能进行了高度优化。
+文件系统标准（File System Standard）引入了源私有文件系统（OPFS），作为页面源私有的、用户不可见的存储端点，它提供了对一种特殊文件（a special kind of file）的可选访问，并对性能进行了高度优化。
 
 > **庆祝**  
-> 源私有文件系统允许 Web App 在自己特定的源虚拟文件系统中存储和操作文件，包括低级文件操作、逐字节访问和文件流。 所有主要浏览器都支持源私有文件系统。
+> 源私有文件系统允许网络应用程序在自己特定的源虚拟文件系统中存储和操作文件，包括低级文件操作、逐字节访问和文件流。 所有主要浏览器都支持源私有文件系统。
 
 ## 浏览器支持
 
@@ -19,31 +19,31 @@ File System 标准引入了源私有文件系统（OPFS），作为页面的源�
 
 ### 在 Web 上处理文件的传统方式
 
-若要在 Web App 中编辑待办事项列表，这是传统的流程：
+若要在网络应用程序中编辑待办事项列表，这是传统的流程：
 
-1. The user _uploads_ the file to a server or _opens_ it on the client with [`<input type="file">`](https://developer.mozilla.org/docs/Web/HTML/Element/input/file).
-1. The user makes their changes, and then _downloads_ the resulting file with an injected [`<a download="ToDo.txt>`](https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement/download) that you programmatically [`click()`](https://developer.mozilla.org/docs/Web/API/HTMLElement/click) via JavaScript.
-1. 对于开启文件夹，您在 [`<input type="file" webkitdirectory>`](https://developer.mozilla.org/docs/Web/API/HTMLInputElement/webkitdirectory)中使用一个特殊属性，尽管它有专有名称，但它实际上具有通用的浏览器支持。
+1. 用户将文件_上传_到服务器，或在客户端使用 [`<input type="file">`](https://developer.mozilla.org/docs/Web/HTML/Element/input/file) _打开_文件。
+1. 用户进行编辑，然后通过 JavaScript 以编程方式对注入的 [`<a download="ToDo.txt">`](https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement/download) 执行 [`click()`](https://developer.mozilla.org/docs/Web/API/HTMLElement/click) 方法来_下载_生成的文件。
+1. 要打开文件夹，可以使用 [`<input type="file" webkitdirectory>`](https://developer.mozilla.org/docs/Web/API/HTMLInputElement/webkitdirectory) 中的特殊属性，尽管它的名称具有私有前缀，但实际上得到了浏览器的普遍支持。
 
-### 网络上文件的现代工作方式
+### 在 Web 上处理文件的现代方式
 
-此流不代表用户对编辑文件的看法， 这意味着用户最终下载了 _副本。他们输入文件的_ 副本。 因此，文件系统访问 API 引入了三种选择方法 — —[`showOpenFilePicker()`](https://developer.mozilla.org/docs/Web/API/Window/showOpenFilePicker), [`显示SaveFilePicker()`](https://developer.mozilla.org/docs/Web/API/Window/showSaveFilePicker) [`showDirectoryPicker()`](https://developer.mozilla.org/docs/Web/API/Window/showDirectoryPicker) 它们能够产生如下流量：
+这种流程并不代表用户编辑文件的思维方式，这意味着用户最终只能下载其输入文件的_副本_。 因此，文件系统访问 API（File System Access API）引入了三个选择器方法——[`showOpenFilePicker()`](https://developer.mozilla.org/docs/Web/API/Window/showOpenFilePicker)、[`showSaveFilePicker()`](https://developer.mozilla.org/docs/Web/API/Window/showSaveFilePicker) 和 [`showDirectoryPicker()`](https://developer.mozilla.org/docs/Web/API/Window/showDirectoryPicker)，它们的功能和名称一样（译注：它们的功能依次为打开文件、保存文件和打开目录）。 通过它们，可以以如下的流程来处理文件：
 
-1. 打开 `To.txt` with `showOpenFilePicker()`, 并获得一个 [`FileSystemFile Handle`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle) 对象。
-1. 从 `FileSystemFileHandle` object, 获得一个 [``](https://developer.mozilla.org/docs/Web/API/File) 通过调用文件句柄的 [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) 方法.
-1. Modify the file, then call [`requestPermission({mode: 'readwrite'})`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/requestPermission) on the handle.
-1. 如果用户接受权限请求，将更改保存到原始文件。
-1. 或者，调用 `showveFilePicker()` 并让用户选择一个新的文件。 (如果用户选择以前打开的文件，其内容将被覆盖) 若要重复保存，您可以保持文件处理方式，所以您不必再次显示文件保存对话框。
+1. 使用 `showOpenFilePicker()` 打开 `ToDo.txt`，得到一个 [`FileSystemFileHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle) 对象。
+1. 通过调用文件句柄 `FileSystemFileHandle` 对象的 [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) 方法获取 [`File`](https://developer.mozilla.org/docs/Web/API/File)。
+1. 编辑文件，然后在句柄上调用 [`requestPermission({mode: 'readwrite'})`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/requestPermission)。
+1. 如果用户接受权限请求，则将更改保存回原始文件。
+1. 或者，调用 `showSaveFilePicker()` 让用户选择一个新文件。 （如果用户选择的是之前打开的文件，其内容将被覆盖。） 对于重复保存，可以保留文件句柄，这样就不必再次显示文件保存对话框。
 
-### 限制网络上的文件工作
+### 在 Web 上处理文件的限制
 
-通过这些方法可以访问的文件和文件夹生活在可以被称为 _用户可见的_ 文件系统中。 Files saved from the web, and executable files specifically, are marked with the [mark of the web](https://textslashplain.com/2016/04/04/downloads-and-the-mark-of-the-web/), so there's an additional warning the operating system can show before a potentially dangerous file gets executed. 作为额外的安全功能，从网页上获取的文件也受到 [Safe Browsing](https://safebrowsing.google.com/)的保护。 为了简洁和本条的背景，你可以将其视为基于云层的病毒扫描。 当您使用文件系统访问 API 将数据写入文件时，写入不是现场，但使用临时文件。 文件本身不会被修改，除非它通过所有这些安全检查。 As you can imagine, this work makes file operations relatively slow, despite improvements applied where possible, for example, [on macOS](https://bugs.chromium.org/p/chromium/issues/detail?id=1413443). Still every [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) call is self-contained, so under the hood it opens the file, seeks to the given offset, and finally writes data.
+通过这些方法访问的文件和文件夹位于_用户可见_的文件系统中。 从网络上保存的文件，特别是可执行文件，都会被打上[网络标记](https://textslashplain.com/2016/04/04/downloads-and-the-mark-of-the-web/)，因此在潜在危险文件被执行之前，操作系统会显示额外的警告。 作为一项额外的安全功能，从网络上获取的文件也会受到[安全浏览](https://safebrowsing.google.com/)的保护，为简单起见，在本文中，你可以将其视为基于云的病毒扫描。 当使用文件系统访问 API 向文件写入数据时，写入不是就地写入，而是会使用临时文件。 除非通过所有这些安全检查，否则文件本身不会被修改。 可以想象，尽管[在 macOS](https://bugs.chromium.org/p/chromium/issues/detail?id=1413443) 等系统上尽可能地进行了优化，但这些检查还是让文件操作变得相对缓慢。 尽管如此，每个 [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) 调用都是独立的，因此它在后台打开文件，查找到给定的偏移量，并最终写入数据。
 
-### 作为处理基础的文件
+### 作为处理工作基础的文件
 
-同时，档案是记录数据的极好方式。 例如， [SQLite](https://www.sqlite.org/) 将整个数据库存储在单个文件中。 另一个例子是用于图像处理的 [mipmap](https://en.wikipedia.org/wiki/Mipmap)。 Mipmap是预计算的，优化图像序列， 其中每一种都是前一种逐渐降低的分辨率，从而使得许多操作像缩放得更快。 所以，网络应用程序如何能够从文件中获得好处，但不需要传统的网络文件处理的性能成本？ 答案是 _原始私有文件系统_。
+同时，文件也是记录数据的绝佳方式。 例如，[SQLite](https://www.sqlite.org/) 将整个数据库存储在一个文件中。 另一个例子是用于图像处理的 [mipmaps](https://en.wikipedia.org/wiki/Mipmap)。 Mipmaps 是经过预先计算和优化的图像序列，每一幅图像都是前一幅图像的分辨率逐渐降低的表示，这使得许多操作（如缩放）变得更快。 那么，网络应用程序如何既能获得文件的优势，又能避免传统网络文件处理的性能成本呢？ 答案是_源私有文件系统_。
 
-## 用户可见性与原始私有文件系统
+## 用户可见性与源私有文件系统
 
 不同于通过操作系统文件浏览器浏览的用户可见的文件系统，您可以读取文件和文件夹， 撰写、移动和重命名原始私有文件系统并不意味着用户会看到。 原始私有文件系统中的文件和文件夹，正如名称所建议的那样是私密的 更具体而言，私下访问站点的 [原点](https://developer.mozilla.org/docs/Glossary/Origin)。 在 DevTools 控制台中输入 [`位置。来源`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来发现页面的原始位置。 For example, the origin of the page `https://developer.chrome.com/articles/` is `https://developer.chrome.com` (that is, the part `/articles` is _not_ part of the origin). 您可以阅读更多关于原产地理论的信息，见 [Understanding "some-site" and "some-origin"](https://web.dev/same-site-same-origin/#origin)。 所有共享相同来源的页面都可以看到相同来源的私有文件系统数据，所以 `https://developer。 hrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与前一个例子相同的细节。 每个原产地都有自己独立的原产地私有文件系统，这意味着 `https://developer的原始私有文件系统。 hrome.com` 完全不同于如 [`https://web.dev`](https://web.dev/) 在 Windows 上，用户可见文件系统的根目录是 ``C:\`。 原始私有文件系统的对应方式是调用异步方法 [``navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 访问的初始空根目录。 关于用户可见文件系统与原始私有文件系统的比较，请见下图表。 图表显示，除根目录外，其他所有东西在概念上都是一样的， 具有文件和文件夹的层次结构，以根据您的数据和存储需要组织和安排。
 
