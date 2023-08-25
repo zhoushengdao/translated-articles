@@ -346,10 +346,10 @@ accessHandle.truncate(4);
 如上所述，将文件从原始私有文件系统移动到用户可见文件系统是不可能的，但您可以复制文件。 既然 `showSaveFilePicker()` 只在主线程上曝光，但不在工人线程中，肯定要在那里运行代码。
 
 ```js
-// On the main thread, not in the Worker. This assumes `fileHandle` is the `FileSystemFileHandle` you obtained the `FileSystemSyncAccessHandle` from in the Worker thread. Be sure to close the file in the Worker thread first.
+// 在主线程上，而不是在 Worker 中。 假设 `fileHandle` 是你在 Worker 线程中获取的 `FileSystemSyncAccessHandle` 的 `FileSystemFileHandle`。 请确保先关闭 Worker 线程中的文件。
 const fileHandle = await opfsRoot.getFileHandle("fast");
 try {
-  // Obtain a file handle to a new file in the user-visible file system with the same name as the file in the origin private file system.
+  // 获取用户可见文件系统中新文件的文件句柄，该文件与源私有文件系统中的文件名相同。
   const saveHandle = await showSaveFilePicker({
     suggestedName: fileHandle.name || "",
   });
