@@ -22,7 +22,7 @@ When you think of files on your computer, you probably think about a file hierar
 To edit the To Do list in a web application, this is the traditional flow:
 
 1. The user _uploads_ the file to a server or _opens_ it on the client with [`<input type="file">`](https://developer.mozilla.org/docs/Web/HTML/Element/input/file).
-1. The user makes their changes, and then _downloads_ the resulting file with an injected [`<a download="ToDo.txt>`](https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement/download) that you programmatically [`click()`](https://developer.mozilla.org/docs/Web/API/HTMLElement/click) via JavaScript.
+1. The user makes their changes, and then _downloads_ the resulting file with an injected [`<a download="ToDo.txt">`](https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement/download) that you programmatically [`click()`](https://developer.mozilla.org/docs/Web/API/HTMLElement/click) via JavaScript.
 1. For opening folders, you use a special attribute in [`<input type="file" webkitdirectory>`](https://developer.mozilla.org/docs/Web/API/HTMLInputElement/webkitdirectory), which, despite its proprietary name, has practically universal browser support.
 
 ### Modern way of working with files on the web
