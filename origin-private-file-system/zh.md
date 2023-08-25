@@ -53,11 +53,11 @@
 
 ## 源私有文件系统的特点
 
-与浏览器中的其他存储机制（如 [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 或 [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Using_IndexedDB)）一样，源私有文件系统也受浏览器配额的限制。 当用户[清除所有浏览数据](https://support.google.com/chrome/answer/2392709)或[所有网站数据](https://developer.chrome.com/docs/devtools/storage/cache/#deletecache)时，源私有文件系统也将被删除。 调用 [`navigator.storage。 估计值()`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate) 以及在结果的响应对象中请参阅 [`使用率`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usage) 条目以查看您的应用已经消耗了多少存储空间 [`用法明细`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usagedetails) 对象， 在哪里您想要查看 `文件系统` 条目。 由于原始私有文件系统对用户不可见，没有权限提示和安全浏览检查。
+与浏览器中的其他存储机制（如 [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 或 [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Using_IndexedDB)）一样，源私有文件系统也受浏览器配额的限制。 当用户[清除所有浏览数据](https://support.google.com/chrome/answer/2392709)或[所有网站数据](https://developer.chrome.com/docs/devtools/storage/cache/#deletecache)时，源私有文件系统也将被删除。 调用 [`navigator.storage.estimate()`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate)，在返回的对象中查看 [`usage`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usage) 条目，了解应用程序已经消耗了多少存储空间。如果你想要特别查看 `fileSystem` 条目的信息，请看按存储方式细分后的 [`usageDetails`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usagedetails) 对象中。 由于源私有文件系统对用户不可见，因此没有权限提示，也没有安全浏览检查。
 
-## 正在获取访问根目录
+## 访问根目录
 
-要访问根目录，请运行下面的命令。 你最后有一个空的目录句柄，更具体而言，一个 [`FileSystemDirectoryHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle)。
+要访问根目录，请运行下面的命令。 你最后会得到一个空目录句柄，更确切地说，是一个 [`FileSystemDirectoryHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle)。
 
 ```js
 const opfsRoot = await navigator.storage.getDirectory();
@@ -67,7 +67,7 @@ console.log(opfsRoot);
 
 ## 主线程或 Web Worker
 
-有两种方法使用原始私有文件系统：在 [主线程](https://developer.mozilla.org/docs/Glossary/Main_thread) 或 [Web Worker](https://developer.mozilla.org/docs/Web/API/Worker) 中。 Web Workers 不能屏蔽主线程，这意味着这里的 API 可以同步，这种模式在主线程上一般不允许。 同步API可以更快，因为它们避免必须兑现许诺， 和文件操作通常是同步的语言，如C，可以编译到WebAssembly。
+有两种方法使用源私有文件系统：在[主线程](https://developer.mozilla.org/docs/Glossary/Main_thread)中或在 [Web Worker](https://developer.mozilla.org/docs/Web/API/Worker) 中。 Web Worker 不会阻塞主线程，这意味着在这里，API 可以是同步的，而在主线程上通常不允许这种模式。 同步 API 可以更快，因为它们可以避免处理 promise，且在可以编译成 WebAssembly 的 C 语言等语言中，文件操作通常是同步的。
 
 ```c
 // 这是同步的 C 代码。
