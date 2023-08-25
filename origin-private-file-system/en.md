@@ -346,14 +346,10 @@ accessHandle.truncate(4);
 As mentioned above, moving files from the origin private file system to the user-visible file system isn't possible, but you can copy files. Since `showSaveFilePicker()` is only exposed on the main thread, but not in the Worker thread, be sure to run the code there.
 
 ```js
-// On the main thread, not in the Worker. This assumes
-// `fileHandle` is the `FileSystemFileHandle` you obtained
-// the `FileSystemSyncAccessHandle` from in the Worker
-// thread. Be sure to close the file in the Worker thread first.
+// On the main thread, not in the Worker. This assumes `fileHandle` is the `FileSystemFileHandle` you obtained the `FileSystemSyncAccessHandle` from in the Worker thread. Be sure to close the file in the Worker thread first.
 const fileHandle = await opfsRoot.getFileHandle("fast");
 try {
-  // Obtain a file handle to a new file in the user-visible file system
-  // with the same name as the file in the origin private file system.
+  // Obtain a file handle to a new file in the user-visible file system with the same name as the file in the origin private file system.
   const saveHandle = await showSaveFilePicker({
     suggestedName: fileHandle.name || "",
   });
