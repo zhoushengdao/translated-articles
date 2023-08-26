@@ -77,7 +77,7 @@ fputs("Some text\n", f);
 fclose(f);
 ```
 
-If you need the fastest possible file operations and/or you deal with [WebAssembly](https://developer.mozilla.org/es/docs/WebAssembly), skip down to [Using the origin private file system in a Web Worker](https://example.com). Else, you can read on.
+If you need the fastest possible file operations and/or you deal with [WebAssembly](https://developer.mozilla.org/docs/WebAssembly), skip down to [Using the origin private file system in a Web Worker](https://example.com). Else, you can read on.
 
 ## Using the origin private file system on the main thread
 
@@ -118,7 +118,7 @@ const existingDirectoryHandle =
 
 ### Getting the file associated with a file handle for reading
 
-A `FileSystemFileHandle` represents a file on the file system. To obtain the associated `File`, use the [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) method. A `File` object is a specific kind of [`Blob`](https://developer.mozilla.org/es/docs/Web/API/Blob), and can be used in any context that a `Blob` can. In particular, [`FileReader`](https://developer.mozilla.org/es/docs/Web/API/FileReader), [`URL.createObjectURL()`](https://developer.mozilla.org/es/docs/Web/API/URL/createObjectURL), [`createImageBitmap()`](https://developer.mozilla.org/es/docs/Web/API/createImageBitmap), and [`XMLHttpRequest.send()`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/send) accept both `Blobs` and `Files`. If you will, obtaining a `File` from a `FileSystemFileHandle` "frees" the data, so you can access it and make it available to the user-visible file system.
+A `FileSystemFileHandle` represents a file on the file system. To obtain the associated `File`, use the [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) method. A `File` object is a specific kind of [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob), and can be used in any context that a `Blob` can. In particular, [`FileReader`](https://developer.mozilla.org/docs/Web/API/FileReader), [`URL.createObjectURL()`](https://developer.mozilla.org/docs/Web/API/URL/createObjectURL), [`createImageBitmap()`](https://developer.mozilla.org/docs/Web/API/createImageBitmap), and [`XMLHttpRequest.send()`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/send) accept both `Blobs` and `Files`. If you will, obtaining a `File` from a `FileSystemFileHandle` "frees" the data, so you can access it and make it available to the user-visible file system.
 
 ```js
 const file = await fileHandle.getFile();
@@ -339,7 +339,7 @@ console.log(textDecoder.decode(dataView));
 accessHandle.truncate(4);
 ```
 
-> Note that the first parameter for `read()` and `write()` is an [`ArrayBuffer`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) or an `ArrayBufferView` like a [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView). You cannot directly manipulate the contents of an `ArrayBuffer`. Instead, you create one of the [typed array objects](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) like an [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
+> Note that the first parameter for `read()` and `write()` is an [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) or an `ArrayBufferView` like a [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView). You cannot directly manipulate the contents of an `ArrayBuffer`. Instead, you create one of the [typed array objects](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) like an [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
 
 ## Copying a file from the origin private file system to the user-visible file system
 
