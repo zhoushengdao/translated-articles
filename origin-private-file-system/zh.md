@@ -43,7 +43,7 @@
 
 同时，文件也是记录数据的绝佳方式。 例如，[SQLite](https://www.sqlite.org/) 将整个数据库存储在一个文件中。 另一个例子是用于图像处理的 [mipmaps](https://en.wikipedia.org/wiki/Mipmap)。 Mipmaps 是经过预先计算和优化的图像序列，每一幅图像都是前一幅图像的分辨率逐渐降低的表示，这使得许多操作（如缩放）变得更快。 那么，网络应用程序如何既能获得文件的优势，又能避免传统网络文件处理的性能成本呢？ 答案是_源私有文件系统_。
 
-## 用户可见文件系统与源私有文件系统的对比
+## 用户可见性与源私有文件系统
 
 不同于通过操作系统的文件资源管理器浏览的、你可以读取、写入、移动和重命名文件和文件夹的用户可见文件系统，源私有文件系统不会被用户看到。 顾名思义，源私有文件系统中的文件和文件夹是私有的，更具体地说，是网站的[源](https://developer.mozilla.org/docs/Glossary/Origin)的私有文件系统。 在 DevTools 控制台中输入 [`location.origin`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来查找页面的源。 例如，页面 `https://developer.chrome.com/articles/` 的源是 `https://developer.chrome.com`（即 `/articles` _不_是源的一部分）。 你可以在[理解“同站”和“同源”](https://web.dev/same-site-same-origin/#origin)一文中阅读更多关于源理论的内容。 共享相同源的所有页面都可以在源私有文件系统中看到相同的数据，因此 `https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与上例相同的信息。 每个源都有自己独立的源私有文件系统，这意味着 `https://developer.chrome.com` 的源私有文件系统与 [`https://web.dev`](https://web.dev/) 的源私有文件系统完全不同。 在 Windows 系统中，用户可见文件系统的根目录是 ``C:\`。 而源私有文件系统的相似项是通过调用异步方法 [``navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 得到的每个源的初始的空的根目录。 关于用户可见文件系统与源私有文件系统的比较，请见下图。 从图中可以看出，除了根目录外，其他所有东西在概念上都是一样的，都具有文件和文件夹的层次结构，可以根据数据和存储需要进行组织和排列。
 
@@ -53,7 +53,7 @@
 
 ## 源私有文件系统的特点
 
-与浏览器中的其他存储机制（如 [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 或 [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Using_IndexedDB)）一样，源私有文件系统也受浏览器配额的限制。 当用户[清除所有浏览数据](https://support.google.com/chrome/answer/2392709)或[所有网站数据](https://developer.chrome.com/docs/devtools/storage/cache/#deletecache)时，源私有文件系统也将被删除。 调用 [`navigator.storage.estimate()`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate)，在返回的对象中查看 [`usage`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usage) 条目，了解应用程序已经消耗了多少存储空间。如果你想要特别查看 `fileSystem` 条目的信息，请看按存储方式细分后的 [`usageDetails`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usagedetails) 对象中。 由于源私有文件系统对用户不可见，因此没有权限提示，也没有安全浏览检查。
+与浏览器中的其他存储机制（如 [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) 或 [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API/Using_IndexedDB)）一样，源私有文件系统也受浏览器配额的限制。 当用户[清除所有浏览数据](https://support.google.com/chrome/answer/2392709)或[所有网站数据](https://developer.chrome.com/docs/devtools/storage/cache/#deletecache)时，源私有文件系统也将被删除。 要了解应用程序已经消耗了多少存储空间，请调用 [`navigator.storage.estimate()`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate)，然后在返回的对象中查看 [`usage`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usage) 条目。如果你想要特别查看 `fileSystem` 条目的信息，请看 [`usageDetails`](https://developer.mozilla.org/docs/Web/API/StorageManager/estimate#usagedetails) 对象，它是按存储方式细分的。 由于源私有文件系统对用户不可见，因此没有权限提示，也没有安全浏览检查。
 
 ## 访问根目录
 
@@ -67,7 +67,7 @@ console.log(opfsRoot);
 
 ## 主线程或 Web Worker
 
-有两种方法使用源私有文件系统：在[主线程](https://developer.mozilla.org/docs/Glossary/Main_thread)中或在 [Web Worker](https://developer.mozilla.org/docs/Web/API/Worker) 中。 Web Worker 不会阻塞主线程，这意味着在这里，API 可以是同步的，而在主线程上通常不允许这种模式。 同步 API 可以更快，因为它们可以避免处理 promise，且在可以编译成 WebAssembly 的 C 语言等语言中，文件操作通常是同步的。
+有两种方法使用源私有文件系统：在[主线程](https://developer.mozilla.org/docs/Glossary/Main_thread)上或在 [Web Worker](https://developer.mozilla.org/docs/Web/API/Worker) 中。 Web Worker 不会阻塞主线程，这意味着在这里，API 可以是同步的，而在主线程上通常不会允许这种模式。 同步 API 可以更快，因为它们可以避免处理 promise，且在 C 语言等可以编译成 WebAssembly 的语言中，文件操作通常是同步的。
 
 ```c
 // 这是同步的 C 代码。
@@ -77,13 +77,13 @@ fputs("Some text\n", f);
 fclose(f);
 ```
 
-If you need the fastest possible file operations and/or you deal with [WebAssembly](https://developer.mozilla.org/es/docs/WebAssembly), skip down to [Using the origin private file system in a Web Worker](https://example.com). 其他，您可以读取了。
+如果你需要最快的文件操作和/或需要使用 [WebAssembly](https://developer.mozilla.org/docs/WebAssembly)，请跳至在 [Web Worker 中使用源私有文件系统](#using-the-origin-private-file-system-in-a-web-worker)。 否则，你可以继续阅读。
 
-## 在主线程上使用原始私有文件系统
+## 在主线程上使用源私有文件系统
 
 ### 创建新文件和文件夹
 
-一旦你有一个根目录， 使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。 By passing [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create), the file or folder will be created if it doesn't exist. 使用新创建的目录作为起点，调用这些函数来建立一个文件的层次结构。
+有了根目录句柄后，分别使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。 通过传递 [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create)，如果文件或文件夹不存在，它将被创建。 通过在新建的目录上调用这些函数来建立文件层次结构。
 
 ```js
 const fileHandle = await opfsRoot.getFileHandle("my first file", {
@@ -108,7 +108,7 @@ const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
 
 ### 访问现有文件和文件夹
 
-如果您知道他们的名字， 通过调用 `getFileHandle()` 或 `getDirectoryHandle()` 方法访问先前创建的文件和文件夹 在文件或文件夹中传递。
+如果你知道文件和文件夹的名称，就可以通过调用 `getFileHandle()` 或 `getDirectoryHandle()` 方法，并传入文件或文件夹的名称来访问以前创建的文件和文件夹。
 
 ```js
 const existingFileHandle = await opfsRoot.getFileHandle("my first file");
@@ -116,18 +116,18 @@ const existingDirectoryHandle =
   await opfsRoot.getDirectoryHandle("my first folder");
 ```
 
-### 正在获取与文件句柄相关联的文件进行读取
+### 读取与文件句柄相关联的文件
 
-`FileSystemFileHandle` 表示文件系统中的一个文件。 要获取关联的 `文件`，请使用 [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) 方法。 `文件` 对象是特定类型的 [`Blob`](https://developer.mozilla.org/es/docs/Web/API/Blob), 并且可以在一个 `Blob` 能够使用的任何上下文中。 In particular, [`FileReader`](https://developer.mozilla.org/es/docs/Web/API/FileReader), [`URL.createObjectURL()`](https://developer.mozilla.org/es/docs/Web/API/URL/createObjectURL), [`createImageBitmap()`](https://developer.mozilla.org/es/docs/Web/API/createImageBitmap), and [`XMLHttpRequest.send()`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/send) accept both `Blobs` and `Files`. 如果您愿意，请从 `FileSystemFileHandle` 获取一个 `文件` 。 这样您可以访问它并将它提供给用户可见的文件系统。
+`FileSystemFileHandle` 表示文件系统中的一个文件。 要获取关联的 `File` 对象，请使用 [`getFile()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/getFile) 方法。 `File` 对象是 [`Blob`](https://developer.mozilla.org/docs/Web/API/Blob) 的一种特殊类型，可以在任何能使用 `Blob` 的上下文中使用。 尤其是 [`FileReader`](https://developer.mozilla.org/docs/Web/API/FileReader)、[`URL.createObjectURL()`](https://developer.mozilla.org/docs/Web/API/URL/createObjectURL)、[`createImageBitmap()`](https://developer.mozilla.org/docs/Web/API/createImageBitmap) 和 [`XMLHttpRequest.send()`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/send)，它们都能处理 `Blob` 和 `File`。 如果你愿意，从 `FileSystemFileHandle` 获取 `File` 来“释放”数据，这样你就可以访问它，并将其提供给用户可见文件系统。
 
 ```js
 const file = await fileHandle.getFile();
 console.log(await file.text());
 ```
 
-### 正在通过串流写入文件
+### 通过流写入文件
 
-调用 [`createWritable()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/createWritable) 将数据导入到一个文件中，创建一个 [`FileSystemWritableFileStream`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream) 将数据导入一个文件，然后是 [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) 内容。 最后，您需要 [`close()`](https://developer.mozilla.org/docs/Web/API/WritableStream/close) 串流。
+为了将数据流写入文件，你需要通过调用 [`createWritable()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/createWritable) 创建一个 [`FileSystemWritableFileStream`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream)，然后使用 [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) 将内容写入文件。 最后，需要用 [`close()`](https://developer.mozilla.org/docs/Web/API/WritableStream/close) 来关闭流。
 
 ```js
 const contents = "Some text";
@@ -139,28 +139,28 @@ await writable.write(contents);
 await writable.close();
 ```
 
-### 正在删除文件和文件夹
+### 删除文件和文件夹
 
-通过调用文件或目录句柄的特殊的 [`remove()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove) 方法来删除文件和文件夹。 To delete a folder including all subfolders, pass the [`{recursive: true}`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove#recursive) option.
+通过调用特定文件或目录句柄上的 [`remove()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove) 方法来删除文件和文件夹。 要删除包括所有子文件夹在内的文件夹，请使用 [`{recursive: true}`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove#recursive) 选项。
 
 ```js
 await fileHandle.remove();
 await directoryHandle.remove({ recursive: true });
 ```
 
-> `remove()` 方法目前仅在 Chrome 中实现。 You can feature-detect support via `'remove' in FileSystemFileHandle.prototype`.
+> `remove()` 方法目前只在 Chrome 浏览器中实现。 你可以通过 `'remove' in FileSystemFileHandle.prototype` 来检测是否支持该功能。
 
-作为替代，如果您知道要删除的文件或文件夹在目录中的名称，请使用 [`removeEntry()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/removeEntry) 方法。
+作为替代，如果知道目录中要删除的文件或文件夹的名称，可以使用 [`removeEntry()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/removeEntry) 方法。
 
 ```js
 directoryHandle.removeEntry("my first nested file");
 ```
 
-> As a quick tip, `await (await navigator.storage.getDirectory()).remove({ recursive: true })` is the fastest way to clear the entire origin private file system.
+> 作为快速提示，`await (await navigator.storage.getDirectory()).remove({ recursive: true })` 是清除整个源私有文件系统的最快方法。
 
 ### 移动和重命名文件和文件夹
 
-使用 [`move()`](https://github.com/whatwg/fs/pull/10) 方法重命名并移动文件和文件夹。 移动和重命名可能同时发生或孤立发生。
+使用 [`move()`](https://github.com/whatwg/fs/pull/10) 方法重命名或移动文件和文件夹。 移动和重命名可以同时进行，也可以单独进行。
 
 ```js
 // 重命名文件。
@@ -174,20 +174,20 @@ await fileHandle.move(
 );
 ```
 
-> 重命名和移动文件夹在 Chrome 中尚未实现。 您也不能将文件从原始私有文件系统移动到用户可见文件系统。 You can [copy](#copying-a-file-from-the-origin-private-file-system-to-the-user-visible-file-system) them, though.
+> 重命名和移动文件夹在 Chrome 浏览器中尚未实现。 你也不能将文件从源私有文件系统移动到用户可见文件系统。 不过你可以[复制](#copying-a-file-from-the-origin-private-file-system-to-the-user-visible-file-system)它们。
 
 ### 解析文件或文件夹的路径
 
-了解指定的文件或文件夹相对于参考目录的位置， 使用 [`解决(format@@2`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/resolve) 方法, 通过一个 `FileSystemHandle` 作为参数。 获取原始私有文件系统中的文件或文件夹的完整路径， 使用根目录作为通过 `导航器获取的参考目录。 torage.getDirectory()`
+要了解给定文件或文件夹相对于参照目录（reference directory）的位置，请使用 [`resolve()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/resolve) 方法，并将 `FileSystemHandle` 作为参数传递给该方法。 要获取源私有文件系统中文件或文件夹的完整路径，请将通过 `navigator.storage.getDirectory()` 获得的根目录作为参照目录。
 
 ```js
 const relativePath = await opfsRoot.resolve(nestedDirectoryHandle);
 // `relativePath` 为 `['my first folder', 'my first nested folder']`。
 ```
 
-### 检查两个文件或文件夹是否处理到同一个文件或文件夹的点
+### 检查两个文件或文件夹句柄是否指向同一个文件或文件夹
 
-有时你有两个句柄，不知道它们指向同一个文件或文件夹。 若要检查是否属实，请使用 [`isSameEntry()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/isSameEntry) 方法。
+有时，你有两个句柄，却不知道它们是否指向同一个文件或文件夹。 对于这种情况，可以使用 [`isSameEntry()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/isSameEntry) 方法。
 
 ```js
 fileHandle.isSameEntry(nestedFileHandle);
@@ -196,7 +196,7 @@ fileHandle.isSameEntry(nestedFileHandle);
 
 ## 列出文件夹的内容
 
-`FileSystemDirectoryHandle` 是一个 [异步迭代器](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols) 你用 [`迭代，等待…的`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for-await...of) 循环。 作为异步迭代器，它还支持 [`<code>`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/entries), [`值()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/values), [`keys()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/keys) 方法，您可以根据您需要的信息选择：
+`FileSystemDirectoryHandle` 是一个[异步迭代器](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols)，可通过 [`for await…of`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for-await...of) 循环遍历。 作为异步迭代器，它还支持 [`entries()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/entries)、[`values()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/values) 和 [`keys()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/keys) 方法，你可以根据自己需要的信息从中进行选择：
 
 <!-- prettier-ignore-start -->
 ```js
@@ -209,7 +209,7 @@ for await (let name of directoryHandle.keys()) {}
 
 ## 递归列出文件夹和所有子文件夹的内容
 
-处理与递归配对的异步循环和函数很容易发生错误。 下面的函数可以作为列出文件夹及其所有子文件夹内容的起始点。 包括所有文件和它们的大小。 如果你不需要文件大小，你可以简化这个函数，它说了 `directoryEntryPromises。 ush`, 不要推送 `handle.getFile()` 许诺, 但 `直接处理`
+处理与递归搭配的异步循环和函数很容易出错。 下面的函数可以作为一个起点，用于列出文件夹及其所有子文件夹的内容，包括所有文件及其大小。 如果你不需要文件大小，可以简化函数，在 `directoryEntryPromises.push` 处不推送 promise `handle.getFile()`，而是直接推送 `handle`。
 
 ```js
 const getDirectoryEntriesRecursive = async (
@@ -264,11 +264,11 @@ const getDirectoryEntriesRecursive = async (
 
 ## 在 Web Worker 中使用源私有文件系统
 
-如前所述，网络工人不能屏蔽主线程，这就是为什么在这种情况下允许同步方法。
+如前所述，Web Worker 不能阻塞主线程，因此在这种情况下允许使用同步方法。
 
-### 获取同步访问句柄中
+### 获取同步访问句柄
 
-最快文件操作的入口点是 [`FileSystemSyncAccessHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle), 从 [`FileSystemFileHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle) 拨打 [`createSyncAccessHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/createSyncAccessHandle)
+最快的文件操作入口点是 [`FileSystemSyncAccessHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle)，可以通过在一个常规的 [`FileSystemFileHandle`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle) 上调用 [`createSyncAccessHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemFileHandle/createSyncAccessHandle) 获取。
 
 ```js
 const fileHandle = await opfsRoot.getFileHandle("my highspeed file.txt", {
@@ -277,11 +277,11 @@ const fileHandle = await opfsRoot.getFileHandle("my highspeed file.txt", {
 const syncAccessHandle = await fileHandle.createSyncAccessHandle();
 ```
 
-> 这可能似乎令人困惑，但你实际上得到了一个 _同步的_ `FileSystemSyncAccessHandle` 来自普通的 `FileSystemFileHandle` 还请注意 `createSyncAccessHandle()` 方法是 _异步_, 尽管 `同步` 名名下。
+> 这可能会令人困惑，但实际上，你可以从常规的 `FileSystemFileHandle` 上获得_同步的_ `FileSystemSyncAccessHandle`。 还要注意的是，尽管方法 `createSyncAccessHandle()` 的名称中包含 `Sync`，但该方法是_异步的_。
 
-### 同步文件方法
+### 同步就地文件方法
 
-一旦你有一个同步访问手机，你就可以访问所有同步的快速在地文件方法。
+一旦拥有了同步访问句柄，你就可以访问所有同步的快速的就地文件方法。
 
 - [`getSize()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/getSize)：返回文件的字节大小。
 - [`写入()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/write)写入缓冲区的内容， 在给定的偏移中，并返回写入字节的数量。 检查返回的字节数允许呼叫者侦测和处理错误及部分写入。
@@ -339,9 +339,9 @@ console.log(textDecoder.decode(dataView));
 accessHandle.truncate(4);
 ```
 
-> 请注意， `read()` and `write()` 的第一个参数是 [`ArrayBuffer`](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) 或 `ArrayBufferView` 就像 [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView)。 您不能直接操作一个 `ArrayBuffer` 的内容。 Instead, you create one of the [typed array objects](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) like an [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
+> Note that the first parameter for `read()` and `write()` is an [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) or an `ArrayBufferView` like a [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView). 您不能直接操作一个 `ArrayBuffer` 的内容。 Instead, you create one of the [typed array objects](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) like an [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
 
-## 将原始私有文件系统中的文件复制到用户可见的文件系统
+## 从源私有文件系统向用户可见文件系统复制文件
 
 如上所述，将文件从原始私有文件系统移动到用户可见文件系统是不可能的，但您可以复制文件。 既然 `showSaveFilePicker()` 只在主线程上曝光，但不在工人线程中，肯定要在那里运行代码。
 
@@ -361,7 +361,7 @@ try {
 }
 ```
 
-## 调试原始私有文件系统
+## 调试源私有文件系统
 
 直到内置的 DevTools 支持被添加(见 [crbug/1284595](https://crbug.com/1284595)) 使用 [OPFS Explorer](https://chrome.google.com/webstore/detail/opfs-explorer/acndjpgkpaclldomagafnognkcgjignd) Chrome 扩展调试原始私有文件系统。 [上面的屏幕截图直接从扩展开始创建新的文件和文件夹](#creating-new-files-and-folders)。
 
