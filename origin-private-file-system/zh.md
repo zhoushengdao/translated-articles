@@ -281,16 +281,16 @@ const syncAccessHandle = await fileHandle.createSyncAccessHandle();
 
 ### 同步就地文件方法
 
-一旦拥有了同步访问句柄，你就可以访问所有同步的快速的就地文件方法。
+一旦拥有了同步访问句柄，你就可以访问所有快速地同步就地文件方法。
 
-- [`getSize()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/getSize)：返回文件的字节大小。
-- [`写入()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/write)写入缓冲区的内容， 在给定的偏移中，并返回写入字节的数量。 检查返回的字节数允许呼叫者侦测和处理错误及部分写入。
-- [`read()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/read): 读取该文件的内容到缓冲区，可在给定的偏移处选择。
-- [`truncate()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/truncate): 将文件调整到给定的大小。
-- [`flush()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/flush): 确保文件的内容包含通过 `write()` 完成的所有修改。
-- [`close()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/close): 关闭访问句柄。
+- [`getSize()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/getSize)：以字节为单位返回文件大小。
+- [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/write)：将缓冲区的内容写入文件，可选择写入到指定偏移量，并返回写入的字节数。 通过检查返回的字节数，调用者可以检测并处理错误和部分写入。
+- [`read()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/read)：将文件内容读入缓冲区，可选择从指定偏移量读起。
+- [`truncate()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/truncate)：将文件调整为给定大小。
+- [`flush()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/flush)：确保文件内容包含通过 `write()` 所做的所有修改。
+- [`close()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/close)：关闭访问句柄。
 
-以下是一个使用上述所有方法的例子。
+下面是一个使用上述所有方法的示例。
 
 ```js
 const opfsRoot = await navigator.storage.getDirectory();
@@ -322,15 +322,15 @@ accessHandle.flush();
 // 文件的当前大小，现在是 `21`（"Some textMore content"的长度）。
 size = accessHandle.getSize();
 
-// 准备文件长度的数据视图。
+// 准备与文件具有相同长度的 DataView。
 const dataView = new DataView(new ArrayBuffer(size));
 
-// 将整个文件读入数据视图。
+// 将整个文件读入 DataView。
 accessHandle.read(dataView);
 // 打印 `"Some textMore content"`。
 console.log(textDecoder.decode(dataView));
 
-// 从偏移量 9 开始读入数据视图。
+// 从偏移量 9 开始读入 DataView。
 accessHandle.read(dataView, { at: 9 });
 // 打印 `"More content"`。
 console.log(textDecoder.decode(dataView));
@@ -339,17 +339,17 @@ console.log(textDecoder.decode(dataView));
 accessHandle.truncate(4);
 ```
 
-> Note that the first parameter for `read()` and `write()` is an [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) or an `ArrayBufferView` like a [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView). 您不能直接操作一个 `ArrayBuffer` 的内容。 Instead, you create one of the [typed array objects](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) like an [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) or a `DataView` object which represents the buffer in a specific format, and use that to read and write the contents of the buffer.
+> 请注意，`read()` 和 `write()` 的第一个参数是 [`ArrayBuffer`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) 或 `ArrayBufferView`（如 [`DataView`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView)）。 你不能直接操作 `ArrayBuffer` 中的内容。 相反，你需要创建一个以特定格式表示缓冲区的[类型化数组对象](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)（如 [`Int8Array`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array) 或 `DataView` 对象），然后使用它来读写缓冲区中的内容。
 
 ## 从源私有文件系统向用户可见文件系统复制文件
 
-如上所述，将文件从原始私有文件系统移动到用户可见文件系统是不可能的，但您可以复制文件。 既然 `showSaveFilePicker()` 只在主线程上曝光，但不在工人线程中，肯定要在那里运行代码。
+如前所述，无法将文件从源私有文件系统移动到用户可见文件系统，但可以复制文件。 因为 `showSaveFilePicker()` 只在主线程中暴露，而不存在于 Worker 线程中，所以请确保在主线程中运行下面的代码。
 
 ```js
-// 在主线程上，而不是在 Worker 中。 假设 `fileHandle` 是你在 Worker 线程中获取的 `FileSystemSyncAccessHandle` 的 `FileSystemFileHandle`。 请确保先关闭 Worker 线程中的文件。
+// 在主线程上，而不是在 Worker 中。 假设 `fileHandle` 是你在 Worker 线程中用于获取的 `FileSystemSyncAccessHandle` 的 `FileSystemFileHandle`。 请确保先关闭 Worker 线程中的文件。
 const fileHandle = await opfsRoot.getFileHandle("fast");
 try {
-  // 获取用户可见文件系统中新文件的文件句柄，该文件与源私有文件系统中的文件名相同。
+  // 获取用户可见文件系统中新文件的句柄，该文件与源私有文件系统中的文件名相同。
   const saveHandle = await showSaveFilePicker({
     suggestedName: fileHandle.name || "",
   });
@@ -363,27 +363,21 @@ try {
 
 ## 调试源私有文件系统
 
-直到内置的 DevTools 支持被添加(见 [crbug/1284595](https://crbug.com/1284595)) 使用 [OPFS Explorer](https://chrome.google.com/webstore/detail/opfs-explorer/acndjpgkpaclldomagafnognkcgjignd) Chrome 扩展调试原始私有文件系统。 [上面的屏幕截图直接从扩展开始创建新的文件和文件夹](#creating-new-files-and-folders)。
+在内置的 DevTools 支持（参见 [crbug/1284595](https://crbug.com/1284595)）被添加之前，请使用 [OPFS Explorer](https://chrome.google.com/webstore/detail/opfs-explorer/acndjpgkpaclldomagafnognkcgjignd) Chrome 浏览器扩展调试源私有文件系统。 上面[创建新文件和文件夹](#creating-new-files-and-folders)部分的截图就是直接从扩展中截取的。
 
 <!-- https://web-dev.imgix.net/image/8WbTDNrhLsU0El80frMBGE4eMCD3/kmE7qbP61UlLcCxBkMMQ.png?auto=format -->
 
 ![Chrome Web Store 上的 OPFS Explorer Chrome DevTools 扩展。](/img/bVc9o6j)
 
-安装扩展后，打开 Chrome DevTools, 选择 **OPFS Explorer** 标签，然后你准备检查文件级别。 点击文件名并通过点击回收站图标删除文件和文件夹，从原始私有文件系统保存文件到用户可见的文件系统。
+安装扩展后，打开 Chrome 浏览器的 DevTools，选择 **OPFS Explorer** 选项卡，然后你就可以检查文件层次结构了。 点击文件名可将文件从源私有文件系统保存到用户可见文件系统，点击垃圾桶图标可删除文件或文件夹。
 
 ## 演示
 
-在一个 [演示](https://sqlite-wasm-opfs.glitch.me/) 中查看正在操作中的原始私有文件系统(如果您安装了OPFS Explorer扩展)，它将它用作编译到WebAssembly的 SQLite 数据库的后端。 请务必查看 Glitch</a> 的
-
-源代码。 注意下面嵌入的版本如何不使用原始私有文件系统后端 (因为iframe 是交叉来源), 但当你在一个单独的标签页中打开演示时，它是这样的。</p> 
-
-
+在将源私有文件系统用作编译为 WebAssembly 的 SQLite 数据库后端的[演示](https://sqlite-wasm-opfs.glitch.me/)中，你可以看到源私有文件系统的运行情况（如果你安装了 OPFS Explorer 扩展）。 请务必查看 [Glitch 上的源代码](https://glitch.com/edit/#!/sqlite-wasm-opfs)。 请注意，下面的嵌入式版本并不使用源私有文件系统后端（因为 iframe 是跨源的），但当你在单独的标签页中打开演示时，它就会使用。
 
 ## 结论
 
-由WHATWG指定的原始私有文件系统决定了我们如何使用和与网络上的文件交互。 它启用了使用用户可见文件系统无法实现的新案例。 所有主要浏览器供应商——苹果、Mozilla和Google——都已上班并共享一个联合视野。 开发原始私人文件系统在很大程度上是一项协作努力，开发者和用户的反馈对其进展至关重要。 在我们继续完善和改进这一标准的过程中， 欢迎您以问题或拉取请求的形式对 [whatwg/fs 存储库](https://github.com/whatwg/fs) 提供反馈。
-
-
+由 WHATWG 制定的源私有文件系统塑造了我们在网络上使用文件和与文件交互的方式。 它实现了用户可见文件系统无法实现的新用例。 所有主要的浏览器供应商——苹果、Mozilla 和谷歌——都参与其中，并拥有共同的愿景。 源私有文件系统的开发在很大程度上是一项协作工作，开发人员和用户的反馈对其进展至关重要。 在我们不断完善和改进该标准的过程中，欢迎以议题或拉取请求的方式向 [whatwg/fs 存储库](https://github.com/whatwg/fs)提供反馈。
 
 ## 相关链接
 
@@ -391,8 +385,6 @@ try {
 - [文件系统标准仓库](https://github.com/whatwg/fs)
 - [WebKit 博文 The File System API with Origin Private File System](https://webkit.org/blog/12257/the-file-system-access-api-with-origin-private-file-system/)
 - [OPFS Explorer 扩展](https://chrome.google.com/webstore/detail/opfs-explorer/acndjpgkpaclldomagafnognkcgjignd)
-
-
 
 ## 致谢
 
