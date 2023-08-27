@@ -1,6 +1,6 @@
 # 源私有文件系统
 
-文件系统标准（File System Standard）引入了源私有文件系统（OPFS），作为页面源私有的、用户不可见的存储端点，它提供了对一种特殊文件（a special kind of file）的可选访问，并对性能进行了高度优化。
+文件系统标准（File System Standard）引入了源私有文件系统（origin private file system，OPFS），作为页面源私有的、用户不可见的存储端点，它提供了对一种特殊文件（a special kind of file）的可选访问，并对性能进行了高度优化。
 
 > **庆祝**  
 > 源私有文件系统允许网络应用程序在自己特定的源虚拟文件系统中存储和操作文件，包括低级文件操作、逐字节访问和文件流。 所有主要浏览器都支持源私有文件系统。
@@ -23,7 +23,7 @@
 
 1. 用户将文件_上传_到服务器，或在客户端使用 [`<input type="file">`](https://developer.mozilla.org/docs/Web/HTML/Element/input/file) _打开_文件。
 1. 用户进行编辑，然后通过 JavaScript 以编程方式对注入的 [`<a download="ToDo.txt">`](https://developer.mozilla.org/docs/Web/API/HTMLAnchorElement/download) 执行 [`click()`](https://developer.mozilla.org/docs/Web/API/HTMLElement/click) 方法来_下载_生成的文件。
-1. 要打开文件夹，可以使用 [`<input type="file" webkitdirectory>`](https://developer.mozilla.org/docs/Web/API/HTMLInputElement/webkitdirectory) 中的特殊属性，尽管它的名称具有私有前缀，但实际上得到了浏览器的普遍支持。
+1. 要打开文件夹，可以使用 [`<input type="file" webkitdirectory>`](https://developer.mozilla.org/docs/Web/API/HTMLInputElement/webkitdirectory)，尽管该属性的名称具有私有前缀，但实际上得到了浏览器的普遍支持。
 
 ### 在 Web 上处理文件的现代方式
 
@@ -148,7 +148,7 @@ await fileHandle.remove();
 await directoryHandle.remove({ recursive: true });
 ```
 
-> `remove()` 方法目前只在 Chrome 浏览器中实现。 你可以通过 `'remove' in FileSystemFileHandle.prototype` 来检测是否支持该功能。
+> `remove()` 方法目前只在 Chrome 浏览器中实现。 你可以通过 `'remove' in FileSystemFileHandle.prototype` 来检测浏览器是否支持该功能。
 
 作为替代，如果知道目录中要删除的文件或文件夹的名称，可以使用 [`removeEntry()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/removeEntry) 方法。
 
