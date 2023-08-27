@@ -45,7 +45,7 @@
 
 ## 用户可见性与源私有文件系统
 
-不同于通过操作系统的文件资源管理器浏览的、你可以读取、写入、移动和重命名文件和文件夹的用户可见文件系统，源私有文件系统不会被用户看到。顾名思义，源私有文件系统中的文件和文件夹是私有的，更具体地说，是网站的[源](https://developer.mozilla.org/docs/Glossary/Origin)的私有文件系统。在 DevTools 控制台中输入 [`location.origin`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来查找页面的源。例如，页面 `https://developer.chrome.com/articles/` 的源是 `https://developer.chrome.com`（即 `/articles` *不*是源的一部分）。你可以在[理解“同站”和“同源”](https://web.dev/same-site-same-origin/#origin)一文中阅读更多关于源理论的内容。共享相同源的所有页面都可以在源私有文件系统中看到相同的数据，因此 `https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与上例相同的信息。每个源都有自己独立的源私有文件系统，这意味着 `https://developer.chrome.com` 的源私有文件系统与 [`https://web.dev`](https://web.dev/) 的源私有文件系统完全不同。在 Windows 系统中，用户可见文件系统的根目录是 `C:\`。而源私有文件系统的相似项是通过调用异步方法 [`navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 得到的每个源的初始的空的根目录。关于用户可见文件系统与源私有文件系统的比较，请见下图。从图中可以看出，除了根目录外，其他所有东西在概念上都是一样的，都具有文件和文件夹的层次结构，可以根据数据和存储需要进行组织和排列。
+不同于通过操作系统的文件资源管理器浏览的、你可以读取、写入、移动和重命名文件和文件夹的用户可见文件系统，源私有文件系统不会被用户看到。顾名思义，源私有文件系统中的文件和文件夹是私有的，更具体地说，是网站的[源](https://developer.mozilla.org/docs/Glossary/Origin)的私有文件系统。在 DevTools 控制台中输入 [`location.origin`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来查找页面的源。例如，页面 `https://developer.chrome.com/articles/` 的源是 `https://developer.chrome.com`（即 `/articles` *不*是源的一部分）。你可以在[理解“同站”和“同源”](https://web.dev/same-site-same-origin/#%E6%9D%A5%E6%BA%90)一文中阅读更多关于源理论的内容。共享相同源的所有页面都可以在源私有文件系统中看到相同的数据，因此 `https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与上例相同的信息。每个源都有自己独立的源私有文件系统，这意味着 `https://developer.chrome.com` 的源私有文件系统与 [`https://web.dev`](https://web.dev/) 的源私有文件系统完全不同。在 Windows 系统中，用户可见文件系统的根目录是 `C:\`。而源私有文件系统的相似项是通过调用异步方法 [`navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 得到的每个源的初始的空的根目录。关于用户可见文件系统与源私有文件系统的比较，请见下图。从图中可以看出，除了根目录外，其他所有东西在概念上都是一样的，都具有文件和文件夹的层次结构，可以根据数据和存储需要进行组织和排列。
 
 ![用户可见文件系统和源私有文件系统的示意图，以及两个示例文件层次结构。用户可见文件系统的入口点是一个符号硬盘，源私有文件系统的入口点是调用“navigator.storage.getDirectory”方法。](/img/bVc9o5U)
 
@@ -192,7 +192,7 @@ fileHandle.isSameEntry(nestedFileHandle);
 
 ## 列出文件夹的内容
 
-`FileSystemDirectoryHandle` 是一个[异步迭代器](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols#the_async_iterator_and_async_iterable_protocols)，可通过 [`for await…of`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for-await...of) 循环遍历。作为异步迭代器，它还支持 [`entries()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/entries)、[`values()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/values) 和 [`keys()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/keys) 方法，你可以根据自己需要的信息从中进行选择：
+`FileSystemDirectoryHandle` 是一个[异步迭代器](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Iteration_protocols#%E5%BC%82%E6%AD%A5%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E5%BC%82%E6%AD%A5%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%8D%8F%E8%AE%AE)，可通过 [`for await…of`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for-await...of) 循环遍历。作为异步迭代器，它还支持 [`entries()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/entries)、[`values()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/values) 和 [`keys()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/keys) 方法，你可以根据自己需要的信息从中进行选择：
 
 <!-- prettier-ignore-start -->
 ```js
