@@ -371,6 +371,8 @@ try {
 
 在将源私有文件系统用作编译为 WebAssembly 的 SQLite 数据库后端的[演示](https://sqlite-wasm-opfs.glitch.me/)中，你可以看到源私有文件系统的运行情况（如果你安装了 OPFS Explorer 扩展）。请务必查看 [Glitch 上的源代码](https://glitch.com/edit/#!/sqlite-wasm-opfs)。请注意，下面的嵌入式版本并不使用源私有文件系统后端（因为 iframe 是跨源的），但当你在单独的标签页中打开演示时，它就会使用。
 
+（译注：这里嵌入不了 iframe，所以请点击 URL 查看演示：<https://sqlite-wasm-opfs.glitch.me/>）
+
 ## 结论
 
 由 WHATWG 制定的源私有文件系统塑造了我们在网络上使用文件和与文件交互的方式。它实现了用户可见文件系统无法实现的新用例。所有主要的浏览器供应商——苹果、Mozilla 和谷歌——都参与其中，并拥有共同的愿景。源私有文件系统的开发在很大程度上是一项协作工作，开发人员和用户的反馈对其进展至关重要。在我们不断完善和改进该标准的过程中，欢迎以议题或拉取请求的方式向 [whatwg/fs 存储库](https://github.com/whatwg/fs)提供反馈。
