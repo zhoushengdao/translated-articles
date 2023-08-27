@@ -37,7 +37,7 @@
 
 ### 在 Web 上处理文件的限制
 
-通过这些方法访问的文件和文件夹位于*用户可见*的文件系统中。从网络上保存的文件，特别是可执行文件，都会被打上[网络标记](https://textslashplain.com/2016/04/04/downloads-and-the-mark-of-the-web/)，因此在潜在危险文件被执行之前，操作系统会显示额外的警告。作为一项额外的安全功能，从网络上获取的文件也会受到[安全浏览](https://safebrowsing.google.com/)的保护，为简单起见，在本文中，你可以将其视为基于云的病毒扫描。当使用文件系统访问 API 向文件写入数据时，写入不是就地写入，而是会使用临时文件。除非通过所有这些安全检查，否则文件本身不会被修改。可以想象，即使[在 macOS](https://bugs.chromium.org/p/chromium/issues/detail?id=1413443) 等系统上尽可能地进行了优化，但这些检查还是让文件操作变得相对缓慢。尽管如此，每个 [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) 调用都是独立的，因此它在后台会打开文件，查找到给定的偏移量，并最终写入数据。
+通过这些方法访问的文件和文件夹位于*用户可见*文件系统中。从网络上保存的文件，特别是可执行文件，都会被打上[网络标记](https://textslashplain.com/2016/04/04/downloads-and-the-mark-of-the-web/)，因此在潜在危险文件被执行之前，操作系统会显示额外的警告。作为一项额外的安全功能，从网络上获取的文件也会受到[安全浏览](https://safebrowsing.google.com/)的保护，为简单起见，在本文中，你可以将其视为基于云的病毒扫描。当使用文件系统访问 API 向文件写入数据时，写入不是就地写入，而是会使用临时文件。除非通过所有这些安全检查，否则文件本身不会被修改。可以想象，即使[在 macOS](https://bugs.chromium.org/p/chromium/issues/detail?id=1413443) 等系统上尽可能地进行了优化，但这些检查还是让文件操作变得相对缓慢。尽管如此，每个 [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemWritableFileStream/write) 调用都是独立的，因此它在后台会打开文件，查找到给定的偏移量，并最终写入数据。
 
 ### 作为处理工作基础的文件
 
@@ -81,7 +81,7 @@ fclose(f);
 
 ### 创建新文件和文件夹
 
-有了根目录句柄后，分别使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。通过传递 [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create)，如果文件或文件夹不存在，它将被创建。通过在新建的目录上调用这些函数来建立文件层次结构。
+有了根目录句柄后，分别使用 [`getFileHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle) 和 [`getDirectoryHandle()`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getDirectoryHandle) 方法创建文件和文件夹。通过传递 [`{ create: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemDirectoryHandle/getFileHandle#create) 参数，当文件或文件夹不存在时，它将被创建。然后通过在新创建的目录上调用这些函数来建立文件层次结构。
 
 ```js
 const fileHandle = await opfsRoot.getFileHandle("my first file", {
@@ -137,7 +137,7 @@ await writable.close();
 
 ### 删除文件和文件夹
 
-通过调用特定文件或目录句柄上的 [`remove()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove) 方法来删除文件和文件夹。要删除包括所有子文件夹在内的文件夹，请使用 [`{recursive: true}`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove#recursive) 选项。
+通过调用特定文件或目录句柄上的 [`remove()`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove) 方法来删除文件和文件夹。要删除包括所有子文件夹在内的文件夹，请使用 [`{ recursive: true }`](https://developer.mozilla.org/docs/Web/API/FileSystemHandle/remove#recursive) 选项。
 
 ```js
 await fileHandle.remove();
@@ -205,7 +205,7 @@ for await (let name of directoryHandle.keys()) {}
 
 ## 递归列出文件夹和所有子文件夹的内容
 
-处理与递归搭配的异步循环和函数很容易出错。下面的函数可以作为一个起点，用于列出文件夹及其所有子文件夹的内容，包括所有文件及其大小。如果你不需要文件大小，可以简化函数，在 `directoryEntryPromises.push` 处不推送 promise `handle.getFile()`，而是直接推送 `handle`。
+处理与递归搭配的异步循环和函数很容易出错。下面的函数可以作为一个起点，用于列出文件夹及其所有子文件夹的内容，包括所有文件及其大小。如果你不需要文件大小，可以简化函数：在 `directoryEntryPromises.push` 处不推送 `handle.getFile()` 的 promise，而是直接推送 `handle`。
 
 ```js
 const getDirectoryEntriesRecursive = async (
