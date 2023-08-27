@@ -47,8 +47,6 @@
 
 不同于通过操作系统的文件资源管理器浏览的、你可以读取、写入、移动和重命名文件和文件夹的用户可见文件系统，源私有文件系统不会被用户看到。顾名思义，源私有文件系统中的文件和文件夹是私有的，更具体地说，是网站的[源](https://developer.mozilla.org/docs/Glossary/Origin)的私有文件系统。在 DevTools 控制台中输入 [`location.origin`](https://developer.mozilla.org/docs/Web/API/Location/origin) 来查找页面的源。例如，页面 `https://developer.chrome.com/articles/` 的源是 `https://developer.chrome.com`（即 `/articles` *不*是源的一部分）。你可以在[理解“同站”和“同源”](https://web.dev/same-site-same-origin/#origin)一文中阅读更多关于源理论的内容。共享相同源的所有页面都可以在源私有文件系统中看到相同的数据，因此 `https://developer.chrome.com/docs/extensions/mv3/getstarted/extensions-101/` 可以看到与上例相同的信息。每个源都有自己独立的源私有文件系统，这意味着 `https://developer.chrome.com` 的源私有文件系统与 [`https://web.dev`](https://web.dev/) 的源私有文件系统完全不同。在 Windows 系统中，用户可见文件系统的根目录是 `C:\`。而源私有文件系统的相似项是通过调用异步方法 [`navigator.storage.getDirectory()`](https://developer.mozilla.org/docs/Web/API/StorageManager/getDirectory) 得到的每个源的初始的空的根目录。关于用户可见文件系统与源私有文件系统的比较，请见下图。从图中可以看出，除了根目录外，其他所有东西在概念上都是一样的，都具有文件和文件夹的层次结构，可以根据数据和存储需要进行组织和排列。
 
-<!-- https://web-dev.imgix.net/image/8WbTDNrhLsU0El80frMBGE4eMCD3/xej6CL5VFJuGJgXPkeKJ.png?auto=format&w=1600 -->
-
 ![用户可见文件系统和源私有文件系统的示意图，以及两个示例文件层次结构。用户可见文件系统的入口点是一个符号硬盘，源私有文件系统的入口点是调用“navigator.storage.getDirectory”方法。](/img/bVc9o5U)
 
 ## 源私有文件系统的特点
@@ -101,8 +99,6 @@ const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
   { create: true },
 );
 ```
-
-<!-- https://web-dev.imgix.net/image/8WbTDNrhLsU0El80frMBGE4eMCD3/VtWQ4T2a1gph0kFzhRwN.png?auto=format -->
 
 ![从前面的代码示例中得到的文件层次结构。](/img/bVc9o5E)
 
@@ -366,8 +362,6 @@ try {
 ## 调试源私有文件系统
 
 在内置的 DevTools 支持（参见 [crbug/1284595](https://crbug.com/1284595)）被添加之前，请使用 [OPFS Explorer](https://chrome.google.com/webstore/detail/opfs-explorer/acndjpgkpaclldomagafnognkcgjignd) Chrome 浏览器扩展调试源私有文件系统。上面[创建新文件和文件夹](#创建新文件和文件夹)部分的截图就是直接从扩展中截取的。
-
-<!-- https://web-dev.imgix.net/image/8WbTDNrhLsU0El80frMBGE4eMCD3/kmE7qbP61UlLcCxBkMMQ.png?auto=format -->
 
 ![Chrome Web Store 上的 OPFS Explorer Chrome DevTools 扩展。](/img/bVc9o6j)
 
