@@ -277,7 +277,7 @@ const syncAccessHandle = await fileHandle.createSyncAccessHandle();
 
 ### 同步就地文件方法
 
-一旦拥有了同步访问句柄，你就可以访问所有快速地同步就地文件方法。
+一旦拥有了同步访问句柄，你就可以访问所有快速的同步就地文件方法。
 
 - [`getSize()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/getSize)：以字节为单位返回文件大小。
 - [`write()`](https://developer.mozilla.org/docs/Web/API/FileSystemSyncAccessHandle/write)：将缓冲区的内容写入文件，可选择写入到指定偏移量，并返回写入的字节数。通过检查返回的字节数，调用者可以检测并处理错误和部分写入。
