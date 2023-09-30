@@ -233,7 +233,7 @@ These events can be observed using the `registerClientListener()` method.
 
 ## GeoGebra's File format
 
-With these methods you can set everything in a construction (see [XML Reference](https://wiki.geogebra.org/en/Reference:Xml) ).
+With these methods you can set everything in a construction (see [XML Reference](https://wiki.geogebra.org/en/Reference:Xml)).
 
 | Method Signature                                | Since | Description                                                                                                                                                                                               |
 | ----------------------------------------------- | :---: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
