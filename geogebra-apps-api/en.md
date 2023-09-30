@@ -1101,8 +1101,8 @@ You can use math-apps module now to inject the applet the ES6 way too
 
 Example of using the API:
 
-```javascript
+<pre>
 mathApps.create({'appName':'graphing'})
     .inject(document.querySelector("#plot"))
     .getAPI().then(api => api.evalCommand('f(x)=sin(x)'));
-```
+</pre>
