@@ -1072,7 +1072,7 @@ With these methods you can set everything in a construction (see [[Reference:Xml
 
 If you are loading GeoGebra using the <code>deployggb.js</code> script, you can access the api either as an argument of <code>appletOnLoad</code> or via the <code>getAppletObject</code> method:
 
-<pre>
+```javascript
 const ggb = new GGBApplet({
   appletOnLoad(api1) {
     // api1 provides the applet API
@@ -1080,7 +1080,7 @@ const ggb = new GGBApplet({
 });
 ggb.inject(document.body);
 const api2 = ggb.getAppletObject(); // api2 is also the API object
-</pre>
+```
 
 For compatibility reasons the API objects can be also accessed via global variables. The name of the global variable is <code>ggbApplet</code> by default and can be overridden by the <code>id</code> parameter passed to <code>new GGBApplet(...)</code>. In case you have multiple GeoGebra apps on a page, <code>ggbApplet</code> always contains API of the last active one. In such case you should either avoid using global variables or use set the <code>id</code> parameter explicitly for all apps.
 
@@ -1088,7 +1088,7 @@ For compatibility reasons the API objects can be also accessed via global variab
 
 You can use math-apps module now to inject the applet the ES6 way too
 
-<pre>
+```html
 <script type="module">
     import {mathApps} from '@geogebra/math-apps';
     mathApps.create({'width':'800', 'height':'600',
@@ -1097,12 +1097,12 @@ You can use math-apps module now to inject the applet the ES6 way too
         .inject(document.querySelector("#applet1"));
 </script>
 <div id="applet1"></div>
-</pre>
+```
 
 Example of using the API:
 
-<pre>
+```javascript
 mathApps.create({'appName':'graphing'})
     .inject(document.querySelector("#plot"))
     .getAPI().then(api => api.evalCommand('f(x)=sin(x)'));
-</pre>
+```
