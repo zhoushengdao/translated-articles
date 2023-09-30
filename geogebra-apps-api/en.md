@@ -1,4 +1,4 @@
-# Reference:GeoGebra Apps API
+# GeoGebra Apps API
 
 This page describes the GeoGebra Apps API to interact with GeoGebra apps. Please see [GeoGebra Apps Embedding](https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding) on how to embed our apps into your web pages.
 
