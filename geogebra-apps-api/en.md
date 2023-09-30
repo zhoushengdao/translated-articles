@@ -2,6 +2,8 @@
 
 This page describes the GeoGebra Apps API to interact with GeoGebra apps. Please see [GeoGebra Apps Embedding](https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding) on how to embed our apps into your web pages.
 
+[TOC]
+
 ## Examples
 
 In these examples you can see the GeoGebra Apps API in action:
