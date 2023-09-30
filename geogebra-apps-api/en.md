@@ -25,7 +25,7 @@ In these examples you can see the GeoGebra Apps API in action:
       <td style="text-align: center;">3.0</td>
       <td> Evaluates the given string just like it would be evaluated when entered into GeoGebra's input bar. Returns whether command evaluation was successful. <br> From GeoGebra 3.2 you can pass multiple commands at once by separating them with \n. <br> Note: you must use English commands names<br>
       </td>
-    </tr><tr><td>String[] evalCommandGetLabels(String cmdString)</td><td>5.0</td><td>Like evalCommand(), but the return value is a String containing a comma-separated list of the labels of the created objects eg <code>"A,B,C"</code></td></tr><tr>
+    </tr><tr><td>String[] evalCommandGetLabels(String cmdString)</td><td>5.0</td><td>Like evalCommand(), but the return value is a String containing a comma-separated list of the labels of the created objects eg `"A,B,C"`</td></tr><tr>
       <td>String evalCommandCAS(String string) </td>
       <td style="text-align: center;">3.2</td>
       <td>Passes the string to GeoGebra's CAS and returns the result as a String.<br>
@@ -158,31 +158,31 @@ blue)</td>
     <tr>
       <td>String getPNGBase64(double exportScale, boolean transparent, double DPI)</td>
       <td style="text-align: center;">4.0</td>
-      <td>Returns the active Graphics View as a base64-encoded String<br>eg var str = ggbApplet.getPNGBase64(1, true, 72); <br> The DPI setting is slow, set to <code>undefined</code> if you don't need it</td>
+      <td>Returns the active Graphics View as a base64-encoded String<br>eg var str = ggbApplet.getPNGBase64(1, true, 72); <br> The DPI setting is slow, set to `undefined` if you don't need it</td>
     </tr>
     <tr>
       <td>void exportSVG(String filename) <br>or <br>void exportSVG(function callback)</td>
       <td style="text-align: center;">HTML5</td>
-      <td>Renders the active Graphics View as an SVG and either downloads it as the given filename or sends it to the callback function <br> The value is <code>null</code> if the active view is 3D <br> <code> ggbApplet.exportSVG(svg =&gt; console.log("data:image/svg+xml;utf8," + encodeURIComponent(svg))); </code> <br> For Classic 5 compatibility please use <code>ExportImage("type", "svg", "filename", "foo.svg")</code> inside materials
+      <td>Renders the active Graphics View as an SVG and either downloads it as the given filename or sends it to the callback function <br> The value is `null` if the active view is 3D <br> ` ggbApplet.exportSVG(svg =&gt; console.log("data:image/svg+xml;utf8," + encodeURIComponent(svg))); ` <br> For Classic 5 compatibility please use `ExportImage("type", "svg", "filename", "foo.svg")` inside materials
       </td>
     </tr>
     <tr>
       <td>void exportPDF(double scale, String filename, String sliderLabel) <br>or <br>void exportPDF(double scale, function callback, String sliderLabel)</td>
       <td style="text-align: center;">HTML5</td>
-      <td> Renders the active Graphics View as a PDF and either downloads it as the given filename or sends it to the callback function <br> <code> ggbApplet.exportPDF(1, pdf =&gt; console.log(pdf)); </code> <br> For Classic 5 compatibility please use <code>ExportImage("type", "pdf", "filename", "foo.pdf")</code> instead
+      <td> Renders the active Graphics View as a PDF and either downloads it as the given filename or sends it to the callback function <br> ` ggbApplet.exportPDF(1, pdf =&gt; console.log(pdf)); ` <br> For Classic 5 compatibility please use `ExportImage("type", "pdf", "filename", "foo.pdf")` instead
       </td>
     </tr>
     <tr>
       <td>void getScreenshotBase64(function callback)</td>
       <td style="text-align: center;">5.0</td>
-      <td>Gets the screenshot of the whole applet as PNG and sends it to the callback function as a base64 encoded string. Example: <code>
-ggbApplet.getScreenshotBase64(function(url){window.open("data:image/png;base64,"+url);});</code><br><b>For internal use only, may not work in all browsers</b></td>
+      <td>Gets the screenshot of the whole applet as PNG and sends it to the callback function as a base64 encoded string. Example: `
+ggbApplet.getScreenshotBase64(function(url){window.open("data:image/png;base64,"+url);});`<br><b>For internal use only, may not work in all browsers</b></td>
     </tr>
     <tr>
       <td>boolean writePNGtoFile(String filename, double exportScale, boolean transparent, double DPI)
 </td>
       <td style="text-align: center;">4.0</td>
-      <td>Exports the active Graphics View to a .PNG file. The DPI setting is slow, set to <code>undefined</code> if you don't need it <br>
+      <td>Exports the active Graphics View to a .PNG file. The DPI setting is slow, set to `undefined` if you don't need it <br>
 eg var success = ggbApplet.writePNGtoFile("myImage.png", 1, false, 72);      </td>
     </tr>
     <tr>
@@ -295,7 +295,7 @@ Note: returns 0 if the object is not a point or a vector.</td>
     <tr>
       <td> String getValueString(String objName [, boolean useLocalizedInput = true])</td>
       <td style="text-align: center;">2.7</td>
-      <td>Returns the value of the object with the given name as a string. If useLocalizedInput is false, returns the command in English, otherwise in current GUI language. Note: Localized input uses parentheses, non-localized input uses brackets.<br>For this method (<b>and all others returning type String</b>) it's important to coerce it properly to a JavaScript string for compatibility with GeoGebra Classic 5 eg <code>var s = getValueString("text1") + "";</code></td>
+      <td>Returns the value of the object with the given name as a string. If useLocalizedInput is false, returns the command in English, otherwise in current GUI language. Note: Localized input uses parentheses, non-localized input uses brackets.<br>For this method (<b>and all others returning type String</b>) it's important to coerce it properly to a JavaScript string for compatibility with GeoGebra Classic 5 eg `var s = getValueString("text1") + "";`</td>
     </tr>
     <tr>
       <td>String getDefinitionString(String objName) </td>
@@ -487,22 +487,22 @@ Note: use this method for efficient repainting when you invoke several methods.<
       <td>void setAxesVisible(int viewNumber, boolean xAxis, boolean yAxis, boolean zAxis)</td>
       <td style="text-align: center;">5.0</td>
       <td>Shows or hides the x-, y- and z-axis of the coordinate system in given graphics window.
-{{Example| <code>ggbApplet.setAxesVisible(3, false, true, true)</code>}}</td>
+{{Example| `ggbApplet.setAxesVisible(3, false, true, true)`}}</td>
     </tr>
  <tr>
       <td>void setAxisLabels(int viewNumber, String xAxis, String yAxis, String zAxis)</td>
       <td style="text-align: center;">5.0</td>
-      <td>Set label for the x-, y- and z-axis of the coordinate system in given graphics window.{{Example| <code>ggbApplet.setAxisLabels(3,"larg","long","area")</code>}}</td>
+      <td>Set label for the x-, y- and z-axis of the coordinate system in given graphics window.{{Example| `ggbApplet.setAxisLabels(3,"larg","long","area")`}}</td>
     </tr>
  <tr>
       <td>void setAxisSteps(int viewNumber, double xAxis, double yAxis, double zAxis)</td>
       <td style="text-align: center;">5.0</td>
-      <td>Set distance for the x-, y- and z-axis of the coordinate system in given graphics window. {{Example| <code>ggbApplet.setAxisSteps(3, 2,1,0.5)</code>}}</td>
+      <td>Set distance for the x-, y- and z-axis of the coordinate system in given graphics window. {{Example| `ggbApplet.setAxisSteps(3, 2,1,0.5)`}}</td>
     </tr>
  <tr>
       <td>void setAxisUnits(int viewNumber, String xAxis, String yAxis, String zAxis)</td>
       <td style="text-align: center;">5.0</td>
-      <td>Set units for the x-, y- and z-axis of the coordinate system in given graphics window.{{Example| <code>ggbApplet.setAxisUnits(3, "cm","cm","cm²")</code>}}</td>
+      <td>Set units for the x-, y- and z-axis of the coordinate system in given graphics window.{{Example| `ggbApplet.setAxisUnits(3, "cm","cm","cm²")`}}</td>
     </tr>
     <tr>
       <td>void setGridVisible(boolean flag) </td>
@@ -607,27 +607,27 @@ Note: use this method for efficient repainting when you invoke several methods.<
 <tr>
       <td>getEditorState()</td>
       <td style="text-align: center;">5.0 (HTML5)</td>
-      <td>Get state of the equation editor in algebra view (or in evaluator applet). Returns JSON object with <code>content</code> and optional fields (<code>caret</code> for graphing app, <code>eval</code> and <code>latex</code> for evaluator app)</td>
+      <td>Get state of the equation editor in algebra view (or in evaluator applet). Returns JSON object with `content` and optional fields (`caret` for graphing app, `eval` and `latex` for evaluator app)</td>
     </tr>
 <tr>
       <td>setEditorState(Object state)</td>
       <td style="text-align: center;">5.0 (HTML5)</td>
-      <td>Set state of the equation editor in algebra view (or in evaluator applet). The argument should be a JSON (object or string) with <code>content</code> and optional <code>caret</code> field. </td>
+      <td>Set state of the equation editor in algebra view (or in evaluator applet). The argument should be a JSON (object or string) with `content` and optional `caret` field. </td>
     </tr>
 <tr>
       <td>getGraphicsOptions(int viewId)</td>
       <td style="text-align: center;">5.0 (HTML5)</td>
-      <td>Get the graphics options for euclidian view specified by viewId. It returns a JSON (object or string) with <code>rightAngleStyle</code>, <code>pointCapturing</code>, <code>grid</code>, <code>gridIsBold</code>, <code>gridType</code>, <code>bgColor</code>, <code>gridColor</code>, <code>axesColor</code>, <code>axes</code>, <code>gridDistance</code> </td>
+      <td>Get the graphics options for euclidian view specified by viewId. It returns a JSON (object or string) with `rightAngleStyle`, `pointCapturing`, `grid`, `gridIsBold`, `gridType`, `bgColor`, `gridColor`, `axesColor`, `axes`, `gridDistance` </td>
     </tr>
     <tr>
       <td>setGraphicsOptions(int viewId, Object options)</td>
       <td style="text-align: center;">5.0 (HTML5)</td>
-      <td>Set the graphics options for euclidian view specified by viewId. The second argument should be a JSON (object or string) with optional fields with <code>rightAngleStyle</code>, <code>pointCapturing</code>, <code>grid</code>, <code>gridIsBold</code>, <code>gridType</code>, <code>bgColor</code>, <code>gridColor</code>, <code>axesColor</code>, <code>axes</code>, <code>gridDistance</code></td>
+      <td>Set the graphics options for euclidian view specified by viewId. The second argument should be a JSON (object or string) with optional fields with `rightAngleStyle`, `pointCapturing`, `grid`, `gridIsBold`, `gridType`, `bgColor`, `gridColor`, `axesColor`, `axes`, `gridDistance`</td>
     </tr>
 <tr>
       <td>setAlgebraOptions(Object options)</td>
       <td style="text-align: center;">5.0 (HTML5)</td>
-      <td>Set the options for the algebra view. The argument should be a JSON (object or string) with field <code>sortBy</code></td>
+      <td>Set the options for the algebra view. The argument should be a JSON (object or string) with field `sortBy`</td>
     </tr>
 </table>
 
@@ -795,7 +795,7 @@ Removes previously registered listener for storing undo points, see registerStor
  <td>void registerClientListener(String JSFunctionName)</td>
  <td style="text-align: center;">5.0</td>
  <td>Registers a JavaScript function as a generic listener for the applet's construction. The listener receives events as JSON objects of the form 
-<code>{type: "setMode", target:"", argument: "2"}</code> where <code>target</code> is the label of the construction element related to the event (if applicable), <code>argument</code> provides additional information based on the event type (e.g. the mode number for setMode event). Please refer to the list of client events below.
+`{type: "setMode", target:"", argument: "2"}` where `target` is the label of the construction element related to the event (if applicable), `argument` provides additional information based on the event type (e.g. the mode number for setMode event). Please refer to the list of client events below.
  </td>
  </tr>
 <tr>
@@ -812,14 +812,14 @@ Removes previously registered client listener, see registerClientListener
 
 ## Client Events
 
-These events can be observed using the <code>registerClientListener</code> method
+These events can be observed using the `registerClientListener` method
 {| class="pretty"
 !Type
 !Attributes
 !Description
 |-
 | addMacro
-|<code>argument</code>: macro name
+|`argument`: macro name
 | when new macro is added
 |-
 | addPolygon
@@ -827,7 +827,7 @@ These events can be observed using the <code>registerClientListener</code> metho
 | polygon construction started
 |-
 | addPolygonComplete
-| <code>target</code>: polygon label
+| `target`: polygon label
 | polygon construction finished
 |-
 | algebraPanelSelected
@@ -839,7 +839,7 @@ These events can be observed using the <code>registerClientListener</code> metho
 | multiple objects deleted
 |-
 | deselect
-|<code>target</code>: object name (for single object) or null (deselect all)
+|`target`: object name (for single object) or null (deselect all)
 | one or all objects removed from selection
 |-
 | dragEnd
@@ -847,15 +847,15 @@ These events can be observed using the <code>registerClientListener</code> metho
 |mouse drag ended
 |-
 | dropdownClosed
-|<code>target</code>: dropdown list name, <code>index</code> index of selected item (0 based)
+|`target`: dropdown list name, `index` index of selected item (0 based)
 | dropdown list closed
 |-
 | dropdownItemFocused
-|<code>target</code>: dropdown list name, <code>index</code> index of focused item (0 based)
+|`target`: dropdown list name, `index` index of focused item (0 based)
 | dropdown list item focused using mouse or keyboard
 |-
 | dropdownOpened
-|<code>target</code>: dropdown list name
+|`target`: dropdown list name
 | dropdown list opened
 |-
 | editorKeyTyped
@@ -863,39 +863,39 @@ These events can be observed using the <code>registerClientListener</code> metho
 |key typed in editor (Algebra view of any app or standalone Evaluator app)
 |-
 | editorStart
-|<code>target:</code> object label if editing existing object
+|`target:` object label if editing existing object
 |user moves focus to the editor (Algebra view of any app or standalone Evaluator app)
 |-
 | editorStop
-|<code>target</code>: object label if editing existing object
+|`target`: object label if editing existing object
 |user (Algebra view of any app or standalone Evaluator app)
 |-
 | export
-|<code>argument</code>: JSON encoded array including export format
+|`argument`: JSON encoded array including export format
 |export started
 |-
 | mouseDown
-|<code>x</code>: mouse x-coordinate, <code>y</code>: mouse y-coordinate
+|`x`: mouse x-coordinate, `y`: mouse y-coordinate
 |user pressed the mouse button
 |-
 | movedGeos
-|<code>argument</code>: object labels
+|`argument`: object labels
 |multiple objects move ended
 |-
 | movingGeos
-|<code>argument</code>: object labels
+|`argument`: object labels
 |multible objects are being moved
 |-
 | openDialog
-|<code>argument</code>: dialog ID
+|`argument`: dialog ID
 |dialog is opened (currently just for export dialog)
 |-
 | openMenu
-|<code>argument</code>: submenu ID
+|`argument`: submenu ID
 |main menu or one of its submenus were open
 |-
 | pasteElms
-|<code>argument</code>: pasted objects as XML
+|`argument`: pasted objects as XML
 |pasting multiple objects started
 |-
 | pasteElmsComplete
@@ -911,11 +911,11 @@ These events can be observed using the <code>registerClientListener</code> metho
 |redo button pressed
 |-
 | relationTool
-|<code>argument</code>: HTML description of the object relation
+|`argument`: HTML description of the object relation
 |relation tool used
 |-
 | removeMacro
-|<code>argument</code>: custom tool name
+|`argument`: custom tool name
 |custom tool removed
 |-
 | renameComplete
@@ -923,23 +923,23 @@ These events can be observed using the <code>registerClientListener</code> metho
 |object renaming complete (in case of chain renames)
 |-
 | renameMacro
-|<code>argument</code>: array [old name, new name]
+|`argument`: array [old name, new name]
 |custom tool was renamed
 |-
 | select
-|<code>target</code>: object label
+|`target`: object label
 |object added to selection
 |-
 | setMode
-|<code>argument</code>: mode number (see toolbar reference for details)
+|`argument`: mode number (see toolbar reference for details)
 |app mode changed (e.g. a tool was selected)
 |-
 | showNavigationBar
-|<code>argument</code>: "true" or "false"
+|`argument`: "true" or "false"
 |navigation bar visibility changed
 |-
 | showStyleBar
-|<code>argument</code>: "true" or "false"
+|`argument`: "true" or "false"
 |style bar visibility changed
 |-
 | sidePanelClosed
@@ -963,15 +963,15 @@ These events can be observed using the <code>registerClientListener</code> metho
 |undo pressed
 |-
 | updateStyle
-|<code>target</code>: object label
+|`target`: object label
 |object style changed
 |-
 | viewChanged2D
-|<code>xZero</code>: horizontal pixel position of point (0,0), <code>yZero</code>: vertical pixel position of point (0,0), <code>xscale</code>: ratio pixels / horizontal units, <code>yscale</code>: ratio pixels / vertical units, <code>viewNo</code>: graphics view number (1 or 2)
+|`xZero`: horizontal pixel position of point (0,0), `yZero`: vertical pixel position of point (0,0), `xscale`: ratio pixels / horizontal units, `yscale`: ratio pixels / vertical units, `viewNo`: graphics view number (1 or 2)
 |graphics view dimensions changed by zooming or panning
 |-
 | viewChanged3D
-|similar to 2D, e.g. <code>xZero: 0,yZero: 0,scale: 50,yscale: 50,viewNo: 512,zZero: -1.5,zscale: 50,xAngle: -40,zAngle: 24</code>
+|similar to 2D, e.g. `xZero: 0,yZero: 0,scale: 50,yscale: 50,viewNo: 512,zZero: -1.5,zscale: 50,xAngle: -40,zAngle: 24`
 |3D view dimensions changed by zooming or panning
 |-
 |}
@@ -1070,19 +1070,19 @@ With these methods you can set everything in a construction (see [[Reference:Xml
 
 ## Obtaining the API Object
 
-If you are loading GeoGebra using the <code>deployggb.js</code> script, you can access the api either as an argument of <code>appletOnLoad</code> or via the <code>getAppletObject</code> method:
+If you are loading GeoGebra using the `deployggb.js` script, you can access the api either as an argument of `appletOnLoad` or via the `getAppletObject` method:
 
 ```javascript
 const ggb = new GGBApplet({
   appletOnLoad(api1) {
     // api1 provides the applet API
-  }
+  },
 });
 ggb.inject(document.body);
 const api2 = ggb.getAppletObject(); // api2 is also the API object
 ```
 
-For compatibility reasons the API objects can be also accessed via global variables. The name of the global variable is <code>ggbApplet</code> by default and can be overridden by the <code>id</code> parameter passed to <code>new GGBApplet(...)</code>. In case you have multiple GeoGebra apps on a page, <code>ggbApplet</code> always contains API of the last active one. In such case you should either avoid using global variables or use set the <code>id</code> parameter explicitly for all apps.
+For compatibility reasons the API objects can be also accessed via global variables. The name of the global variable is `ggbApplet` by default and can be overridden by the `id` parameter passed to `new GGBApplet(...)`. In case you have multiple GeoGebra apps on a page, `ggbApplet` always contains API of the last active one. In such case you should either avoid using global variables or use set the `id` parameter explicitly for all apps.
 
 ## Obtaining the API Object as a module: The ES6 way
 
@@ -1090,11 +1090,15 @@ You can use math-apps module now to inject the applet the ES6 way too
 
 ```html
 <script type="module">
-    import {mathApps} from '@geogebra/math-apps';
-    mathApps.create({'width':'800', 'height':'600',
-        'showAlgebraInput': 'true',
-        'material_id':'MJWHp9en'})
-        .inject(document.querySelector("#applet1"));
+  import { mathApps } from "@geogebra/math-apps";
+  mathApps
+    .create({
+      width: "800",
+      height: "600",
+      showAlgebraInput: "true",
+      material_id: "MJWHp9en",
+    })
+    .inject(document.querySelector("#applet1"));
 </script>
 <div id="applet1"></div>
 ```
@@ -1102,7 +1106,9 @@ You can use math-apps module now to inject the applet the ES6 way too
 Example of using the API:
 
 ```javascript
-mathApps.create({'appName':'graphing'})
-    .inject(document.querySelector("#plot"))
-    .getAPI().then(api => api.evalCommand('f(x)=sin(x)'));
+mathApps
+  .create({ appName: "graphing" })
+  .inject(document.querySelector("#plot"))
+  .getAPI()
+  .then((api) => api.evalCommand("f(x)=sin(x)"));
 ```
