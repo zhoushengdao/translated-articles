@@ -250,11 +250,11 @@ With these methods you can set everything in a construction (see [XML Reference]
 
 ## Miscellaneous
 
-| Method Signature            | Since | Description                             |
-| --------------------------- | :---: | --------------------------------------- |
-| `void debug(String string)` |  3.2  | Prints the `string` to the Java Console |
-| `String getVersion()`       |  5.0  | Returns the version of GeoGebra         |
-| `void remove()`             |  5.0  | Removes the applet and frees up memory  |
+| Method Signature            | Since | Description                              |
+| --------------------------- | :---: | ---------------------------------------- |
+| `void debug(String string)` |  3.2  | Prints the `string` to the Java Console. |
+| `String getVersion()`       |  5.0  | Returns the version of GeoGebra.         |
+| `void remove()`             |  5.0  | Removes the applet and frees up memory.  |
 
 ### Obtaining the API Object
 
