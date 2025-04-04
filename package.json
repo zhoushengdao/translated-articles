@@ -1,9 +1,8 @@
 {
-  "devDependencies": {
-    "@prettier/plugin-pug": "^3.0.0",
-    "jsdom": "^22.1.0",
-    "prettier": "^3.0.2",
-    "pug": "^3.0.2",
-    "purgecss": "^5.0.0"
-  }
+  "name": "zhoushengdao-articles",
+  "type": "module",
+  "scripts": {
+    "crowdin": "node crowdin.yml.js"
+  },
+  "packageManager": "pnpm@10.7.1"
 }

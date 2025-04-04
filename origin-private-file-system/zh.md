@@ -9,7 +9,7 @@
 
 源私有文件系统被现代浏览器支持，并由网络超文本应用程序技术工作组（[WHATWG](https://whatwg.org/)）标准化为 [File System Living Standard](https://fs.spec.whatwg.org/)。
 
-![浏览器兼容性](https://jihulab.com/zhoushengdao/zhoushengdao-articles/-/raw/main/origin-private-file-system/bcd.svg?ref_type=heads)
+![浏览器兼容性](./bcd.svg)
 
 ## 动机
 
@@ -92,11 +92,11 @@ const directoryHandle = await opfsRoot.getDirectoryHandle("my first folder", {
 });
 const nestedFileHandle = await directoryHandle.getFileHandle(
   "my first nested file",
-  { create: true },
+  { create: true }
 );
 const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
   "my first nested folder",
-  { create: true },
+  { create: true }
 );
 ```
 
@@ -108,8 +108,9 @@ const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
 
 ```js
 const existingFileHandle = await opfsRoot.getFileHandle("my first file");
-const existingDirectoryHandle =
-  await opfsRoot.getDirectoryHandle("my first folder");
+const existingDirectoryHandle = await opfsRoot.getDirectoryHandle(
+  "my first folder"
+);
 ```
 
 ### 读取与文件句柄相关联的文件
@@ -166,7 +167,7 @@ await fileHandle.move(nestedDirectoryHandle);
 // 将文件移动到另一个目录并重命名。
 await fileHandle.move(
   nestedDirectoryHandle,
-  "my first renamed and now nested file",
+  "my first renamed and now nested file"
 );
 ```
 
@@ -210,7 +211,7 @@ for await (let name of directoryHandle.keys()) {}
 ```js
 const getDirectoryEntriesRecursive = async (
   directoryHandle,
-  relativePath = ".",
+  relativePath = "."
 ) => {
   const fileHandles = [];
   const directoryHandles = [];
@@ -233,7 +234,7 @@ const getDirectoryEntriesRecursive = async (
             relativePath: nestedPath,
             handle,
           };
-        }),
+        })
       );
     } else if (handle.kind === "directory") {
       directoryHandles.push({ handle, nestedPath });
@@ -246,7 +247,7 @@ const getDirectoryEntriesRecursive = async (
             entries: await getDirectoryEntriesRecursive(handle, nestedPath),
             handle,
           };
-        })(),
+        })()
       );
     }
   }

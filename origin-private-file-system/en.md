@@ -9,7 +9,7 @@ The File System Standard introduces an origin private file system (OPFS) as a st
 
 The origin private file system is supported by modern browsers and is standardized by the Web Hypertext Application Technology Working Group ([WHATWG](https://whatwg.org/)) in the [File System Living Standard](https://fs.spec.whatwg.org/).
 
-![Browser compatibility](https://jihulab.com/zhoushengdao/zhoushengdao-articles/-/raw/main/origin-private-file-system/bcd.svg?ref_type=heads)
+![Browser compatibility](./bcd.svg)
 
 ## Motivation
 
@@ -94,11 +94,11 @@ const directoryHandle = await opfsRoot.getDirectoryHandle("my first folder", {
 });
 const nestedFileHandle = await directoryHandle.getFileHandle(
   "my first nested file",
-  { create: true },
+  { create: true }
 );
 const nestedDirectoryHandle = await directoryHandle.getDirectoryHandle(
   "my first nested folder",
-  { create: true },
+  { create: true }
 );
 ```
 
@@ -112,8 +112,9 @@ If you know their name, access previously created files and folders by calling t
 
 ```js
 const existingFileHandle = await opfsRoot.getFileHandle("my first file");
-const existingDirectoryHandle =
-  await opfsRoot.getDirectoryHandle("my first folder");
+const existingDirectoryHandle = await opfsRoot.getDirectoryHandle(
+  "my first folder"
+);
 ```
 
 ### Getting the file associated with a file handle for reading
@@ -170,7 +171,7 @@ await fileHandle.move(nestedDirectoryHandle);
 // Move a file to another directory and rename it.
 await fileHandle.move(
   nestedDirectoryHandle,
-  "my first renamed and now nested file",
+  "my first renamed and now nested file"
 );
 ```
 
@@ -214,7 +215,7 @@ Dealing with asynchronous loops and functions paired with recursion is easy to g
 ```js
 const getDirectoryEntriesRecursive = async (
   directoryHandle,
-  relativePath = ".",
+  relativePath = "."
 ) => {
   const fileHandles = [];
   const directoryHandles = [];
@@ -237,7 +238,7 @@ const getDirectoryEntriesRecursive = async (
             relativePath: nestedPath,
             handle,
           };
-        }),
+        })
       );
     } else if (handle.kind === "directory") {
       directoryHandles.push({ handle, nestedPath });
@@ -250,7 +251,7 @@ const getDirectoryEntriesRecursive = async (
             entries: await getDirectoryEntriesRecursive(handle, nestedPath),
             handle,
           };
-        })(),
+        })()
       );
     }
   }
