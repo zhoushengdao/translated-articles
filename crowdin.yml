@@ -1,7 +1,7 @@
 files:
   - source: "/astro-container-reference/*.mdx"
-    translation: "/%original_path%/%file_name%-%locale%.%file_extension%"
+    translation: "/%original_path%/%locale%/%original_file_name%"
   - source: "/debugging-till-dawn/*.md"
-    translation: "/%original_path%/%file_name%-%locale%.%file_extension%"
+    translation: "/%original_path%/%locale%/%original_file_name%"
   - source: "/wget-manual-1.25.0/*.html"
-    translation: "/%original_path%/%file_name%-%locale%.%file_extension%"
+    translation: "/%original_path%/%locale%/%original_file_name%"

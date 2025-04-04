@@ -18,7 +18,7 @@ const processDirectory = async (dir) => {
     if (metadata.status === "doing") {
       return {
         source: `/${dir}/*.${metadata.format}`,
-        translation: "/%original_path%/%file_name%-%locale%.%file_extension%",
+        translation: "/%original_path%/%locale%/%original_file_name%",
       };
     }
   } catch (error) {

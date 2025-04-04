@@ -9,7 +9,7 @@
 
 源私有文件系统被现代浏览器支持，并由网络超文本应用程序技术工作组（[WHATWG](https://whatwg.org/)）标准化为 [File System Living Standard](https://fs.spec.whatwg.org/)。
 
-![浏览器兼容性](./bcd.svg)
+![浏览器兼容性](../bcd.svg)
 
 ## 动机
 
