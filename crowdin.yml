@@ -1,5 +1,3 @@
 files:
   - source: "/debugging-till-dawn/*.md"
     translation: "/%original_path%/%locale%/%original_file_name%"
-  - source: "/wget-manual-1.25.0/*.html"
-    translation: "/%original_path%/%locale%/%original_file_name%"
