@@ -1,3 +1,1 @@
 files:
-  - source: "/debugging-till-dawn/*.md"
-    translation: "/%original_path%/%locale%/%original_file_name%"
