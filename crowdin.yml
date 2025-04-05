@@ -1,1 +1,3 @@
-files: []
+files:
+  - source: "/marko-docs/*.md"
+    translation: "/%original_path%/%locale%/%original_file_name%"
