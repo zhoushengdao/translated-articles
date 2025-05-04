@@ -250,7 +250,7 @@ Intl.NumberFormat(locales, options)
 > [!NOTE]
 > 下面的文本描述了被规范标记为"可选"的行为。 它可能不会在所有环境中工作。 检查[浏览器兼容性表](#浏览器兼容性)。
 
-通常，`Intl.NumberFormat()` 可以带或不带 [`new`](/zh-CN/docs/Web/JavaScript/Reference/Operators/new)调用，并且在两种情况下都会返回一个新的 `Intl.NumberFormat` 实例。 但是，如果[`this`](/en-US/docs/Web/JavaScript/Reference/Operators/this)值是一个[`instanceof`](/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat`的对象（不一定意味着它是通过`new Intl.NumberFormat`创建的；只是它在原型链中有`Intl.NumberFormat.prototype`），那么将返回`this`的值，而新创建的`Intl.NumberFormat`对象隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`属性中（一个在实例之间重用的唯一符号）。
+通常，`Intl.NumberFormat()` 可以带或不带 [`new`](/zh-CN/docs/Web/JavaScript/Reference/Operators/new)调用，并且在两种情况下都会返回一个新的 `Intl.NumberFormat` 实例。 但是，如果 [`this`](/zh-CN/docs/Web/JavaScript/Reference/Operators/this) 值是一个[`instanceof`](/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat` 的对象（不一定意味着它是通过 `new Intl.NumberFormat` 创建的；只是它在原型链中有 `Intl.NumberFormat.prototype`），那么将返回 `this` 的值，而新创建的`Intl.NumberFormat` 对象隐藏在 `[Symbol(IntlLegacyConstructedSymbol)]` 属性中（一个在实例之间重用的唯一符号）。
 
 ```js
 const formatter = Intl.NumberFormat.call(
@@ -399,7 +399,7 @@ new Intl.NumberFormat("en-GB", {
 
 ### 显示符号
 
-为正值和负值显示符号，但不为零：
+为正值和负值显示符号，但不为零显示：
 
 ```js
 new Intl.NumberFormat("en-US", {
@@ -841,7 +841,7 @@ console.log(nf.format(11.23)); // "$11.25"
 
 {{Compat}}
 
-## 另请参阅
+## 参见
 
 - {{jsxref("Intl.NumberFormat")}}
 - {{jsxref("Intl.supportedValuesOf()")}}
