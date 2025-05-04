@@ -12,11 +12,11 @@ There are two (non-exclusive) ways to add TypeScript to a Marko project:
 
 - **For sites and web apps**, you can place [a `tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) at the project root:
  <pre>� components/
- 📁 node_modules/
- <img src="https://markojs.com/assets/91bc26e5.svg" width=16> index.marko
- 📦 package.json
- <mark><img src="https://markojs.com/assets/57999d2d.svg" width=16> tsconfig.json</mark>
- </pre>
+  📁 node_modules/
+  <img src="https://markojs.com/assets/91bc26e5.svg" width=16> index.marko
+  📦 package.json
+  <mark><img src="https://markojs.com/assets/57999d2d.svg" width=16> tsconfig.json</mark>
+  </pre>
 - **If you’re [publishing packages of Marko tags](https://markojs.com/docs/custom-tags/#publishing-tags-to-npm)**, add the following to [your `marko.json`](./marko-json.md):
  ```json
  "script-lang": "ts"
