@@ -83,7 +83,7 @@ Intl.NumberFormat(locales, options)
 
 - `style`
   - : 使用的格式化样式。
-    - `"decimal"` (默认)
+    - `"decimal"`（默认）
       - : 用于普通数字格式化。
     - `"currency"`
       - : 用于货币格式化。
@@ -97,7 +97,7 @@ Intl.NumberFormat(locales, options)
   - : 如何在货币格式化中显示货币。
     - `"code"`
       - : 使用 ISO 货币代码。
-    - `"symbol"` (默认)
+    - `"symbol"`（默认）
       - : 使用本地化的货币符号，如 €。
     - `"narrowSymbol"`
       - : 使用窄格式符号（"$100" 而不是 "US$100"）。
@@ -171,7 +171,7 @@ Intl.NumberFormat(locales, options)
       - ：向+∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
     - `"halfFloor"`
       - ：向-∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"floor"`一样取整。
-    - `"halfExpand"` (默认)
+    - `"halfExpand"`（默认）
       - ：远离0取整。 半增量以上的值像`"expand"`（远离零）取整，以下的像`"trunc"`（向0方向）取整。 在半增量上，值像`"expand"`一样取整。
     - `"halfTrunc"`
       - ：向0取整。 半增量以上的值像`"expand"`（远离零）取整，以下的像`"trunc"`（向0方向）取整。 在半增量上，值像`"trunc"`一样取整。
@@ -183,7 +183,7 @@ Intl.NumberFormat(locales, options)
 
 - `trailingZeroDisplay`
   - ：显示整数尾随零的策略。 可能的值为：
-    - `"auto"` (默认)
+    - `"auto"`（默认）
       - ：根据`minimumFractionDigits`和`minimumSignificantDigits`保留尾随零。
     - `"stripIfInteger"`
       - ：如果所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与`"auto"`相同。
@@ -201,13 +201,13 @@ Intl.NumberFormat(locales, options)
 
 - `notation`
   - ：应该为数字显示的格式。 可能的值为：
-    - `"standard"` (默认)
+    - `"standard"`（默认）
       - ：普通数字格式。
-    - `"科学"`
+    - `"scientific"`
       - : 返回格式化数字的数量级。
-    - `"工程"`
+    - `"engineering"`
       - : 当可以被三整除时，返回十的指数。
-    - `"紧凑"`
+    - `"compact"`
       - : 表示指数的字符串；默认为使用"短"形式。
 
 - `compactDisplay`
@@ -217,14 +217,14 @@ Intl.NumberFormat(locales, options)
 
   - : 是否使用分组分隔符，如千位分隔符或千/十万/千万分隔符。
 
-    - `"总是"`
+    - `"always"`
       - : 即使区域设置偏好不同，也显示分组分隔符。
-    - `"自动"`
+    - `"auto"`
       - : 根据区域设置偏好显示分组分隔符，这也可能取决于货币。
-    - `"最小2"`
+    - `"min2"`
       - : 当一组中至少有2位数字时显示分组分隔符。
     - `true`
-      - : 同`"总是"`。
+      - : 同 `"always"`。
     - `false`
       - : 不显示分组分隔符。
 
@@ -232,25 +232,25 @@ Intl.NumberFormat(locales, options)
 
 - `signDisplay`
   - : 何时显示数字的符号。 可能的值为：
-    - `"自动"`（默认）
+    - `"auto"`（默认）
       - : 仅对负数显示符号，包括负零。
-    - `"总是"`
+    - `"always"`
       - : 总是显示符号。
-    - `"除零外"`
+    - `"exceptZero"`
       - : 对正数和负数显示符号，但不包括零。
-    - `"负数"`
+    - `"negative"`
       - : 仅对负数显示符号，不包括负零。
-    - `"从不"`
+    - `"never"`
       - : 从不显示符号。
 
 ### 返回值
 
 一个新的`Intl.NumberFormat`对象。
 
-> [!注意]
-> 下面的文本描述了被规范标记为"可选"的行为。 它可能不会在所有环境中工作。 检查[浏览器兼容性表](#browser_compatibility)。
+> [!NOTE]
+> 下面的文本描述了被规范标记为"可选"的行为。 它可能不会在所有环境中工作。 检查[浏览器兼容性表](#浏览器兼容性)。
 
-通常，`Intl.NumberFormat()`可以带或不带[`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new)调用，并且在两种情况下都会返回一个新的`Intl.NumberFormat`实例。 但是，如果[`this`](/en-US/docs/Web/JavaScript/Reference/Operators/this)值是一个[`instanceof`](/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat`的对象（不一定意味着它是通过`new Intl.NumberFormat`创建的；只是它在原型链中有`Intl.NumberFormat.prototype`），那么将返回`this`的值，而新创建的`Intl.NumberFormat`对象隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`属性中（一个在实例之间重用的唯一符号）。
+通常，`Intl.NumberFormat()` 可以带或不带 [`new`](/zh-CN/docs/Web/JavaScript/Reference/Operators/new)调用，并且在两种情况下都会返回一个新的 `Intl.NumberFormat` 实例。 但是，如果[`this`](/en-US/docs/Web/JavaScript/Reference/Operators/this)值是一个[`instanceof`](/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat`的对象（不一定意味着它是通过`new Intl.NumberFormat`创建的；只是它在原型链中有`Intl.NumberFormat.prototype`），那么将返回`this`的值，而新创建的`Intl.NumberFormat`对象隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`属性中（一个在实例之间重用的唯一符号）。
 
 ```js
 const formatter = Intl.NumberFormat.call(
