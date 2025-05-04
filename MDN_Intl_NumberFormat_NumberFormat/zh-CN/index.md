@@ -1,5 +1,5 @@
 ---
-title: Intl.NumberFormat() constructor
+title: Intl.NumberFormat() 构造函数
 slug: Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat
 page-type: javascript-constructor
 browser-compat: javascript.builtins.Intl.NumberFormat.NumberFormat
@@ -7,7 +7,7 @@ browser-compat: javascript.builtins.Intl.NumberFormat.NumberFormat
 
 {{JSRef}}
 
-The **`Intl.NumberFormat()`** constructor creates {{jsxref("Intl.NumberFormat")}} objects.
+**`Intl.NumberFormat()`** 构造函数创建 {{jsxref("Intl.NumberFormat")}} 对象。
 
 {{InteractiveExample("JavaScript Demo: Intl.NumberFormat() constructor", "taller")}}
 
@@ -19,26 +19,26 @@ console.log(
     number,
   ),
 );
-// Expected output: "123.456,79 €"
+// 预期输出："123.456,79 €"
 
-// The Japanese yen doesn't use a minor unit
+// 日元不使用辅币单位
 console.log(
   new Intl.NumberFormat("ja-JP", { style: "currency", currency: "JPY" }).format(
     number,
   ),
 );
-// Expected output: "￥123,457"
+// 预期输出："￥123,457"
 
-// Limit to three significant digits
+// 限制为三位有效数字
 console.log(
   new Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(
     number,
   ),
 );
-// Expected output: "1,23,000"
+// 预期输出："1,23,000"
 ```
 
-## Syntax
+## 语法
 
 ```js-nolint
 new Intl.NumberFormat()
@@ -50,207 +50,207 @@ Intl.NumberFormat(locales)
 Intl.NumberFormat(locales, options)
 ```
 
-> **Note:** `Intl.NumberFormat()` can be called with or without [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new). Both create a new `Intl.NumberFormat` instance. However, there's a special behavior when it's called without `new` and the `this` value is another `Intl.NumberFormat` instance; see [Return value](#return_value).
+> **注意：**`Intl.NumberFormat()` 可以带或不带 [`new`](/zh-CN/docs/Web/JavaScript/Reference/Operators/new) 调用。 两者都会创建一个新的 `Intl.NumberFormat` 实例。 然而，当不带 `new` 调用且 `this` 值是另一个 `Intl.NumberFormat` 实例时，有一个特殊行为；参见 [返回值](#返回值)。
 
-### Parameters
+### 参数
 
 - `locales` {{optional_inline}}
 
-  - : A string with a BCP 47 language tag or an {{jsxref("Intl.Locale")}} instance, or an array of such locale identifiers. The runtime's default locale is used when `undefined` is passed or when none of the specified locale identifiers is supported. For the general form and interpretation of the `locales` argument, see [the parameter description on the `Intl` main page](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
+  - : 一个带有 BCP 47 语言标签的字符串或一个 {{jsxref("Intl.Locale")}} 实例，或这样的区域标识符数组。 当传递 `undefined` 或不支持指定的区域标识符时，使用运行时的默认区域设置。 关于 `locales` 参数的一般形式和解释，参见 [`Intl` 主页面上的参数描述](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_参数)。
 
-    The following Unicode extension key is allowed:
+    允许以下 Unicode 扩展键：
 
     - `nu`
-      - : See [`numberingSystem`](#numberingsystem).
+      - : 参见 [`numberingSystem`](#numberingsystem)。
 
-    This key can also be set with `options` (as listed below). When both are set, the `options` property takes precedence.
+    此键也可以通过 `options` 设置（如下所列）。 当两者都设置时，`options` 属性优先。
 
 - `options` {{optional_inline}}
 
-  - : An object. For ease of reading, the property list is broken into sections based on their purposes, including [locale options](#locale_options), [style options](#style_options), [digit options](#digit_options), and [other options](#other_options).
+  - : 一个对象。 为了便于阅读，属性列表根据其用途分为几个部分，包括[区域选项](#区域选项)、[样式选项](#样式选项)、[数字选项](#数字选项)和[其他选项](#其他选项)。
 
-#### Locale options
+#### 区域选项
 
 - `localeMatcher`
-  - : The locale matching algorithm to use. Possible values are `"lookup"` and `"best fit"`; the default is `"best fit"`.
-    For information about this option, see [Locale identification and negotiation](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locale_identification_and_negotiation).
+  - : 使用的区域匹配算法。 可能的值为 `"lookup"` 和 `"best fit"`；默认为 `"best fit"`。
+    关于此选项的信息，参见 [区域识别和判定](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl#语言区域识别和判定)。
 - `numberingSystem`
-  - : The numbering system to use for number formatting, such as `"arab"`, `"hans"`, `"mathsans"`, and so on. For a list of supported numbering system types, see [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_numbering_system_types). This option can also be set through the `nu` Unicode extension key; if both are provided, this `options` property takes precedence.
+  - : 用于数字格式化的数字系统，如 `"arab"`、`"hans"`、`"mathsans"` 等。 有关支持的数字系统类型列表，参见 [`Intl.supportedValuesOf()`](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_numbering_system_types)。 此选项也可以通过 `nu` Unicode 扩展键设置；如果两者都提供，此 `options` 属性优先。
 
-#### Style options
+#### 样式选项
 
-Depending on the `style` used, some of them may be ignored, and others may be required:
+根据使用的 `style`，其中一些可能被忽略，而其他一些可能是必需的：
 
 - `style`
-  - : The formatting style to use.
-    - `"decimal"` (default)
-      - : For plain number formatting.
+  - : 使用的格式化样式。
+    - `"decimal"` (默认)
+      - : 用于普通数字格式化。
     - `"currency"`
-      - : For currency formatting.
+      - : 用于货币格式化。
     - `"percent"`
-      - : For percent formatting.
+      - : 用于百分比格式化。
     - `"unit"`
-      - : For unit formatting.
+      - : 用于单位格式化。
 - `currency`
-  - : The currency to use in currency formatting. Possible values are the ISO 4217 currency codes, such as `"USD"` for the US dollar, `"EUR"` for the euro, or `"CNY"` for the Chinese RMB — see [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers). There is no default value; if the `style` is `"currency"`, the `currency` property must be provided. It is normalized to uppercase.
+  - : 用于货币格式化的货币。 可能的值为 ISO 4217 货币代码，如 `"USD"` 表示美元，`"EUR"` 表示欧元，或 `"CNY"` 表示人民币 — 参见 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers)。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。
 - `currencyDisplay`
-  - : How to display the currency in currency formatting.
+  - : 如何在货币格式化中显示货币。
     - `"code"`
-      - : Use the ISO currency code.
-    - `"symbol"` (default)
-      - : Use a localized currency symbol such as €.
+      - : 使用 ISO 货币代码。
+    - `"symbol"` (默认)
+      - : 使用本地化的货币符号，如 €。
     - `"narrowSymbol"`
-      - : Use a narrow format symbol ("$100" rather than "US$100").
+      - : 使用窄格式符号（"$100" 而不是 "US$100"）。
     - `"name"`
-      - : Use a localized currency name such as `"dollar"`.
+      - : 使用本地化的货币名称，如 `"dollar"`。
 - `currencySign`
-  - : In many locales, accounting format means to wrap the number with parentheses instead of appending a minus sign. Possible values are `"standard"` and `"accounting"`; the default is `"standard"`.
+  - : 在许多区域设置中，会计格式意味着用括号包裹数字而不是附加减号。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。
 - `unit`
-  - : The unit to use in `unit` formatting, Possible values are listed in [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers). Pairs of simple units can be concatenated with "-per-" to make a compound unit. There is no default value; if the `style` is `"unit"`, the `unit` property must be provided.
+  - ：在 `unit` 格式化中使用的单位，可能的值列在 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers) 中。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。
 - `unitDisplay`
-  - : The unit formatting style to use in `unit` formatting. Possible values are:
-    - `"short"` (default)
-      - : E.g., `16 l`.
+  - ：在 `unit` 格式化中使用的单位格式化样式。 可能的值为：
+    - `"short"`（默认）
+      - ：例如，`16 l`。
     - `"narrow"`
-      - : E.g., `16l`.
+      - ：例如，`16l`。
     - `"long"`
-      - : E.g., `16 litres`.
+      - ：例如，`16 litres`。
 
-#### Digit options
+#### 数字选项
 
-The following properties are also supported by {{jsxref("Intl.PluralRules")}}.
+以下属性也由 {{jsxref("Intl.PluralRules")}} 支持。
 
 - `minimumIntegerDigits`
-  - : The minimum number of integer digits to use. A value with a smaller number of integer digits than this number will be left-padded with zeros (to the specified length) when formatted. Possible values are from `1` to `21`; the default is `1`.
+  - ：使用的最小整数位数。 当格式化时，整数位数小于此数的值将在左侧填充零（到指定长度）。 可能的值从 `1` 到 `21`；默认为 `1`。
 
 - `minimumFractionDigits`
-  - : The minimum number of fraction digits to use. Possible values are from `0` to `100`; the default for plain number and percent formatting is `0`; the default for currency formatting is the number of minor unit digits provided by the [ISO 4217 currency code list](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) (2 if the list doesn't provide that information). See [SignificantDigits/FractionDigits default values](#significantdigitsfractiondigits_default_values) for when this default gets applied.
+  - ：使用的最小小数位数。 可能的值从 `0` 到 `100`；对于普通数字和百分比格式化的默认值为 `0`；对于货币格式化的默认值为由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（如果列表未提供该信息，则为 2）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `maximumFractionDigits`
-  - : The maximum number of fraction digits to use. Possible values are from `0` to `100`; the default for plain number formatting is the larger of `minimumFractionDigits` and `3`; the default for currency formatting is the larger of `minimumFractionDigits` and the number of minor unit digits provided by the [ISO 4217 currency code list](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) (2 if the list doesn't provide that information); the default for percent formatting is the larger of `minimumFractionDigits` and 0. See [SignificantDigits/FractionDigits default values](#significantdigitsfractiondigits_default_values) for when this default gets applied.
+  - ：使用的最大小数位数。 可能的值从 `0` 到 `100`；对于普通数字格式化的默认值为 `minimumFractionDigits` 和 `3` 中的较大者；对于货币格式化的默认值为 `minimumFractionDigits` 和由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数中的较大者（如果列表未提供该信息，则为 2）；对于百分比格式化的默认值为 `minimumFractionDigits` 和 0 中的较大者。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `minimumSignificantDigits`
-  - : The minimum number of significant digits to use. Possible values are from `1` to `21`; the default is `1`. See [SignificantDigits/FractionDigits default values](#significantdigitsfractiondigits_default_values) for when this default gets applied.
+  - ：使用的最小有效位数。 可能的值从 `1` 到 `21`；默认为 `1`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `maximumSignificantDigits`
-  - : The maximum number of significant digits to use. Possible values are from `1` to `21`; the default is `21`. See [SignificantDigits/FractionDigits default values](#significantdigitsfractiondigits_default_values) for when this default gets applied.
+  - ：使用的最大有效位数。 可能的值从 `1` 到 `21`；默认为 `21`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `roundingPriority`
 
-  - : Specify how rounding conflicts will be resolved if both "FractionDigits" ([`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)) and "SignificantDigits" ([`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)) are specified.
-    Possible values are:
+  - ：如果同时指定了 "FractionDigits"（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和 "SignificantDigits"（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)），则指定如何解决舍入冲突。
+    可能的值为：
 
-    - `"auto"` (default)
-      - : The result from the significant digits property is used.
+    - `"auto"`（默认）
+      - ：使用来自有效位数属性的结果。
     - `"morePrecision"`
-      - : The result from the property that results in more precision is used.
+      - ：使用来自导致更高精度的属性的结果。
     - `"lessPrecision"`
-      - : The result from the property that results in less precision is used.
+      - ：使用来自导致更低精度的属性的结果。
 
-    The value `"auto"` is normalized to `"morePrecision"` if `notation` is `"compact"` and none of the four "FractionDigits"/"SignificantDigits" options are set.
+    如果 `notation` 是 `"compact"` 且未设置四个 "FractionDigits"/"SignificantDigits" 选项中的任何一个，则值 `"auto"` 被标准化为 `"morePrecision"`。
 
-    Note that for values other than `auto` the result with more precision is calculated from the [`maximumSignificantDigits`](#minimumsignificantdigits) and [`maximumFractionDigits`](#maximumfractiondigits) (minimum fractional and significant digit settings are ignored).
+    请注意，对于 `auto` 以外的值，更高精度的结果是从 [`maximumSignificantDigits`](#minimumsignificantdigits) 和 [`maximumFractionDigits`](#maximumfractiondigits) 计算得出的（最小小数和有效数字设置被忽略）。
 
 - `roundingIncrement`
 
-  - : Indicates the increment at which rounding should take place relative to the calculated rounding magnitude. Possible values are `1`, `2`, `5`, `10`, `20`, `25`, `50`, `100`, `200`, `250`, `500`, `1000`, `2000`, `2500`, and `5000`; the default is `1`. It cannot be mixed with significant-digits rounding or any setting of `roundingPriority` other than `auto`.
+  - ：指示相对于计算的舍入幅度应进行舍入的增量。 可能的值为 `1`、`2`、`5`、`10`、`20`、`25`、`50`、`100`、`200`、`250`、`500`、`1000`、`2000`、`2500` 和 `5000`；默认为 `1`。 它不能与有效数字舍入或 `roundingPriority` 的任何设置（除了 `auto`）混合使用。
 
 - `roundingMode`
 
-  - : How decimals should be rounded. Possible values are:
+  - ：应如何舍入小数。 可能的值为：
 
     - `"ceil"`
-      - : Round toward +∞. Positive values round up. Negative values round "more positive".
+      - ：向 +∞ 方向舍入。 正值向上舍入。 负值向 "更正" 方向舍入。
     - `"floor"`
-      - : Round toward -∞. Positive values round down. Negative values round "more negative".
+      - ：向 -∞ 方向舍入。 正值向下取整。 负值向“更负”方向取整。
     - `"expand"`
-      - : Round away from 0. The _magnitude_ of the value is always increased by rounding. Positive values round up. Negative values round "more negative".
+      - ：远离0取整。 通过取整，值的_大小_总是增加。 正值向上取整。 负值向“更负”方向取整。
     - `"trunc"`
-      - : Round toward 0. This _magnitude_ of the value is always reduced by rounding. Positive values round down. Negative values round "less negative".
+      - ：向0取整。 通过取整，值的_大小_总是减少。 正值向下取整。 负值向“更负”方向取整。
     - `"halfCeil"`
-      - : Ties toward +∞. Values above the half-increment round like `"ceil"` (towards +∞), and below like `"floor"` (towards -∞). On the half-increment, values round like `"ceil"`.
+      - ：向+∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
     - `"halfFloor"`
-      - : Ties toward -∞. Values above the half-increment round like `"ceil"` (towards +∞), and below like `"floor"` (towards -∞). On the half-increment, values round like `"floor"`.
-    - `"halfExpand"` (default)
-      - : Ties away from 0. Values above the half-increment round like `"expand"` (away from zero), and below like `"trunc"` (towards 0). On the half-increment, values round like `"expand"`.
+      - ：向-∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"floor"`一样取整。
+    - `"halfExpand"` (默认)
+      - ：远离0取整。 半增量以上的值像`"expand"`（远离零）取整，以下的像`"trunc"`（向0方向）取整。 在半增量上，值像`"expand"`一样取整。
     - `"halfTrunc"`
-      - : Ties toward 0. Values above the half-increment round like `"expand"` (away from zero), and below like `"trunc"` (towards 0). On the half-increment, values round like `"trunc"`.
+      - ：向0取整。 半增量以上的值像`"expand"`（远离零）取整，以下的像`"trunc"`（向0方向）取整。 在半增量上，值像`"trunc"`一样取整。
     - `"halfEven"`
-      - : Ties towards the nearest even integer. Values above the half-increment round like `"expand"` (away from zero), and below like `"trunc"` (towards 0). On the half-increment values round towards the nearest even digit.
+      - ：向最近的偶数取整。 半增量以上的值像`"expand"`（远离零）取整，以下的像`"trunc"`（向0方向）取整。 在半增量上，值向最近的偶数取整。
 
-    These options reflect the [ICU user guide](https://unicode-org.github.io/icu/userguide/format_parse/numbers/rounding-modes.html), where "expand" and "trunc" map to ICU "UP" and "DOWN", respectively.
-    The [rounding modes](#rounding_modes) example below demonstrates how each mode works.
+    这些选项反映了[ICU用户指南](https://unicode-org.github.io/icu/userguide/format_parse/numbers/rounding-modes.html)，其中"expand"和"trunc"分别映射到ICU的"UP"和"DOWN"。
+    下面的[取整模式](#rounding_modes)示例展示了每种模式的工作方式。
 
 - `trailingZeroDisplay`
-  - : The strategy for displaying trailing zeros on whole numbers. Possible values are:
-    - `"auto"` (default)
-      - : Keep trailing zeros according to `minimumFractionDigits` and `minimumSignificantDigits`.
+  - ：显示整数尾随零的策略。 可能的值为：
+    - `"auto"` (默认)
+      - ：根据`minimumFractionDigits`和`minimumSignificantDigits`保留尾随零。
     - `"stripIfInteger"`
-      - : Remove the fraction digits _if_ they are all zero. This is the same as `"auto"` if any of the fraction digits is non-zero.
+      - ：如果所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与`"auto"`相同。
 
-##### SignificantDigits/FractionDigits default values
+##### SignificantDigits/FractionDigits 默认值
 
-For the four options above (the `FractionDigits` and `SignificantDigits` options), we mentioned their defaults; however, these defaults are _not unconditionally applied_. They are only applied when the property is actually going to be used, which depends on the [`roundingPriority`](#roundingpriority) and [`notation`](#notation) settings. Specifically:
+对于上述四个选项（`FractionDigits`和`SignificantDigits`选项），我们提到了它们的默认值；然而，这些默认值_不是无条件应用的_。 它们仅在属性实际使用时应用，这取决于[`roundingPriority`](#roundingpriority)和[`notation`](#notation)设置。 具体来说：
 
-- If `roundingPriority` is not `"auto"`, then all four options apply.
-- If `roundingPriority` is `"auto"` and at least one `SignificantDigits` option is set, then the `SignificantDigits` options apply and the `FractionDigits` options are ignored.
-- If `roundingPriority` is `"auto"`, and either at least one `FractionDigits` option is set or `notation` is not `"compact"`, then the `FractionDigits` options apply and the `SignificantDigits` options are ignored.
-- If `roundingPriority` is `"auto"`, `notation` is `"compact"`, and none of the four options are set, then they are set to `{ minimumFractionDigits: 0, maximumFractionDigits: 0, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }`, regardless of the defaults mentioned above, and `roundingPriority` is set to `"morePrecision"`.
+- 如果`roundingPriority`不是`"auto"`，则所有四个选项都适用。
+- 如果`roundingPriority`是`"auto"`并且至少设置了一个`SignificantDigits`选项，则`SignificantDigits`选项适用，`FractionDigits`选项被忽略。
+- 如果`roundingPriority`是`"auto"`，并且至少设置了一个`FractionDigits`选项或`notation`不是`"compact"`，则`FractionDigits`选项适用，`SignificantDigits`选项被忽略。
+- 如果`roundingPriority`是`"auto"`，`notation`是`"compact"`，并且四个选项均未设置，则它们设置为`{ minimumFractionDigits: 0, maximumFractionDigits: 0, minimumSignificantDigits: 1, maximumSignificantDigits: 2 }`，不考虑上述默认值，并且`roundingPriority`设置为`"morePrecision"`。
 
-#### Other options
+#### 其他选项
 
 - `notation`
-  - : The formatting that should be displayed for the number. Possible values are:
-    - `"standard"` (default)
-      - : Plain number formatting.
-    - `"scientific"`
-      - : Return the order-of-magnitude for formatted number.
-    - `"engineering"`
-      - : Return the exponent of ten when divisible by three.
-    - `"compact"`
-      - : String representing exponent; defaults to using the "short" form.
+  - ：应该为数字显示的格式。 可能的值为：
+    - `"standard"` (默认)
+      - ：普通数字格式。
+    - `"科学"`
+      - : 返回格式化数字的数量级。
+    - `"工程"`
+      - : 当可以被三整除时，返回十的指数。
+    - `"紧凑"`
+      - : 表示指数的字符串；默认为使用"短"形式。
 
 - `compactDisplay`
-  - : Only used when `notation` is `"compact"`. Possible values are `"short"` and `"long"`; the default is `"short"`.
+  - : 仅在`notation`为`"紧凑"`时使用。 可能的值是`"短"`和`"长"`；默认为`"短"`。
 
 - `useGrouping`
 
-  - : Whether to use grouping separators, such as thousands separators or thousand/lakh/crore separators.
+  - : 是否使用分组分隔符，如千位分隔符或千/十万/千万分隔符。
 
-    - `"always"`
-      - : Display grouping separators even if the locale prefers otherwise.
-    - `"auto"`
-      - : Display grouping separators based on the locale preference, which may also be dependent on the currency.
-    - `"min2"`
-      - : Display grouping separators when there are at least 2 digits in a group.
+    - `"总是"`
+      - : 即使区域设置偏好不同，也显示分组分隔符。
+    - `"自动"`
+      - : 根据区域设置偏好显示分组分隔符，这也可能取决于货币。
+    - `"最小2"`
+      - : 当一组中至少有2位数字时显示分组分隔符。
     - `true`
-      - : Same as `"always"`.
+      - : 同`"总是"`。
     - `false`
-      - : Display no grouping separators.
+      - : 不显示分组分隔符。
 
-    The default is `"min2"` if `notation` is `"compact"`, and `"auto"` otherwise. The string values `"true"` and `"false"` are accepted, but are always converted to the default value.
+    如果`notation`是`"紧凑"`，则默认为`"最小2"`，否则为`"自动"`。 接受字符串值`"true"`和`"false"`，但总是转换为默认值。
 
 - `signDisplay`
-  - : When to display the sign for the number. Possible values are:
-    - `"auto"` (default)
-      - : Sign display for negative numbers only, including negative zero.
-    - `"always"`
-      - : Always display sign.
-    - `"exceptZero"`
-      - : Sign display for positive and negative numbers, but not zero.
-    - `"negative"`
-      - : Sign display for negative numbers only, excluding negative zero.
-    - `"never"`
-      - : Never display sign.
+  - : 何时显示数字的符号。 可能的值为：
+    - `"自动"`（默认）
+      - : 仅对负数显示符号，包括负零。
+    - `"总是"`
+      - : 总是显示符号。
+    - `"除零外"`
+      - : 对正数和负数显示符号，但不包括零。
+    - `"负数"`
+      - : 仅对负数显示符号，不包括负零。
+    - `"从不"`
+      - : 从不显示符号。
 
-### Return value
+### 返回值
 
-A new `Intl.NumberFormat` object.
+一个新的`Intl.NumberFormat`对象。
 
-> [!NOTE]
-> The text below describes behavior that is marked by the specification as "optional". It may not work in all environments. Check the [browser compatibility table](#browser_compatibility).
+> [!注意]
+> 下面的文本描述了被规范标记为"可选"的行为。 它可能不会在所有环境中工作。 检查[浏览器兼容性表](#browser_compatibility)。
 
-Normally, `Intl.NumberFormat()` can be called with or without [`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new), and a new `Intl.NumberFormat` instance is returned in both cases. However, if the [`this`](/en-US/docs/Web/JavaScript/Reference/Operators/this) value is an object that is [`instanceof`](/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat` (doesn't necessarily mean it's created via `new Intl.NumberFormat`; just that it has `Intl.NumberFormat.prototype` in its prototype chain), then the value of `this` is returned instead, with the newly created `Intl.NumberFormat` object hidden in a `[Symbol(IntlLegacyConstructedSymbol)]` property (a unique symbol that's reused between instances).
+通常，`Intl.NumberFormat()`可以带或不带[`new`](/en-US/docs/Web/JavaScript/Reference/Operators/new)调用，并且在两种情况下都会返回一个新的`Intl.NumberFormat`实例。 但是，如果[`this`](/en-US/docs/Web/JavaScript/Reference/Operators/this)值是一个[`instanceof`](/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) `Intl.NumberFormat`的对象（不一定意味着它是通过`new Intl.NumberFormat`创建的；只是它在原型链中有`Intl.NumberFormat.prototype`），那么将返回`this`的值，而新创建的`Intl.NumberFormat`对象隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`属性中（一个在实例之间重用的唯一符号）。
 
 ```js
 const formatter = Intl.NumberFormat.call(
@@ -269,35 +269,35 @@ console.log(Object.getOwnPropertyDescriptors(formatter));
 // }
 ```
 
-Note that there's only one actual `Intl.NumberFormat` instance here: the one hidden in `[Symbol(IntlLegacyConstructedSymbol)]`. Calling the [`format()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format) and [`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions) methods on `formatter` would correctly use the options stored in that instance, but calling all other methods (e.g., [`formatRange()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatRange)) would fail with "TypeError: formatRange method called on incompatible Object", because those methods don't consult the hidden instance's options.
+注意，这里只有一个实际的`Intl.NumberFormat`实例：隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`中的那个。 在`formatter`上调用[`format()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format)和[`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions)方法会正确使用该实例中存储的选项，但调用所有其他方法（例如[`formatRange()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatRange)）会因为那些方法不咨询隐藏实例的选项而失败，并显示"TypeError: formatRange method called on incompatible Object"。
 
-This behavior, called `ChainNumberFormat`, does not happen when `Intl.NumberFormat()` is called without `new` but with `this` set to anything else that's not an `instanceof Intl.NumberFormat`. If you call it directly as `Intl.NumberFormat()`, the `this` value is [`Intl`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl), and a new `Intl.NumberFormat` instance is created normally.
+这种行为，称为`ChainNumberFormat`，当`Intl.NumberFormat()`不带`new`调用但`this`设置为任何不是`instanceof Intl.NumberFormat`的其他内容时不会发生。 如果你直接以`Intl.NumberFormat()`调用它，`this`值是[`Intl`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)，并且一个新的`Intl.NumberFormat`实例会正常创建。
 
-### Exceptions
+### 异常
 
 - {{jsxref("RangeError")}}
-  - : Thrown in one of the following cases:
-    - A property that takes enumerated values (such as `style`, `units`, `currency`, and so on) is set to an invalid value.
-    - Both `maximumFractionDigits` and `minimumFractionDigits` are set, and they are set to different values.
-      Note that depending on various formatting options, these properties can have default values.
-      It is therefore possible to get this error even if you only set one of the properties.
+  - : 在以下情况之一抛出：
+    - 一个接受枚举值的属性（如`style`、`units`、`currency`等）被设置为无效值。
+    - `maximumFractionDigits`和`minimumFractionDigits`都被设置，并且它们被设置为不同的值。
+      请注意，根据各种格式化选项，这些属性可以有默认值。
+      因此，即使你只设置了一个属性，也可能得到这个错误。
 - {{jsxref("TypeError")}}
-  - : Thrown if the `options.style` property is set to "unit" or "currency", and no value has been set for the corresponding property `options.unit` or `options.currency`.
+  - : 如果`options.style`属性设置为"unit"或"currency"，并且没有为相应的属性`options.unit`或`options.currency`设置值，则抛出。
 
-## Examples
+## 示例
 
-### Basic usage
+### 基本用法
 
-In basic use without specifying a locale, a formatted string in the default locale and with default options is returned.
+在不指定区域设置的基本使用中，返回默认区域设置和默认选项的格式化字符串。
 
 ```js
 const amount = 3500;
 
 console.log(new Intl.NumberFormat().format(amount));
-// '3,500' if in US English locale
+// '3,500' 如果是在美国英语区域设置中
 ```
 
-### Decimal and percent formatting
+### 小数和百分比格式化
 
 ```js
 const amount = 3500;
@@ -310,10 +310,10 @@ new Intl.NumberFormat("en-US", {
 }).format(amount); // '350,000%'
 ```
 
-### Unit formatting
+### 单位格式化
 
-If the `style` is `'unit'`, a `unit` property must be provided.
-Optionally, `unitDisplay` controls the unit formatting.
+如果 `style` 是 `'unit'`，则必须提供 `unit` 属性。
+可选地，`unitDisplay` 控制单位的格式化。
 
 ```js
 const amount = 3500;
@@ -330,11 +330,9 @@ new Intl.NumberFormat("en-US", {
 }).format(amount); // '3,500 liters'
 ```
 
-### Currency formatting
+### 货币格式化
 
-If the `style` is `'currency'`, a `currency` property
-must be provided. Optionally, `currencyDisplay` and
-`currencySign` control the unit formatting.
+如果 `style` 是 `'currency'`，则必须提供 `currency` 属性。 可选地，`currencyDisplay` 和 `currencySign` 控制单位的格式化。
 
 ```js
 const amount = -3500;
@@ -356,9 +354,9 @@ new Intl.NumberFormat("bn", {
 }).format(amount); // '($3,500.00)'
 ```
 
-### Scientific, engineering or compact notations
+### 科学、工程或紧凑表示法
 
-Scientific and compact notation are represented by the `notation` option and can be formatted like this:
+科学和紧凑表示法由 `notation` 选项表示，可以这样格式化：
 
 ```js
 new Intl.NumberFormat("en-US", {
@@ -399,9 +397,9 @@ new Intl.NumberFormat("en-GB", {
 // 988M
 ```
 
-### Displaying signs
+### 显示符号
 
-Display a sign for positive and negative numbers, but not zero:
+为正值和负值显示符号，但不为零：
 
 ```js
 new Intl.NumberFormat("en-US", {
@@ -411,7 +409,7 @@ new Intl.NumberFormat("en-US", {
 // '+55%'
 ```
 
-Note that when the currency sign is "accounting", parentheses might be used instead of a minus sign:
+请注意，当货币符号为 "accounting" 时，可能会使用括号而不是减号：
 
 ```js
 new Intl.NumberFormat("bn", {
@@ -423,22 +421,22 @@ new Intl.NumberFormat("bn", {
 // '($3,500.00)'
 ```
 
-### FractionDigits, SignificantDigits and IntegerDigits
+### FractionDigits、SignificantDigits 和 IntegerDigits
 
-You can specify the minimum or maximum number of fractional, integer or significant digits to display when formatting a number.
+在格式化数字时，您可以指定要显示的最小或最大小数位数、整数位数或有效位数。
 
-> [!NOTE]
-> If both significant and fractional digit limits are specified, then the actual formatting depends on the [`roundingPriority`](#roundingpriority).
+> [!注意]
+> 如果同时指定了有效位数和小数位数的限制，那么实际的格式化取决于 [`roundingPriority`](#roundingpriority)。
 
-#### Using FractionDigits and IntegerDigits
+#### 使用 FractionDigits 和 IntegerDigits
 
-The integer and fraction digit properties indicate the number of digits to display before and after the decimal point, respectively.
-If the value to display has fewer integer digits than specified, it will be left-padded with zeros to the expected number.
-If it has fewer fractional digits, it will be right-padded with zeros.
-Both cases are shown below:
+整数和小数位数属性分别表示在小数点前后显示的位数。
+如果要显示的值具有的整数位数少于指定的位数，则将在左侧填充零以达到预期的位数。
+如果小数位数较少，则将在右侧填充零。
+以下两种情况均显示：
 
 ```js
-// Formatting adds zeros to display minimum integers and fractions
+// 格式化添加零以显示最小整数和小数
 console.log(
   new Intl.NumberFormat("en", {
     minimumIntegerDigits: 3,
@@ -448,12 +446,12 @@ console.log(
 // "004.3300"
 ```
 
-If a value has more fractional digits than the specified maximum number, it will be rounded.
-The _way_ that it is rounded depends on the [`roundingMode`](#roundingmode) property (more details are provided in the [rounding modes](#rounding_modes) section).
-Below the value is rounded from five fractional digits (`4.33145`) to two (`4.33`):
+如果一个值的小数位数多于指定的最大数，它将被四舍五入。
+四舍五入的方式取决于 [`roundingMode`](#roundingmode) 属性（更多细节在[四舍五入模式](#rounding_modes)部分提供）。
+下面的值从五个小数位 (`4.33145`) 四舍五入到两个 (`4.33`)：
 
 ```js
-// Display value shortened to maximum number of digits
+// 显示值缩短到最大位数
 console.log(
   new Intl.NumberFormat("en", {
     maximumFractionDigits: 2,
@@ -462,10 +460,10 @@ console.log(
 // "4.33"
 ```
 
-The minimum fractional digits have no effect if the value already has more than 2 fractional digits:
+如果值已经具有多于2个小数位，则最小小数位数没有效果：
 
 ```js
-// Minimum fractions have no effect if value is higher precision.
+// 如果值的精度更高，最小小数位数没有效果。
 console.log(
   new Intl.NumberFormat("en", {
     minimumFractionDigits: 2,
@@ -474,14 +472,14 @@ console.log(
 // "4.331"
 ```
 
-> [!WARNING]
-> Watch out for default values as they may affect formatting even if not specified in your code.
-> The default maximum digit value is `3` for plain values, `2` for currency, and may have different values for other predefined types.
+> [!警告]
+> 注意默认值，因为它们可能会影响格式化，即使未在代码中指定。
+> 对于普通值，默认的最大数字值为 `3`，对于货币为 `2`，对于其他预定义类型可能有不同的值。
 
-The formatted value above is rounded to 3 digits, even though we didn't specify the maximum digits!
-This is because a default value of `maximumFractionDigits` is set when we specify `minimumFractionDigits`, and visa versa. The default values of `maximumFractionDigits` and `minimumFractionDigits` are `3` and `0`, respectively.
+上面的格式化值被四舍五入到3位，即使我们没有指定最大位数！
+这是因为当我们指定 `minimumFractionDigits` 时，`maximumFractionDigits` 的默认值被设置，反之亦然。 `maximumFractionDigits` 和 `minimumFractionDigits` 的默认值分别为 `3` 和 `0`。
 
-You can use [`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions) to inspect the formatter.
+您可以使用 [`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions) 来检查格式化器。
 
 ```js
 console.log(
@@ -511,16 +509,16 @@ console.log(
 // }
 ```
 
-#### Using SignificantDigits
+#### 使用 SignificantDigits
 
-The number of _significant digits_ is the total number of digits including both integer and fractional parts.
-The `maximumSignificantDigits` is used to indicate the total number of digits from the original value to display.
+有效位数的总数是包括整数和小数部分的总位数。
+`maximumSignificantDigits` 用于指示从原始值显示的总位数。
 
-The examples below show how this works.
-Note in particular the last case: only the first digit is retained and the others are discarded/set to zero.
+下面的例子展示了这是如何工作的。
+特别注意最后一种情况：只保留第一个数字，其他数字被丢弃/设置为零。
 
 ```js
-// Display 5 significant digits
+// 显示5位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 5,
@@ -528,7 +526,7 @@ console.log(
 );
 // "54.331"
 
-// Max 2 significant digits
+// 最大2位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -536,7 +534,7 @@ console.log(
 );
 // "54"
 
-// Max 1 significant digits
+// 最大1位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 1,
@@ -545,10 +543,10 @@ console.log(
 // "50"
 ```
 
-The `minimumSignificantDigits` ensures that at least the specified number of digits are displayed, adding zeros to the end of the value if needed.
+`minimumSignificantDigits` 确保至少显示指定数量的数字，如果需要，则在值的末尾添加零。
 
 ```js
-// Minimum 10 significant digits
+// 最小10位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     minimumSignificantDigits: 10,
@@ -557,21 +555,21 @@ console.log(
 // "54.33145000"
 ```
 
-> [!WARNING]
-> Watch out for default values as they may affect formatting.
-> If only one `SignificantDigits` property is used, then its counterpart will automatically be applied with the default value.
-> The default maximum and minimum significant digit values are 21 and 1, respectively.
+> [!警告]
+> 注意默认值，因为它们可能会影响格式化。
+> 如果只使用一个 `SignificantDigits` 属性，那么它的对应属性将自动应用默认值。
+> 默认的最大和最小有效数字值分别为21和1。
 
-#### Specifying significant and fractional digits at the same time
+#### 同时指定有效位数和小数位数
 
-The fraction digits ([`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)) and significant digits ([`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)) are both ways of controlling how many fractional and leading digits should be formatted.
-If both are used at the same time, it is possible for them to conflict.
+小数位数（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和有效位数（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)）都是控制应格式化多少小数位和前导位的方法。
+如果同时使用两者，它们可能会发生冲突。
 
-These conflicts are resolved using the [`roundingPriority`](#roundingpriority) property.
-By default, this has a value of `"auto"`, which means that if either [`minimumSignificantDigits`](#minimumsignificantdigits) or [`maximumSignificantDigits`](#minimumsignificantdigits) is specified, the fractional and integer digit properties will be ignored.
+这些冲突通过 [`roundingPriority`](#roundingpriority) 属性解决。
+默认情况下，其值为 `"auto"`，这意味着如果指定了 [`minimumSignificantDigits`](#minimumsignificantdigits) 或 [`maximumSignificantDigits`](#minimumsignificantdigits)，则将忽略小数和整数位数属性。
 
-For example, the code below formats the value of `4.33145` with `maximumFractionDigits: 3`, and then `maximumSignificantDigits: 2`, and then both.
-The value with both is the one set with `maximumSignificantDigits`.
+例如，下面的代码用 `maximumFractionDigits: 3` 格式化 `4.33145` 的值，然后用 `maximumSignificantDigits: 2`，然后两者都用。
+两者都用的值是使用 `maximumSignificantDigits` 设置的值。
 
 ```js
 console.log(
@@ -595,7 +593,7 @@ console.log(
 // "4.3"
 ```
 
-Using [`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions) to inspect the formatter, we can see that the returned object does not include `maximumFractionDigits` when `maximumSignificantDigits` or `minimumSignificantDigits` are specified.
+使用[`resolvedOptions()`](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions)来检查格式化器，我们可以看到返回的对象在指定了`maximumSignificantDigits`或`minimumSignificantDigits`时不包含`maximumFractionDigits`。
 
 ```js
 console.log(
@@ -626,10 +624,10 @@ console.log(
 // }
 ```
 
-In addition to `"auto"`, you can resolve conflicts by specifying [`roundingPriority`](#roundingpriority) as `"morePrecision"` or `"lessPrecision"`.
-The formatter calculates the precision using the values of `maximumSignificantDigits` and `maximumFractionDigits`.
+除了`"auto"`，您还可以通过将[`roundingPriority`](#roundingpriority)指定为`"morePrecision"`或`"lessPrecision"`来解决冲突。
+格式化器使用`maximumSignificantDigits`和`maximumFractionDigits`的值来计算精度。
 
-The code below shows the format being selected for the three different rounding priorities:
+下面的代码显示了为三种不同的舍入优先级选择的格式：
 
 ```js
 const maxFracNF = new Intl.NumberFormat("en", {
@@ -668,9 +666,9 @@ console.log(`morePrecision - ${bothMore.format(1.23456)}`);
 // "morePrecision - 1.235"
 ```
 
-Note that the algorithm can behave in an unintuitive way if a minimum value is specified without a maximum value.
-The example below formats the value `1` specifying `minimumFractionDigits: 2` (formatting to `1.00`) and `minimumSignificantDigits: 2` (formatting to `1.0`).
-Since `1.00` has more digits than `1.0`, this should be the result when prioritizing `morePrecision`, but in fact the opposite is true:
+请注意，如果指定了最小值而没有最大值，算法可能会以非直观的方式行为。
+下面的例子格式化值`1`，指定`minimumFractionDigits: 2`（格式化为`1.00`）和`minimumSignificantDigits: 2`（格式化为`1.0`）。
+由于`1.00`比`1.0`有更多的数字，这应该是优先考虑`morePrecision`时的结果，但实际上相反：
 
 ```js
 const bothLess = new Intl.NumberFormat("en", {
@@ -690,25 +688,25 @@ console.log(`morePrecision - ${bothMore.format(1)}`);
 // "morePrecision - 1.0"
 ```
 
-The reason for this is that only the "maximum precision" values are used for the calculation, and the default value of `maximumSignificantDigits` is much higher than `maximumFractionDigits`.
+这样做的原因是只有"最大精度"值用于计算，而`maximumSignificantDigits`的默认值比`maximumFractionDigits`高得多。
 
-> [!NOTE]
-> The working group have proposed a modification of the algorithm where the formatter should evaluate the result of using the specified fractional and significant digits independently (taking account of both minimum and maximum values).
-> It will then select the option that displays more fractional digits if `morePrecision` is set, and fewer if `lessPrecision` is set.
-> This will result in more intuitive behavior for this case.
+> [!注意]
+> 工作组已经提出了算法的修改，其中格式化器应该独立评估使用指定的分数和有效数字的结果（考虑最小值和最大值）。
+> 然后，如果设置了`morePrecision`，它将选择显示更多分数数字的选项，如果设置了`lessPrecision`，则选择显示更少的选项。
+> 这将导致这种情况下更直观的行为。
 
-### Rounding modes
+### 舍入模式
 
-If a value has more fractional digits than allowed by the constructor options, the formatted value will be _rounded_ to the specified number of fractional digits.
-The _way_ in which the value is rounded depends on the [`roundingMode`](#roundingmode) property.
+如果一个值的分数数字比构造函数选项允许的多，格式化后的值将被_舍入_到指定的分数数字数量。
+值的_舍入方式_取决于[`roundingMode`](#roundingmode)属性。
 
-Number formatters use `halfExpand` rounding by default, which rounds values "away from zero" at the half-increment (in other words, the _magnitude_ of the value is rounded up).
+数字格式化器默认使用`halfExpand`舍入，即在半增量时"远离零"舍入值（换句话说，值的_幅度_被向上舍入）。
 
-For a positive number, if the fractional digits to be removed are closer to the next increment (or on the half way point) then the remaining fractional digits will be rounded up, otherwise they are rounded down.
-This is shown below: 2.23 rounded to two significant digits is truncated to 2.2 because 2.23 is less than the half increment 2.25, while values of 2.25 and greater are rounded up to 2.3:
+对于一个正数，如果要移除的分数数字更接近下一个增量（或在半路上），则剩余的分数数字将被向上舍入，否则它们将被向下舍入。
+如下所示：2.23舍入到两个有效数字被截断为2.2，因为2.23小于半增量2.25，而2.25及以上的值被向上舍入到2.3：
 
 ```js
-// Value below half-increment: round down.
+// 值低于半增量：向下舍入。
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -716,7 +714,7 @@ console.log(
 );
 // "2.2"
 
-// Value on or above half-increment: round up.
+// 值在半增量或以上：向上舍入。
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -731,10 +729,10 @@ console.log(
 // "2.3"
 ```
 
-A negative number on or below the half-increment point is also rounded away from zero (becomes more negative):
+负数在半增量点或以下也被远离零舍入（变得更负）：
 
 ```js
-// Value below half-increment: round down.
+// 值低于半增量：向下舍入。
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -742,7 +740,7 @@ console.log(
 );
 // "-2.2"
 
-// Value on or above half-increment: round up.
+// 值在半增量或以上：向上舍入。
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -757,30 +755,30 @@ console.log(
 // "-2.3"
 ```
 
-The table below show the effect of different rounding modes for positive and negative values that are on and around the half-increment.
+下表显示了不同舍入模式对半增量及其周围的正负值的影响。
 
-| rounding mode | 2.23 | 2.25 | 2.28 | -2.23 | -2.25 | -2.28 |
-| ------------- | -------------------- | -------------------- | -------------------- | --------------------- | --------------------- | --------------------- |
-| `ceil`        | 2.3  | 2.3  | 2.3  | -2.2  | -2.2  | -2.2  |
-| `floor`       | 2.2  | 2.2  | 2.2  | -2.3  | -2.3  | -2.3  |
-| `expand`      | 2.3  | 2.3  | 2.3  | -2.3  | -2.3  | -2.3  |
-| `trunc`       | 2.2  | 2.2  | 2.2  | -2.2  | -2.2  | -2.2  |
-| `halfCeil`    | 2.2  | 2.3  | 2.3  | -2.2  | -2.2  | -2.3  |
-| `halfFloor`   | 2.2  | 2.2  | 2.3  | -2.2  | -2.3  | -2.3  |
-| `halfExpand`  | 2.2  | 2.3  | 2.3  | -2.2  | -2.3  | -2.3  |
-| `halfTrunc`   | 2.2  | 2.2  | 2.3  | -2.2  | -2.2  | -2.3  |
-| `halfEven`    | 2.2  | 2.2  | 2.3  | -2.2  | -2.2  | -2.3  |
+| 舍入模式         | 2.23 | 2.25 | 2.28 | -2.23 | -2.25 | -2.28 |
+| ------------ | -------------------- | -------------------- | -------------------- | --------------------- | --------------------- | --------------------- |
+| `ceil`       | 2.3  | 2.3  | 2.3  | -2.2  | -2.2  | -2.2  |
+| `floor`      | 2.2  | 2.2  | 2.2  | -2.3  | -2.3  | -2.3  |
+| `expand`     | 2.3  | 2.3  | 2.3  | -2.3  | -2.3  | -2.3  |
+| `trunc`      | 2.2  | 2.2  | 2.2  | -2.2  | -2.2  | -2.2  |
+| `halfCeil`   | 2.2  | 2.3  | 2.3  | -2.2  | -2.2  | -2.3  |
+| `halfFloor`  | 2.2  | 2.2  | 2.3  | -2.2  | -2.3  | -2.3  |
+| `halfExpand` | 2.2  | 2.3  | 2.3  | -2.2  | -2.3  | -2.3  |
+| `halfTrunc`  | 2.2  | 2.2  | 2.3  | -2.2  | -2.2  | -2.3  |
+| `halfEven`   | 2.2  | 2.2  | 2.3  | -2.2  | -2.2  | -2.3  |
 
-When using `halfEven`, its behavior also depends on the parity (odd or even) of the last digit of the rounded number. For example, the behavior of `halfEven` in the table above is the same as `halfTrunc`, because the magnitudes of all numbers are between a smaller "even" number (2.2) and a larger "odd" number (2.3). If the numbers are between ±2.3 and ±2.4, `halfEven` will behave like `halfExpand` instead. This behavior avoids consistently under- or over-estimating half-increments in a large data sample.
+当使用`halfEven`时，其行为还取决于被四舍五入数字的最后一位的奇偶性。 例如，上表中`halfEven`的行为与`halfTrunc`相同，因为所有数字的大小都在较小的"偶数"数字（2.2）和较大的"奇数"数字（2.3）之间。 如果数字在±2.3和±2.4之间，`halfEven`将表现得像`halfExpand`。 这种行为避免了在大数据样本中持续低估或高估半增量。
 
-### Using roundingIncrement
+### 使用roundingIncrement
 
-Sometimes we want to round the remaining fractional digits to some other increment than the next integer.
-For example, currencies for which the smallest coin is 5 cents might want to round the value to increments of 5, reflecting amounts that can actually be paid in cash.
+有时我们希望将剩余的小数位数四舍五入到其他增量，而不是下一个整数。
+例如，最小硬币为5美分的货币可能希望将值四舍五入到5的增量，反映实际可以用现金支付的金额。
 
-This kind of rounding can be achieved with the [`roundingIncrement`](#roundingincrement) property.
+这种四舍五入可以通过[`roundingIncrement`](#roundingincrement)属性实现。
 
-For example, if `maximumFractionDigits` is 2 and `roundingIncrement` is 5, then the number is rounded to the nearest 0.05:
+例如，如果`maximumFractionDigits`为2且`roundingIncrement`为5，则数字将四舍五入到最接近的0.05：
 
 ```js
 const nf = new Intl.NumberFormat("en-US", {
@@ -795,8 +793,8 @@ console.log(nf.format(11.25)); // "$11.25"
 console.log(nf.format(11.22)); // "$11.20"
 ```
 
-This particular pattern is referred to as "nickel rounding", where nickel is the colloquial name for a USA 5 cent coin.
-To round to the nearest 10 cents ("dime rounding"), you could change `roundingIncrement` to `10`.
+这种特定模式被称为"镍四舍五入"，其中镍是美国5美分硬币的俗称。
+要四舍五入到最接近的10美分（"角四舍五入"），您可以将`roundingIncrement`更改为`10`。
 
 ```js
 const nf = new Intl.NumberFormat("en-US", {
@@ -811,9 +809,9 @@ console.log(nf.format(11.25)); // "$11.30"
 console.log(nf.format(11.22)); // "$11.20"
 ```
 
-You can also use [`roundingMode`](#roundingmode) to change the rounding algorithm.
-The example below shows how `halfCeil` rounding can be used to round the value "less positive" below the half-rounding increment and "more positive" if above or on the half-increment.
-The incremented digit is "0.05" so the half-increment is at .025 (below, this is shown at 11.225).
+您还可以使用[`roundingMode`](#roundingmode)来更改四舍五入算法。
+下面的示例展示了如何使用`halfCeil`四舍五入来将值"更不积极"地四舍五入到半增量以下，"更积极"地四舍五入到半增量以上或等于半增量。
+增量数字为"0.05"，因此半增量在.025（下面，这在11.225处显示）。
 
 ```js
 const nf = new Intl.NumberFormat("en-US", {
@@ -831,19 +829,19 @@ console.log(nf.format(11.225)); // "$11.25"
 console.log(nf.format(11.23)); // "$11.25"
 ```
 
-If you need to change the number of digits, remember that `minimumFractionDigits` and `maximumFractionDigits` must both be set to the same value, or a `RangeError` is thrown.
+如果需要更改数字的位数，请记住`minimumFractionDigits`和`maximumFractionDigits`必须设置为相同的值，否则会抛出`RangeError`。
 
-`roundingIncrement` cannot be mixed with significant-digits rounding or any setting of `roundingPriority` other than `auto`.
+`roundingIncrement`不能与有效数字四舍五入或`roundingPriority`的任何设置（除了`auto`）混合使用。
 
-## Specifications
+## 规范
 
 {{Specifications}}
 
-## Browser compatibility
+## 浏览器兼容性
 
 {{Compat}}
 
-## See also
+## 另请参阅
 
 - {{jsxref("Intl.NumberFormat")}}
 - {{jsxref("Intl.supportedValuesOf()")}}
