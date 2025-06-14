@@ -41,7 +41,9 @@ Content Delivery Networks (CDNs) consider efficient streaming one of their best 
 
 - Some [Akamai features designed to mitigate slow backends can ironically slow down fast chunked responses](https://community.akamai.com/customers/s/question/0D50f00006n975d/enabling-chunked-transfer-encoding-responses). Try toggling off Adaptive Acceleration, Ion, mPulse, Prefetch, and/or similar performance features. Also check for the following in the configuration:
 
-    <network:http.buffer-response-v2>off</network:http.buffer-response-v2>
+  ```xml
+  <network:http.buffer-response-v2>off</network:http.buffer-response-v2>
+  ```
 
 ## Node.js itself
 
