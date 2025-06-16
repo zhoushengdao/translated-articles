@@ -92,7 +92,7 @@ Intl.NumberFormat(locales, options)
     - `"unit"`
       - : 用于单位格式化。
 - `currency`
-  - : 用于货币格式化的货币。 可能的值为 ISO 4217 货币代码，如 `"USD"` 表示美元，`"EUR"` 表示欧元，或 `"CNY"` 表示人民币 — 参见 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers)。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。
+  - : 用于货币格式化的货币。 : 用于货币格式化的货币。 可能的值为 ISO 4217 货币代码，如 `"USD"` 表示美元，`"EUR"` 表示欧元，或 `"CNY"` 表示人民币 — 参见 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers)。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。
 - `currencyDisplay`
   - : 如何在货币格式化中显示货币。
     - `"code"`
@@ -104,9 +104,9 @@ Intl.NumberFormat(locales, options)
     - `"name"`
       - : 使用本地化的货币名称，如 `"dollar"`。
 - `currencySign`
-  - : 在许多区域设置中，会计格式意味着用括号包裹数字而不是附加减号。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。
+  - : 在许多区域设置中，会计格式意味着用括号包裹数字而不是附加减号。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。
 - `unit`
-  - ：在 `unit` 格式化中使用的单位，可能的值列在 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers) 中。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。
+  - ：在 `unit` 格式化中使用的单位，可能的值列在 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers) 中。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。
 - `unitDisplay`
   - ：在 `unit` 格式化中使用的单位格式化样式。 可能的值为：
     - `"short"`（默认）
@@ -121,13 +121,13 @@ Intl.NumberFormat(locales, options)
 以下属性也由 {{jsxref("Intl.PluralRules")}} 支持。
 
 - `minimumIntegerDigits`
-  - ：使用的最小整数位数。 当格式化时，整数位数小于此数的值将在左侧填充零（到指定长度）。 可能的值从 `1` 到 `21`；默认为 `1`。
+  - ：使用的最小整数位数。 ：使用的最小整数位数。 当格式化时，整数位数小于此数的值将在左侧填充零（到指定长度）。 可能的值从 `1` 到 `21`；默认为 `1`。 可能的值从 `1` 到 `21`；默认为 `1`。
 
 - `minimumFractionDigits`
   - ：使用的最小小数位数。 可能的值从 `0` 到 `100`；对于普通数字和百分比格式化的默认值为 `0`；对于货币格式化的默认值为由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（如果列表未提供该信息，则为 2）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `maximumFractionDigits`
-  - ：使用的最大小数位数。 可能的值从 `0` 到 `100`；对于普通数字格式化的默认值为 `minimumFractionDigits` 和 `3` 中的较大者；对于货币格式化的默认值为 `minimumFractionDigits` 和由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数中的较大者（如果列表未提供该信息，则为 2）；对于百分比格式化的默认值为 `minimumFractionDigits` 和 0 中的较大者。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
+  - ：使用的最大小数位数。 ：使用的最小小数位数。 可能的值从 `0` 到 `100`；对于普通数字和百分比格式化的默认值为 `0`；对于货币格式化的默认值为由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（如果列表未提供该信息，则为 2）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
 
 - `minimumSignificantDigits`
   - ：使用的最小有效位数。 可能的值从 `1` 到 `21`；默认为 `1`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
@@ -138,6 +138,7 @@ Intl.NumberFormat(locales, options)
 - `roundingPriority`
 
   - ：如果同时指定了 "FractionDigits"（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和 "SignificantDigits"（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)），则指定如何解决舍入冲突。
+    可能的值为：
     可能的值为：
 
     - `"auto"`（默认）
@@ -157,7 +158,7 @@ Intl.NumberFormat(locales, options)
 
 - `roundingMode`
 
-  - ：应如何舍入小数。 可能的值为：
+  - ：应如何舍入小数。 可能的值为： 可能的值为：
 
     - `"ceil"`
       - ：向 +∞ 方向舍入。 正值向上舍入。 负值向 "更正" 方向舍入。
@@ -168,7 +169,7 @@ Intl.NumberFormat(locales, options)
     - `"trunc"`
       - ：向0取整。 通过取整，值的_大小_总是减少。 正值向下取整。 负值向“更负”方向取整。
     - `"halfCeil"`
-      - ：向+∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
+      - ：向 +∞ 方向舍入。 正值向上舍入。 负值向 "更正" 方向舍入。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
     - `"halfFloor"`
       - ：向-∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"floor"`一样取整。
     - `"halfExpand"`（默认）
@@ -180,17 +181,18 @@ Intl.NumberFormat(locales, options)
 
     这些选项反映了[ICU用户指南](https://unicode-org.github.io/icu/userguide/format_parse/numbers/rounding-modes.html)，其中"expand"和"trunc"分别映射到ICU的"UP"和"DOWN"。
     下面的[取整模式](#rounding_modes)示例展示了每种模式的工作方式。
+    下面的[取整模式](#rounding_modes)示例展示了每种模式的工作方式。
 
 - `trailingZeroDisplay`
-  - ：显示整数尾随零的策略。 可能的值为：
+  - ：显示整数尾随零的策略。 可能的值为： 可能的值为：
     - `"auto"`（默认）
       - ：根据`minimumFractionDigits`和`minimumSignificantDigits`保留尾随零。
     - `"stripIfInteger"`
-      - ：如果所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与`"auto"`相同。
+      - ：如果所有小数位都是零，则移除小数部分。 ：如果所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与`"auto"`相同。
 
 ##### SignificantDigits/FractionDigits 默认值
 
-对于上述四个选项（`FractionDigits`和`SignificantDigits`选项），我们提到了它们的默认值；然而，这些默认值_不是无条件应用的_。 它们仅在属性实际使用时应用，这取决于[`roundingPriority`](#roundingpriority)和[`notation`](#notation)设置。 具体来说：
+对于上述四个选项（`FractionDigits`和`SignificantDigits`选项），我们提到了它们的默认值；然而，这些默认值_不是无条件应用的_。 它们仅在属性实际使用时应用，这取决于[`roundingPriority`](#roundingpriority)和[`notation`](#notation)设置。 具体来说： 它们仅在属性实际使用时应用，这取决于[`roundingPriority`](#roundingpriority)和[`notation`](#notation)设置。 具体来说：
 
 - 如果`roundingPriority`不是`"auto"`，则所有四个选项都适用。
 - 如果`roundingPriority`是`"auto"`并且至少设置了一个`SignificantDigits`选项，则`SignificantDigits`选项适用，`FractionDigits`选项被忽略。
@@ -200,7 +202,7 @@ Intl.NumberFormat(locales, options)
 #### 其他选项
 
 - `notation`
-  - ：应该为数字显示的格式。 可能的值为：
+  - ：应该为数字显示的格式。 可能的值为： 可能的值为：
     - `"standard"`（默认）
       - ：普通数字格式。
     - `"scientific"`
@@ -211,7 +213,7 @@ Intl.NumberFormat(locales, options)
       - : 表示指数的字符串；默认为使用"短"形式。
 
 - `compactDisplay`
-  - : 仅在`notation`为`"紧凑"`时使用。 可能的值是`"短"`和`"长"`；默认为`"短"`。
+  - : 仅在`notation`为`"紧凑"`时使用。 : 仅在`notation`为`"紧凑"`时使用。 可能的值是`"短"`和`"长"`；默认为`"短"`。
 
 - `useGrouping`
 
@@ -228,7 +230,7 @@ Intl.NumberFormat(locales, options)
     - `false`
       - : 不显示分组分隔符。
 
-    如果`notation`是`"紧凑"`，则默认为`"最小2"`，否则为`"自动"`。 接受字符串值`"true"`和`"false"`，但总是转换为默认值。
+    如果`notation`是`"紧凑"`，则默认为`"最小2"`，否则为`"自动"`。 接受字符串值`"true"`和`"false"`，但总是转换为默认值。 接受字符串值`"true"`和`"false"`，但总是转换为默认值。
 
 - `signDisplay`
   - : 何时显示数字的符号。 可能的值为：
@@ -269,9 +271,9 @@ console.log(Object.getOwnPropertyDescriptors(formatter));
 // }
 ```
 
-注意，这里只有一个实际的`Intl.NumberFormat`实例：隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`中的那个。 在`formatter`上调用[`format()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format)和[`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions)方法会正确使用该实例中存储的选项，但调用所有其他方法（例如[`formatRange()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatRange)）会因为那些方法不咨询隐藏实例的选项而失败，并显示"TypeError: formatRange method called on incompatible Object"。
+注意，这里只有一个实际的`Intl.NumberFormat`实例：隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`中的那个。 注意，这里只有一个实际的`Intl.NumberFormat`实例：隐藏在`[Symbol(IntlLegacyConstructedSymbol)]`中的那个。 在`formatter`上调用[`format()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/format)和[`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions)方法会正确使用该实例中存储的选项，但调用所有其他方法（例如[`formatRange()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/formatRange)）会因为那些方法不咨询隐藏实例的选项而失败，并显示"TypeError: formatRange method called on incompatible Object"。
 
-这种行为，称为`ChainNumberFormat`，当`Intl.NumberFormat()`不带`new`调用但`this`设置为任何不是`instanceof Intl.NumberFormat`的其他内容时不会发生。 如果你直接以`Intl.NumberFormat()`调用它，`this`值是[`Intl`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)，并且一个新的`Intl.NumberFormat`实例会正常创建。
+这种行为，称为`ChainNumberFormat`，当`Intl.NumberFormat()`不带`new`调用但`this`设置为任何不是`instanceof Intl.NumberFormat`的其他内容时不会发生。 如果你直接以`Intl.NumberFormat()`调用它，`this`值是[`Intl`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)，并且一个新的`Intl.NumberFormat`实例会正常创建。 如果你直接以`Intl.NumberFormat()`调用它，`this`值是[`Intl`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)，并且一个新的`Intl.NumberFormat`实例会正常创建。
 
 ### 异常
 
@@ -279,6 +281,8 @@ console.log(Object.getOwnPropertyDescriptors(formatter));
   - : 在以下情况之一抛出：
     - 一个接受枚举值的属性（如`style`、`units`、`currency`等）被设置为无效值。
     - `maximumFractionDigits`和`minimumFractionDigits`都被设置，并且它们被设置为不同的值。
+      请注意，根据各种格式化选项，这些属性可以有默认值。
+      因此，即使你只设置了一个属性，也可能得到这个错误。
       请注意，根据各种格式化选项，这些属性可以有默认值。
       因此，即使你只设置了一个属性，也可能得到这个错误。
 - {{jsxref("TypeError")}}
@@ -434,6 +438,9 @@ new Intl.NumberFormat("bn", {
 如果要显示的值具有的整数位数少于指定的位数，则将在左侧填充零以达到预期的位数。
 如果小数位数较少，则将在右侧填充零。
 以下两种情况均显示：
+如果要显示的值具有的整数位数少于指定的位数，则将在左侧填充零以达到预期的位数。
+如果小数位数较少，则将在右侧填充零。
+以下两种情况均显示：
 
 ```js
 // 格式化添加零以显示最小整数和小数
@@ -474,9 +481,12 @@ console.log(
 
 > [!警告]
 > 注意默认值，因为它们可能会影响格式化，即使未在代码中指定。
+> [!警告]
+> 注意默认值，因为它们可能会影响格式化，即使未在代码中指定。
 > 对于普通值，默认的最大数字值为 `3`，对于货币为 `2`，对于其他预定义类型可能有不同的值。
 
 上面的格式化值被四舍五入到3位，即使我们没有指定最大位数！
+这是因为当我们指定 `minimumFractionDigits` 时，`maximumFractionDigits` 的默认值被设置，反之亦然。 上面的格式化值被四舍五入到3位，即使我们没有指定最大位数！
 这是因为当我们指定 `minimumFractionDigits` 时，`maximumFractionDigits` 的默认值被设置，反之亦然。 `maximumFractionDigits` 和 `minimumFractionDigits` 的默认值分别为 `3` 和 `0`。
 
 您可以使用 [`resolvedOptions()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/resolvedOptions) 来检查格式化器。
@@ -512,8 +522,10 @@ console.log(
 #### 使用 SignificantDigits
 
 有效位数的总数是包括整数和小数部分的总位数。
+有效位数的总数是包括整数和小数部分的总位数。
 `maximumSignificantDigits` 用于指示从原始值显示的总位数。
 
+下面的例子展示了这是如何工作的。
 下面的例子展示了这是如何工作的。
 特别注意最后一种情况：只保留第一个数字，其他数字被丢弃/设置为零。
 
@@ -564,11 +576,14 @@ console.log(
 
 小数位数（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和有效位数（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)）都是控制应格式化多少小数位和前导位的方法。
 如果同时使用两者，它们可能会发生冲突。
+如果同时使用两者，它们可能会发生冲突。
 
+这些冲突通过 [`roundingPriority`](#roundingpriority) 属性解决。
 这些冲突通过 [`roundingPriority`](#roundingpriority) 属性解决。
 默认情况下，其值为 `"auto"`，这意味着如果指定了 [`minimumSignificantDigits`](#minimumsignificantdigits) 或 [`maximumSignificantDigits`](#minimumsignificantdigits)，则将忽略小数和整数位数属性。
 
 例如，下面的代码用 `maximumFractionDigits: 3` 格式化 `4.33145` 的值，然后用 `maximumSignificantDigits: 2`，然后两者都用。
+两者都用的值是使用 `maximumSignificantDigits` 设置的值。
 两者都用的值是使用 `maximumSignificantDigits` 设置的值。
 
 ```js
@@ -626,6 +641,7 @@ console.log(
 
 除了`"auto"`，您还可以通过将[`roundingPriority`](#roundingpriority)指定为`"morePrecision"`或`"lessPrecision"`来解决冲突。
 格式化器使用`maximumSignificantDigits`和`maximumFractionDigits`的值来计算精度。
+格式化器使用`maximumSignificantDigits`和`maximumFractionDigits`的值来计算精度。
 
 下面的代码显示了为三种不同的舍入优先级选择的格式：
 
@@ -667,7 +683,9 @@ console.log(`morePrecision - ${bothMore.format(1.23456)}`);
 ```
 
 请注意，如果指定了最小值而没有最大值，算法可能会以非直观的方式行为。
+请注意，如果指定了最小值而没有最大值，算法可能会以非直观的方式行为。
 下面的例子格式化值`1`，指定`minimumFractionDigits: 2`（格式化为`1.00`）和`minimumSignificantDigits: 2`（格式化为`1.0`）。
+由于`1.00`比`1.0`有更多的数字，这应该是优先考虑`morePrecision`时的结果，但实际上相反：
 由于`1.00`比`1.0`有更多的数字，这应该是优先考虑`morePrecision`时的结果，但实际上相反：
 
 ```js
@@ -694,14 +712,18 @@ console.log(`morePrecision - ${bothMore.format(1)}`);
 > 工作组已经提出了算法的修改，其中格式化器应该独立评估使用指定的分数和有效数字的结果（考虑最小值和最大值）。
 > 然后，如果设置了`morePrecision`，它将选择显示更多分数数字的选项，如果设置了`lessPrecision`，则选择显示更少的选项。
 > 这将导致这种情况下更直观的行为。
+> 然后，如果设置了`morePrecision`，它将选择显示更多分数数字的选项，如果设置了`lessPrecision`，则选择显示更少的选项。
+> 这将导致这种情况下更直观的行为。
 
 ### 舍入模式
 
 如果一个值的分数数字比构造函数选项允许的多，格式化后的值将被_舍入_到指定的分数数字数量。
 值的_舍入方式_取决于[`roundingMode`](#roundingmode)属性。
+值的_舍入方式_取决于[`roundingMode`](#roundingmode)属性。
 
 数字格式化器默认使用`halfExpand`舍入，即在半增量时"远离零"舍入值（换句话说，值的_幅度_被向上舍入）。
 
+对于一个正数，如果要移除的分数数字更接近下一个增量（或在半路上），则剩余的分数数字将被向上舍入，否则它们将被向下舍入。
 对于一个正数，如果要移除的分数数字更接近下一个增量（或在半路上），则剩余的分数数字将被向上舍入，否则它们将被向下舍入。
 如下所示：2.23舍入到两个有效数字被截断为2.2，因为2.23小于半增量2.25，而2.25及以上的值被向上舍入到2.3：
 
@@ -774,6 +796,7 @@ console.log(
 ### 使用roundingIncrement
 
 有时我们希望将剩余的小数位数四舍五入到其他增量，而不是下一个整数。
+有时我们希望将剩余的小数位数四舍五入到其他增量，而不是下一个整数。
 例如，最小硬币为5美分的货币可能希望将值四舍五入到5的增量，反映实际可以用现金支付的金额。
 
 这种四舍五入可以通过[`roundingIncrement`](#roundingincrement)属性实现。
@@ -793,6 +816,7 @@ console.log(nf.format(11.25)); // "$11.25"
 console.log(nf.format(11.22)); // "$11.20"
 ```
 
+这种特定模式被称为"镍四舍五入"，其中镍是美国5美分硬币的俗称。
 这种特定模式被称为"镍四舍五入"，其中镍是美国5美分硬币的俗称。
 要四舍五入到最接近的10美分（"角四舍五入"），您可以将`roundingIncrement`更改为`10`。
 
