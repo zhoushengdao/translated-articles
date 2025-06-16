@@ -11,17 +11,17 @@ Or maybe you just want more autocomplete in VSCode. That works too.
 There are two (non-exclusive) ways to add TypeScript to a Marko project:
 
 - **For sites and web apps**, you can place [a `tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) at the project root:
- <pre>� components/
-  📁 node_modules/
-  <img src="https://markojs.com/assets/91bc26e5.svg" width=16> index.marko
-  📦 package.json
-  <mark><img src="https://markojs.com/assets/57999d2d.svg" width=16> tsconfig.json</mark>
-  </pre>
+  <pre>� components/
+    📁 node_modules/
+    <img src="https://markojs.com/assets/91bc26e5.svg" width=16> index.marko
+    📦 package.json
+    <mark><img src="https://markojs.com/assets/57999d2d.svg" width=16> tsconfig.json</mark>
+    </pre>
 - **If you’re [publishing packages of Marko tags](https://markojs.com/docs/custom-tags/#publishing-tags-to-npm)**, add the following to [your `marko.json`](./marko-json.md):
- ```json
- "script-lang": "ts"
- ```
- This will automatically expose type-checking and autocomplete for the published tags.
+  ```json
+  "script-lang": "ts"
+  ```
+  This will automatically expose type-checking and autocomplete for the published tags.
 
 > **ProTip**: You can also use the `script-lang` method for sites and apps.
 
@@ -108,37 +108,37 @@ $ const instanceFn = (val: T) => {
 Marko exposes [type definitions](https://github.com/marko-js/marko/blob/main/packages/runtime-class/index.d.ts) you can reuse in [a TypeScript namespace](https://www.typescriptlang.org/docs/handbook/namespaces.html) called `Marko`:
 
 - **`Marko.Template<Input, Return>`**
- - The type of a `.marko` file
- - `typeof import("./template.marko")`
+  - The type of a `.marko` file
+  - `typeof import("./template.marko")`
 - **`Marko.TemplateInput<Input>`**
- - The object accepted by the render methods of a template. It includes the template's `Input` as well as `$global` values.
+  - The object accepted by the render methods of a template. It includes the template's `Input` as well as `$global` values.
 - **`Marko.Body<Params, Return>`**
- - The type of the [body content](./body-content.md) of a tag (`renderBody`)
+  - The type of the [body content](./body-content.md) of a tag (`renderBody`)
 - **`Marko.Component<Input, State>`**
- - The base class for a [class component](./class-components.md)
+  - The base class for a [class component](./class-components.md)
 - **`Marko.Renderable`**
- - Values accepted by the [`<${dynamic}/>` tag](./syntax.md#dynamic-tagname)
- - `string | Marko.Template | Marko.Body | { renderBody: Marko.Body}`
+  - Values accepted by the [`<${dynamic}/>` tag](./syntax.md#dynamic-tagname)
+  - `string | Marko.Template | Marko.Body | { renderBody: Marko.Body}`
 - **`Marko.Out`**
- - The render context with methods like `write`, `beginAsync`, etc.
- - `ReturnType<template.render>`
+  - The render context with methods like `write`, `beginAsync`, etc.
+  - `ReturnType<template.render>`
 - **`Marko.Global`**
- - The type of the object in `$global` and `out.global` that can be passed to a template's render methods as the `$global` property.
+  - The type of the object in `$global` and `out.global` that can be passed to a template's render methods as the `$global` property.
 - **`Marko.RenderResult`**
- - The [result](./rendering.md#renderresult) of rendering a Marko template
- - `ReturnType<template.renderSync>`
- - `Awaited<ReturnType<template.render>>`
+  - The [result](./rendering.md#renderresult) of rendering a Marko template
+  - `ReturnType<template.renderSync>`
+  - `Awaited<ReturnType<template.render>>`
 - **`Marko.Emitter`**
- - `EventEmitter` from `@types/node`
+  - `EventEmitter` from `@types/node`
 - **`Marko.NativeTags`**
- - `Marko.NativeTags`: An object containing all native tags and their types
+  - `Marko.NativeTags`: An object containing all native tags and their types
 - **`Marko.Input<TagName>`** and **`Marko.Return<TagName>`**
- - Helpers to extract the input and return types native tags (when a string is passed) or a custom tag.
+  - Helpers to extract the input and return types native tags (when a string is passed) or a custom tag.
 - **`Marko.BodyParameters<Body>`** and **`Marko.BodyReturnType<Body>`**
- - Helpers to extract the parameters and return types from the specified `Marko.Body`
+  - Helpers to extract the parameters and return types from the specified `Marko.Body`
 - **`Marko.AttrTag<T>`**
- - Used to represent types for [attributes tags](./body-content.md#named-body-content)
- - A single attribute tag, with a `[Symbol.iterator]` to consume any repeated tags.
+  - Used to represent types for [attributes tags](./body-content.md#named-body-content)
+  - A single attribute tag, with a `[Symbol.iterator]` to consume any repeated tags.
 
 ### Typing `renderBody`
 
