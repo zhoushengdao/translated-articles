@@ -413,7 +413,7 @@ new Intl.NumberFormat("en-US", {
 // '+55%'
 ```
 
-请注意，当货币符号为 "accounting" 时，可能会使用括号而不是减号：
+注意，当货币符号为 "accounting" 时，可能会使用括号而不是减号：
 
 ```js
 new Intl.NumberFormat("bn", {
@@ -467,7 +467,7 @@ console.log(
 // "4.33"
 ```
 
-如果值已经具有多于2个小数位，则最小小数位数没有效果：
+如果值已经具有多于 2 个小数位，则最小小数位数没有效果：
 
 ```js
 // 如果值的精度更高，最小小数位数没有效果。
@@ -530,7 +530,7 @@ console.log(
 特别注意最后一种情况：只保留第一个数字，其他数字被丢弃/设置为零。
 
 ```js
-// 显示5位有效数字
+// 显示 5 位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 5,
@@ -538,7 +538,7 @@ console.log(
 );
 // "54.331"
 
-// 最大2位有效数字
+// 最大 2 位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 2,
@@ -546,7 +546,7 @@ console.log(
 );
 // "54"
 
-// 最大1位有效数字
+// 最大 1 位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     maximumSignificantDigits: 1,
@@ -558,7 +558,7 @@ console.log(
 `minimumSignificantDigits` 确保至少显示指定数量的数字，如果需要，则在值的末尾添加零。
 
 ```js
-// 最小10位有效数字
+// 最小 10 位有效数字
 console.log(
   new Intl.NumberFormat("en", {
     minimumSignificantDigits: 10,
