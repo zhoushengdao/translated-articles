@@ -92,7 +92,7 @@ Intl.NumberFormat(locales, options)
     - `"unit"`
       - : 用于单位格式化。
 - `currency`
-  - : 用于货币格式化的货币。 : 用于货币格式化的货币。 可能的值为 ISO 4217 货币代码，如 `"USD"` 表示美元，`"EUR"` 表示欧元，或 `"CNY"` 表示人民币 — 参见 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers)。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。
+  - : 用于货币格式化的货币。 可能的值为 ISO 4217 货币代码，如 `"USD"` 表示美元，`"EUR"` 表示欧元，`"CNY"` 表示人民币——参见 [`Intl.supportedValuesOf()`](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_currency_identifiers)。 没有默认值；如果 `style` 是 `"currency"`，则必须提供 `currency` 属性。 它被规范化为大写。
 - `currencyDisplay`
   - : 如何在货币格式化中显示货币。
     - `"code"`
@@ -104,53 +104,52 @@ Intl.NumberFormat(locales, options)
     - `"name"`
       - : 使用本地化的货币名称，如 `"dollar"`。
 - `currencySign`
-  - : 在许多区域设置中，会计格式意味着用括号包裹数字而不是附加减号。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。
+  - : 在许多区域设置中，会计格式意味着用括号包裹数字而不是使用负号。 可能的值为 `"standard"` 和 `"accounting"`；默认为 `"standard"`。
 - `unit`
-  - ：在 `unit` 格式化中使用的单位，可能的值列在 [`Intl.supportedValuesOf()`](/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers) 中。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。 简单的单位对可以通过 "-per-" 连接起来形成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。
+  - : 在单位格式化中使用的单位，可能的值列在 [`Intl.supportedValuesOf()`](/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/supportedValuesOf#supported_unit_identifiers) 中。 两个简单单位可以通过 "-per-" 连接起来，构成一个复合单位。 没有默认值；如果 `style` 是 `"unit"`，则必须提供 `unit` 属性。
 - `unitDisplay`
-  - ：在 `unit` 格式化中使用的单位格式化样式。 可能的值为：
+  - ：在单位格式化中使用的单位样式。 可能的值为：
     - `"short"`（默认）
-      - ：例如，`16 l`。
+      - : 例如，`16 l`。
     - `"narrow"`
-      - ：例如，`16l`。
+      - : 例如，`16l`。
     - `"long"`
-      - ：例如，`16 litres`。
+      - : 例如，`16 litres`。
 
 #### 数字选项
 
-以下属性也由 {{jsxref("Intl.PluralRules")}} 支持。
+{{jsxref("Intl.PluralRules")}} 也支持以下属性。
 
 - `minimumIntegerDigits`
-  - ：使用的最小整数位数。 ：使用的最小整数位数。 当格式化时，整数位数小于此数的值将在左侧填充零（到指定长度）。 可能的值从 `1` 到 `21`；默认为 `1`。 可能的值从 `1` 到 `21`；默认为 `1`。
+  - : 使用的最小整数位数。 当某个值的整数位数小于此数值时，格式化时将在其左侧补零（直至达到指定长度）。 取值范围为 `1` 到 `21`；默认为 `1`。
 
 - `minimumFractionDigits`
-  - ：使用的最小小数位数。 可能的值从 `0` 到 `100`；对于普通数字和百分比格式化的默认值为 `0`；对于货币格式化的默认值为由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（如果列表未提供该信息，则为 2）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
+  - : 使用的最小小数位数。 取值范围为 `0` 到 `100`；普通数字和百分比格式化的默认值为 `0`；货币格式化的默认值采用 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（若列表未提供该信息，则默认为 2 位）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_默认值) 了解何时应用此默认值。
 
 - `maximumFractionDigits`
-  - ：使用的最大小数位数。 ：使用的最小小数位数。 可能的值从 `0` 到 `100`；对于普通数字和百分比格式化的默认值为 `0`；对于货币格式化的默认值为由 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（如果列表未提供该信息，则为 2）。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
+  - : 使用的最大小数位数。 取值范围为 `0` 到 `100`：普通数字格式化默认取 `minimumFractionDigits` 与 `3` 的较大值；货币格式化默认取 `minimumFractionDigits` 与 [ISO 4217 货币代码列表](https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml) 提供的小数位数（若无该信息则取 `2`）的较大值；百分比格式化默认取 `minimumFractionDigits` 与 `0` 的较大值。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_默认值) 了解何时应用此默认值。
 
 - `minimumSignificantDigits`
-  - ：使用的最小有效位数。 可能的值从 `1` 到 `21`；默认为 `1`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
+  - : 使用的最小有效位数。 取值范围为 `1` 到 `21`；默认为 `1`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_默认值) 了解何时应用此默认值。
 
 - `maximumSignificantDigits`
-  - ：使用的最大有效位数。 可能的值从 `1` 到 `21`；默认为 `21`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_default_values) 了解何时应用此默认值。
+  - : 使用的最大有效位数。 取值范围为 `1` 到 `21`；默认为 `21`。 参见 [SignificantDigits/FractionDigits 默认值](#significantdigitsfractiondigits_默认值) 了解何时应用此默认值。
 
 - `roundingPriority`
 
-  - ：如果同时指定了 "FractionDigits"（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和 "SignificantDigits"（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)），则指定如何解决舍入冲突。
-    可能的值为：
+  - : 如果同时指定了“小数位数”（[`minimumFractionDigits`](#minimumfractiondigits)/[`maximumFractionDigits`](#maximumfractiondigits)）和 “有效数字位数”（[`minimumSignificantDigits`](#minimumsignificantdigits)/[`maximumSignificantDigits`](#maximumsignificantdigits)），则指定如何解决舍入冲突。
     可能的值为：
 
     - `"auto"`（默认）
-      - ：使用来自有效位数属性的结果。
+      - : 使用来自有效位数属性的结果。
     - `"morePrecision"`
-      - ：使用来自导致更高精度的属性的结果。
+      - : 使用能产生更高精度的结果的属性。
     - `"lessPrecision"`
-      - ：使用来自导致更低精度的属性的结果。
+      - : 使用能产生更低精度的结果的属性。
 
-    如果 `notation` 是 `"compact"` 且未设置四个 "FractionDigits"/"SignificantDigits" 选项中的任何一个，则值 `"auto"` 被标准化为 `"morePrecision"`。
+    如果 `notation` 是 `"compact"` 且未设置四个“小数位数”/“有效数字位数”选项中的任何一个，则值 `"auto"` 被标准化为 `"morePrecision"`。
 
-    请注意，对于 `auto` 以外的值，更高精度的结果是从 [`maximumSignificantDigits`](#minimumsignificantdigits) 和 [`maximumFractionDigits`](#maximumfractiondigits) 计算得出的（最小小数和有效数字设置被忽略）。
+    请注意，对于 `auto` 以外的值，更高精度的结果是从 [`maximumSignificantDigits`](#minimumsignificantdigits) 和 [`maximumFractionDigits`](#maximumfractiondigits) 计算得出的（最小小数位数和有效数字位数设置被忽略）。
 
 - `roundingIncrement`
 
@@ -158,18 +157,18 @@ Intl.NumberFormat(locales, options)
 
 - `roundingMode`
 
-  - ：应如何舍入小数。 可能的值为： 可能的值为：
+  - : 应如何舍入小数。 可能的值为：
 
     - `"ceil"`
-      - ：向 +∞ 方向舍入。 正值向上舍入。 负值向 "更正" 方向舍入。
+      - : 向 +∞ 方向舍入。 正值向上舍入。 负值向“更正”方向舍入。
     - `"floor"`
-      - ：向 -∞ 方向舍入。 正值向下取整。 负值向“更负”方向取整。
+      - ：向 -∞ 方向舍入。 正值向下舍入。 负值向“更负”方向舍入。
     - `"expand"`
-      - ：远离0取整。 通过取整，值的_大小_总是增加。 正值向上取整。 负值向“更负”方向取整。
+      - : 远离 0 舍入。 通过舍入，值的 _大小_ 总是增加。 正值向上舍入。 负值向“更负”方向舍入。
     - `"trunc"`
-      - ：向0取整。 通过取整，值的_大小_总是减少。 正值向下取整。 负值向“更负”方向取整。
+      - : 向 0 舍入。 通过舍入，值的 _大小_ 总是减少。 正值向下舍入。 负值向“更不负”方向舍入。
     - `"halfCeil"`
-      - ：向 +∞ 方向舍入。 正值向上舍入。 负值向 "更正" 方向舍入。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
+      - : 向 +∞ 方向舍入。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"ceil"`一样取整。
     - `"halfFloor"`
       - ：向-∞方向取整。 半增量以上的值像`"ceil"`（向+∞方向）取整，以下的像`"floor"`（向-∞方向）取整。 在半增量上，值像`"floor"`一样取整。
     - `"halfExpand"`（默认）
@@ -184,11 +183,11 @@ Intl.NumberFormat(locales, options)
     下面的[取整模式](#rounding_modes)示例展示了每种模式的工作方式。
 
 - `trailingZeroDisplay`
-  - ：显示整数尾随零的策略。 可能的值为： 可能的值为：
+  - : 显示整数尾随零的策略。 可能的值为：
     - `"auto"`（默认）
-      - ：根据`minimumFractionDigits`和`minimumSignificantDigits`保留尾随零。
+      - : 根据 `minimumFractionDigits` 和 `minimumSignificantDigits` 保留尾随零。
     - `"stripIfInteger"`
-      - ：如果所有小数位都是零，则移除小数部分。 ：如果所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与`"auto"`相同。
+      - : _如果_ 所有小数位都是零，则移除小数部分。 如果任何小数位非零，这与 `"auto"` 相同。
 
 ##### SignificantDigits/FractionDigits 默认值
 
