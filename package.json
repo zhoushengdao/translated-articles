@@ -4,5 +4,5 @@
   "scripts": {
     "crowdin": "node crowdin.yml.js"
   },
-  "packageManager": "pnpm@10.7.1"
+  "packageManager": "pnpm@10.14.0"
 }
